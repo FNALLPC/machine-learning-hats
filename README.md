@@ -4,7 +4,7 @@
 
 ## Getting started
 
-We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the old-fashioned way, by editing scripts and running them from the command line. However, a notebook interface lets you interact with the process and retry steps, which is good for learning.
+We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the normal way, by editing scripts and running them from the command line. However, a notebook interface lets you interact with the process and retry steps, which is good for learning.
 
 When you log into cmslpc, add a `-L` option to your ssh command:
 
@@ -21,7 +21,7 @@ And now start Jupyter with this command:
 
     jupyter notebook --no-browser --port=8888 --ip localhost
 
-After a pause (while cmslpc loads the necessary libraries, you should see a message like the following:
+After a pause (while cmslpc loads the necessary libraries for the first time) you should see a message like the following:
 
     [I 08:22:45.871 NotebookApp] Serving notebooks from local directory: /uscms_data/d2/pivarski/CMSSW_9_0_0_pre6/src
     [I 08:22:45.871 NotebookApp] 0 active kernels 

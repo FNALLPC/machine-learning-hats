@@ -1,6 +1,6 @@
 # Scientific Python HATS
 
-FIXME: Introduction!
+**FIXME:** Introduction!
 
 ## Getting started
 

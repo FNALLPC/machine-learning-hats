@@ -14,7 +14,7 @@ On cmslpc, create a CMSSW directory as usual (version 9 and above):
 
     export SCRAM_ARCH=slc6_amd64_gcc530
     cmsrel CMSSW_9_0_0_pre6
-    cd CMSSW_9_0_0_pre6/src
+    cd CMSSW_9_0_0_pre6/src
     cmsenv
 
 And now start Jupyter with this command:

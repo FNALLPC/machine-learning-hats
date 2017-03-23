@@ -1,6 +1,6 @@
 # Scientific Python HATS
 
-Intro...
+FIXME: Introduction!
 
 ## Getting started
 
@@ -39,4 +39,36 @@ Jupyter and all the other Python libraries we will be studying are bundled in CM
 
 ## First notebook
 
-...
+In your browser, create a new notebook using the menu on the right:
+
+![New Notebook](new_notebook.png)
+
+Now you have two tabs: one for finding files and notebooks, one for editing and running code. Try a little Python code: type
+
+    import ROOT
+
+into the first cell and hit shift-enter to evaluate it. (Enter alone lets you write a multi-line cell.)
+
+This notebook is running on cmslpc in your user account. You can also execute shell commands by starting the command with an exclamation point (`!`). Try
+
+    !pwd
+
+to see that you are in your CMSSW directory. (Alternatively, you can start a traditional terminal instead of a notebook from the "New" menu on the directory tab.)
+
+## Getting the tutorials
+
+To download the tutorials, type
+
+    !git clone https://github.com/FNALLPC/scientific-python-hats.git
+
+and hit shift-enter in your notebook. After a few seconds, you should see output like this:
+
+    Cloning into 'scientific-python-hats'...
+    remote: Counting objects: 9, done.
+    remote: Compressing objects: 100% (7/7), done.
+    remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
+    Unpacking objects: 100% (9/9), done.
+
+and in your directory tab, there's a new directory called `scientific-python-hats`. All of the tutorials and exercises are in there.
+
+From this point on, follow the instructions in the notebook of your choice.

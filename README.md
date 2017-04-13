@@ -12,6 +12,7 @@ When you log into cmslpc, add a `-L` option to your ssh command:
 
 On cmslpc, create a CMSSW directory as usual (version 9 and above):
 
+    source /cvmfs/cms.cern.ch/cmsset_default.sh
     export SCRAM_ARCH=slc6_amd64_gcc530
     cmsrel CMSSW_9_0_0_pre6
     cd CMSSW_9_0_0_pre6/src

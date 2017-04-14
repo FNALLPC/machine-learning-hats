@@ -1,5 +1,5 @@
-from os import listdir
-from os.path import isfile, join
+from os import listdir, mkdir
+from os.path import isfile, join, exists
 
 ###
 #    HATS comment: 
@@ -8,6 +8,9 @@ from os.path import isfile, join
 # filled with our input files, and spits out a one output file 
 # corresponding to the entire directory.
 ###
+usage = """%prog [options]
+
+This script takes as input a directory of input .root files, and runs the hatsTrees.C macro on them."""
 
 ###
 #    HATS comment: 
@@ -16,7 +19,8 @@ from os.path import isfile, join
 #  In case we forget how to use our python interface, we'll write help comments too :-)
 ###
 from optparse import OptionParser
-parser = OptionParser()
+parser = OptionParser(usage)
+
 parser.add_option("-l", "--load", dest = "load",
                   action = "store_true", default = False,
                   help = "do not recompile the class, instead load it from a compiled library" )
@@ -25,7 +29,7 @@ parser.add_option("-i", "--inDir", dest = "inDir",
 parser.add_option("-t", "--inTreeName", dest = "inTreeName",
                   help = "the name of the input tree inside the input file" )
 parser.add_option("-o", "--outFileName", dest = "outFileName",
-                  help = "the file output root file" )
+                  help = "the output root file name. It will be located within the 'output' directory" )
 (options, args) = parser.parse_args()
 
 ###
@@ -78,4 +82,6 @@ instance = hatsTrees(chain)
 ### HATS comment:
 # and now we call our class's 'Loop' method
 ###
+if not exists("output"):
+  mkdir("output")
 instance.Loop("output/%s" % options.outFileName)

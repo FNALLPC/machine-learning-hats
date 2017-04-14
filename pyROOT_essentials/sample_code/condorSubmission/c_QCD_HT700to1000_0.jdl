@@ -1,0 +1,13 @@
+universe = vanilla
+Executable = h_QCD_HT700to1000_0.sh 
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+Notification = Error
+ 
+arguments = $(Process)
+ 
+Output = condorLogs/log.QCD_HT700to1000_0.stdout
+Error = condorLogs/log.QCD_HT700to1000_0.stderr
+Log = condorLogs/log.QCD_HT700to1000_0.condorlog
+Queue 4 
+ 

@@ -41,6 +41,7 @@ void hatsTrees::Loop(std::string outFileName)
     fChain->SetBranchStatus("*",0);  // disable all branches
     //fChain->SetBranchStatus("branchname"           , 1 );  
     //
+    fChain->SetBranchStatus("jetAK4_N"             , 1 );  
     fChain->SetBranchStatus("jetAK4_pt"            , 1 );  
     fChain->SetBranchStatus("jetAK4_eta"           , 1 );  
     fChain->SetBranchStatus("jetAK4_mass"          , 1 );  
@@ -102,6 +103,7 @@ void hatsTrees::Loop(std::string outFileName)
        * It just so happens that the jets are ordered by pT
        * so we can get the leading and subleading jets easily 
        */
+      if (jetAK4_N < 2) continue;
       leadingJet.SetPtEtaPhiE(jetAK4_pt->at(0), jetAK4_eta->at(0), jetAK4_phi->at(0), jetAK4_e->at(0));
       subleadingJet.SetPtEtaPhiE(jetAK4_pt->at(1), jetAK4_eta->at(1), jetAK4_phi->at(1), jetAK4_e->at(1));
       

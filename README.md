@@ -8,7 +8,7 @@ We will use Jupyter to present these tutorials, only because it is a convenient 
 
 When you log into cmslpc, add a `-L` option to your ssh command:
 
-    ssh -L localhost:8888:localhost:8888 cmslpc-sl6.fnal.gov
+    ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>cmslpc-sl6.fnal.gov
 
 On cmslpc, create a CMSSW directory as usual (version 9 and above):
 

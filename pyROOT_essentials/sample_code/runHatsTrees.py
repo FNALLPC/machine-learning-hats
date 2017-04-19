@@ -1,4 +1,4 @@
-from os import listdir, mkdir
+from os import listdir, mkdir, popen
 from os.path import isfile, join, exists
 
 ###
@@ -48,9 +48,9 @@ from ROOT import *
 ###
 chain = TChain(options.inTreeName)
 inFiles = []
-for inFile in listdir(options.inDir):
-  if isfile(join(options.inDir, inFile)):
-    inFiles.append(join(options.inDir, inFile))
+for inFile in filter(None,popen("xrdfs root://cmseos.fnal.gov/ ls "+options.inDir).read().split('\n')):
+  if ".root" in inFile:
+    inFiles.append(inFile)
 for sample in inFiles:
   chain.Add(sample)
 

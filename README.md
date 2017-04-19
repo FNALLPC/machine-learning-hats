@@ -2,21 +2,42 @@
 
 ## Introduction
 
-This Hands on Tutorial Session (HATS) is intended to provide you with basic familiarity of PyROOT and rootpy. PyROOT is a Python extension module which provides bindings for all classes within the ROOT libraries and is easily used in unison with C++. Whereas the rootpy project provides a more pythonic interface with ROOT on top of the PyROOT bindings. 
+This Hands on Tutorial Session (HATS) is intended to provide you with basic familiarity of pyROOT and ROOTpy. pyROOT is a Python extension module which provides bindings for all classes within the ROOT libraries and is easily used in unison with C++. Whereas the ROOTpy project provides a more pythonic interface with ROOT on top of the PyROOT bindings. 
 
-The primary goal of these exercises is to obtain a general understanding of the syntax required to import and make use of the ROOT libraries within a basic Python environment as well as to illustrate how to make use of C++ classes within this environment in order to save computing time.
+The primary goal of these exercises is to obtain a general understanding of the syntax required to import and make use of the ROOT libraries within a basic Python script as well as to illustrate how to make use of C++ classes in order to save computing time.
 
-Many analysts already use both Python and C++, though some students are inclined to stick closely to C++ in order to ensure their access to coding examples and experts, and are disinclined from using PyROOT due to the unusual nature of its documentation. It is our hope that through providing you with this basic introduction and Github repository of example scripts, that we can bring together the existing PyROOT/rootpy community within CMS and foster its growth.
+Whether you use Python, C++ or some combination of the two to complete your analysis is a personal preference, however with the current lack of documentation on pyROOT, many students stick with C++ in order to ensure their access to coding examples and experts. It is our hope that through providing you with this basic introduction and Github repository of example scripts, that we can bring together the existing pyROOT/ROOTpy community within CMS and foster its growth. 
 
 ## Getting started
 
-We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the normal way, by editing scripts and running them from the command line. However, a notebook interface lets you interact with the process and retry steps, which is good for learning.
+We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the normal way, by editing scripts and running them from the command line (with `python -i` in your terminal). However, a notebook interface lets you interact with the process and retry steps, which is good for learning.
+
+Before proceeding with the next step, which will open an ssh tunnel to the lpc cluster, please review the content of your `~/.ssh/config` file on your system by executing:
+
+    cat ~/.ssh/config
+
+In case the file does already contain the following lines, consider adding them:
+
+    Host cmslpc*.fnal.gov
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null`
+
+Please note this is not safe in general, so make sure you have the `Host cmslpc*.fnal.gov` line in there!
 
 When you log into cmslpc, add a `-L` option to your ssh command:
 
     ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>@cmslpc-sl6.fnal.gov
 
-On cmslpc, create a CMSSW directory as usual (version 9 and above):
+On cmslpc, if you do not already have one, create a HATS directory in your `~/nobackup` directory (which has a more generous quota than your home directory):
+
+
+    mkdir ~/nobackup/HATS
+
+move to it:
+
+    cd ~/nobackup/HATS
+
+and create a CMSSW directory as usual (version 9 and above):
 
     source /cvmfs/cms.cern.ch/cmsset_default.sh
     
@@ -30,8 +51,8 @@ for cshell:
     
 either way:
     
-    cmsrel CMSSW_9_0_0_pre6
-    cd CMSSW_9_0_0_pre6/src
+    cmsrel CMSSW_9_0_1
+    cd CMSSW_9_0_1/src
     cmsenv
 
 And now start Jupyter with this command:
@@ -88,4 +109,4 @@ and hit shift-enter in your notebook. After a few seconds, you should see output
 
 and in your directory tab, there's a new directory called `scientific-python-hats`. All of the tutorials and exercises are in there.
 
-From this point on, follow the instructions in the notebook of your choice.
+From this point on, follow the instructions in the notebook of your choice (for the PyROOT and rootpy HATS@LPC start from the README.md (https://github.com/FNALLPC/scientific-python-hats/blob/master/pyROOT_essentials/README.md)in the `pyROOT_essentials` directory.

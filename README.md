@@ -1,6 +1,12 @@
 # Scientific Python HATS
 
-**FIXME:** Introduction!
+## Introduction
+
+This Hands on Tutorial Session (HATS) is intended to provide you with basic familiarity of pyROOT and ROOTpy. pyROOT is a Python extension module which provides bindings for all classes within the ROOT libraries and is easily used in unison with C++. Whereas the ROOTpy project provides a more pythonic interface with ROOT on top of the PyROOT bindings. 
+
+The primary goal of these exercises is to obtain a general understanding of the syntax required to import and make use of the ROOT libraries within a basic Python script as well as to illustrate how to make use of C++ classes in order to save computing time.
+
+Whether you use Python, C++ or some combination of the two to complete your analysis is a personal preference, however with the current lack of documentation on pyROOT, many students stick with C++ in order to ensure their access to coding examples and experts. It is our hope that through providing you with this basic introduction and Github repository of example scripts, that we can bring together the existing pyROOT/ROOTpy community within CMS and foster its growth. 
 
 ## Getting started
 
@@ -13,7 +19,17 @@ When you log into cmslpc, add a `-L` option to your ssh command:
 On cmslpc, create a CMSSW directory as usual (version 9 and above):
 
     source /cvmfs/cms.cern.ch/cmsset_default.sh
+    
+for bash:
+
     export SCRAM_ARCH=slc6_amd64_gcc530
+    
+for cshell:
+
+    setenv SCRAM_ARCH slc6_amd64_gcc530
+    
+either way:
+    
     cmsrel CMSSW_9_0_0_pre6
     cd CMSSW_9_0_0_pre6/src
     cmsenv

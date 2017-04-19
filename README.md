@@ -16,11 +16,11 @@ Before proceeding with the next step, which will open an ssh tunnel to the lpc c
 
     cat ~/.ssh/config
 
-In case the file does already contain the following lines, consider adding them:
+In case the file does already contain the following lines, consider adding them (opening the file with your favorite editor):
 
     Host cmslpc*.fnal.gov
         StrictHostKeyChecking no
-        UserKnownHostsFile /dev/null`
+        UserKnownHostsFile /dev/null
 
 Please note this is not safe in general, so make sure you have the `Host cmslpc*.fnal.gov` line in there!
 

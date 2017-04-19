@@ -48,7 +48,7 @@ from ROOT import *
 ###
 chain = TChain(options.inTreeName)
 inFiles = []
-for inFile in filter(None,popen("xrdfs root://cmseos.fnal.gov/ ls "+options.inDir).read().split('\n')):
+for inFile in filter(None,popen("xrdfs root://cmseos.fnal.gov/ ls -u "+options.inDir).read().split('\n')):
   if ".root" in inFile:
     inFiles.append(inFile)
 for sample in inFiles:

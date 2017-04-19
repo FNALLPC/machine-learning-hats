@@ -109,4 +109,4 @@ and hit shift-enter in your notebook. After a few seconds, you should see output
 
 and in your directory tab, there's a new directory called `scientific-python-hats`. All of the tutorials and exercises are in there.
 
-From this point on, follow the instructions in the notebook of your choice (for the PyROOT and rootpy HATS@LPC start from the README.md (https://github.com/FNALLPC/scientific-python-hats/blob/master/pyROOT_essentials/README.md)in the `pyROOT_essentials` directory.
+From this point on, follow the instructions in the notebook of your choice (for the PyROOT and rootpy HATS@LPC start from the [README.md](https://github.com/FNALLPC/scientific-python-hats/blob/master/pyROOT_essentials/README.md) in the `pyROOT_essentials` directory.

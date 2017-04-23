@@ -6,6 +6,7 @@
 #include <TChain.h>
 #include <TH1D.h>
 #include <TLorentzVector.h>
+#include <TSystem.h>
 
 double diff(struct timeval endTime, struct timeval startTime) {
   return (1000L * 1000L * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec)) / 1000.0 / 1000.0;
@@ -15,11 +16,11 @@ void rootmacro() {
     struct timeval startTime, endTime;
 
     auto tchain = new TChain();
-    tchain->Add("root://cmseos.fnal.gov//store/user/hats/PyRoot/2017/qcd_samples/shuffled_sig/sig_shuffled_0.root/tree");
-    tchain->Add("root://cmseos.fnal.gov//store/user/hats/PyRoot/2017/qcd_samples/shuffled_sig/sig_shuffled_1.root/tree");
-    tchain->Add("root://cmseos.fnal.gov//store/user/hats/PyRoot/2017/qcd_samples/shuffled_sig/sig_shuffled_2.root/tree");
-    tchain->Add("root://cmseos.fnal.gov//store/user/hats/PyRoot/2017/qcd_samples/shuffled_sig/sig_shuffled_3.root/tree");
-    tchain->Add("root://cmseos.fnal.gov//store/user/hats/PyRoot/2017/qcd_samples/shuffled_sig/sig_shuffled_4.root/tree");
+    tchain->Add("sig_shuffled_0.root/tree");
+    tchain->Add("sig_shuffled_1.root/tree");
+    tchain->Add("sig_shuffled_2.root/tree");
+    tchain->Add("sig_shuffled_3.root/tree");
+    tchain->Add("sig_shuffled_4.root/tree");
 
     tchain->SetBranchStatus("*", 0);
     tchain->SetBranchStatus("jetAK4_N", 1);
@@ -70,4 +71,5 @@ void rootmacro() {
     gettimeofday(&endTime, 0);
 
     std::cout << "This took " << diff(endTime, startTime) << " seconds." << std::endl;
+    gSystem->Exit(0);
 }

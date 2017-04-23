@@ -21,7 +21,12 @@ void rootmacro() {
     tchain->Add("sig_shuffled_2.root/tree");
     tchain->Add("sig_shuffled_3.root/tree");
     tchain->Add("sig_shuffled_4.root/tree");
-
+    tchain->Add("sig_shuffled_5.root/tree");
+    tchain->Add("sig_shuffled_6.root/tree");
+    tchain->Add("sig_shuffled_7.root/tree");
+    tchain->Add("sig_shuffled_8.root/tree");
+    tchain->Add("sig_shuffled_9.root/tree");
+    
     tchain->SetBranchStatus("*", 0);
     tchain->SetBranchStatus("jetAK4_N", 1);
     tchain->SetBranchStatus("jetAK4_pt", 1);

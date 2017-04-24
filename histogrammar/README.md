@@ -1,3 +1,9 @@
+# Order of notebooks in this tutorial
+
+ 1. `pyroot-histogram-acceleration.ipynb`: introduction to the Histogrammar package; one thing it's good for
+ 2. `functional-playground.ipynb`: broader introduction to functional programming style and how Histogrammar lets you do data analysis that way
+ 3. `technology-preview.ipynb`: if you finish early and get bored, take a look at this (the future of Histogrammar)
+
 ## Getting started
 
 We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the normal way, by editing scripts and running them from the command line (with `python -i` in your terminal). However, a notebook interface lets you interact with the process and retry steps, which is good for learning.

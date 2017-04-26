@@ -22,7 +22,8 @@ Please note this is not safe in general, so make sure you have the `Host cmslpc*
 
 When you log into cmslpc, add a `-L` option to your ssh command:
 
-    ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>@cmslpc-sl6.fnal.gov
+    ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>@cmslpc-sl6.fnal.gov  ## PLEASE PICK A DIFFERENT NUMBER BESIDES 8888
+                                                                              ## Try something random so that others don't choose the same 
 
 On cmslpc, if you do not already have one, create a HATS directory in your `~/nobackup` directory (which has a more generous quota than your home directory):
 

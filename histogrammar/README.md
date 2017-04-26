@@ -67,7 +67,7 @@ and then clone this repository:
 
 Now start Jupyter with this command:
 
-    jupyter notebook --no-browser --port=8888 --ip localhost  ## Please change the 8888 to 
+    jupyter notebook --no-browser --port=8888 --ip localhost  ## Please change the '8888' to 
                                                               ## the port number you chose earlier
 
 After a pause (while cmslpc loads the necessary libraries for the first time) you should see a message like the following:

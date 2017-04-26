@@ -33,7 +33,13 @@ move to it:
 
 and create a CMSSW directory as usual (version 9 and above):
 
+for bash:
+
     source /cvmfs/cms.cern.ch/cmsset_default.sh
+
+for cshell:
+
+    source /cvmfs/cms.cern.ch/cmsset_default.csh
     
 for bash:
 

@@ -1,12 +1,12 @@
-# Scientific Python HATS
+# CMS Open Data + Machine Learning
 
 ## Introduction
 
-This Hands on Tutorial Session (HATS) is intended to provide you with basic familiarity of pyROOT and ROOTpy. pyROOT is a Python extension module which provides bindings for all classes within the ROOT libraries and is easily used in unison with C++. Whereas the ROOTpy project provides a more pythonic interface with ROOT on top of the PyROOT bindings. 
+This Hands on Tutorial Session (HATS) is intended to provide show you how to take simulated and reconstructed proton-proton collision events from the 2011 CMS Open Data release and build a classifier for differentiating boosted, merged W boson jets from QCD jets.
 
-The primary goal of these exercises is to obtain a general understanding of the syntax required to import and make use of the ROOT libraries within a basic Python script as well as to illustrate how to make use of C++ classes in order to save computing time.
+# Main notebook in this tutorial
 
-Whether you use Python, C++ or some combination of the two to complete your analysis is a personal preference, however with the current lack of documentation on pyROOT, many students stick with C++ in order to ensure their access to coding examples and experts. It is our hope that through providing you with this basic introduction and Github repository of example scripts, that we can bring together the existing pyROOT/ROOTpy community within CMS and foster its growth. 
+ 1. `dshep2017.ipynb`
 
 ## Getting started
 
@@ -80,39 +80,3 @@ After a pause (while cmslpc loads the necessary libraries for the first time) yo
 Copy/paste the URL it gives you into your web browser and from now on, all interactions with Python and your user account will be through the browser. The `-L` option we passed to ssh is forwarding Jupyter's web traffic through SSH, so your account is safe, even if you access it from home.
 
 Jupyter and all the other Python libraries we will be studying are bundled in CMSSW. For these exercises, there is no need to install anything else.
-
-## First notebook
-
-In your browser, create a new notebook using the menu on the right:
-
-![New Notebook](new_notebook.png)
-
-Now you have two tabs: one for finding files and notebooks, one for editing and running code. Try a little Python code: type
-
-    import ROOT
-
-into the first cell and hit shift-enter to evaluate it. (Enter alone lets you write a multi-line cell.)
-
-This notebook is running on cmslpc in your user account. You can also execute shell commands by starting the command with an exclamation point (`!`). Try
-
-    !pwd
-
-to see that you are in your CMSSW directory. (Alternatively, you can start a traditional terminal instead of a notebook from the "New" menu on the directory tab.)
-
-## Getting the tutorials
-
-To download the tutorials, type
-
-    !git clone https://github.com/FNALLPC/scientific-python-hats.git
-
-and hit shift-enter in your notebook. After a few seconds, you should see output like this:
-
-    Cloning into 'scientific-python-hats'...
-    remote: Counting objects: 9, done.
-    remote: Compressing objects: 100% (7/7), done.
-    remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
-    Unpacking objects: 100% (9/9), done.
-
-and in your directory tab, there's a new directory called `scientific-python-hats`. All of the tutorials and exercises are in there.
-
-From this point on, follow the instructions in the notebook of your choice (for the PyROOT and rootpy HATS@LPC start from the [README.md](https://github.com/FNALLPC/scientific-python-hats/blob/master/pyROOT_essentials/README.md) in the `pyROOT_essentials` directory.

@@ -14,7 +14,7 @@ You will be issued a unique IP in class for access to an Amazon Web Services GPU
 
 Download the encrypted access key:
 
-    wget http://home.fnal.gov/~burt/des.pem.enc
+    wget http://home.fnal.gov/~burt/ds.pem.enc
 
 Decrypt and protect the access key (the decryption password will be given at the session):
 

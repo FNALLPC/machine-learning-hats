@@ -23,7 +23,7 @@ Decrypt and protect the access key (the decryption password will be given at the
 
 When you log into AWS, add a `-L` option to your ssh command, and use the access key:
 
-    ssh -i ds.pem -L localhost:8888:localhost:8888 <YOUR USERNAME>@<your AWS IP>
+    ssh -i ds.pem -L localhost:8888:localhost:8888 ec2-user@<your AWS IP>
 
 After you're logged in source the python distribution you want for example:
 

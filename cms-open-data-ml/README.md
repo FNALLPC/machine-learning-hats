@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Hands on Tutorial Session (HATS) is intended to provide show you how to take simulated and reconstructed proton-proton collision events from the 2011 CMS Open Data release and build a classifier for differentiating boosted, merged W boson jets from QCD jets.
+This is introductory tutorial for hands-on session of the DS@HEP2017 workshop and the CMS Hands on Tutorial Session (HATS). It is intended to show you how to analyze simulated and reconstructed pp collision events from the 2011 CMS Open Data release and build classifiers for differentiating boosted, merged W boson jets from QCD jets.
 
 # Main notebook in this tutorial
 
@@ -10,56 +10,17 @@ This Hands on Tutorial Session (HATS) is intended to provide show you how to tak
 
 ## Getting started
 
-We will use Jupyter to present these tutorials, only because it is a convenient interface to Python. Everything that we will present can be performed the normal way, by editing scripts and running them from the command line (with `python -i` in your terminal). However, a notebook interface lets you interact with the process and retry steps, which is good for learning.
-
-Before proceeding with the next step, which will open an ssh tunnel to the lpc cluster, please review the content of your `~/.ssh/config` file on your system by executing:
-
-    cat ~/.ssh/config
-
-In case the file does already contain the following lines, consider adding them (opening the file with your favorite editor):
-
-    Host cmslpc*.fnal.gov
-        StrictHostKeyChecking no
-        UserKnownHostsFile /dev/null
-
-Please note this is not safe in general, so make sure you have the `Host cmslpc*.fnal.gov` line in there!
-
-When you log into cmslpc, add a `-L` option to your ssh command:
+When you log into cmslpc or AWS, add a `-L` option to your ssh command:
 
     ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>@cmslpc-sl6.fnal.gov
+After you're logged in source the python distribution you want for example:
 
-On cmslpc, if you do not already have one, create a HATS directory in your `~/nobackup` directory (which has a more generous quota than your home directory):
-
-
-    mkdir ~/nobackup/HATS
-
-move to it:
-
-    cd ~/nobackup/HATS
-
-and create a CMSSW directory as usual (version 9 and above):
-
-for bash:
-
-    source /cvmfs/cms.cern.ch/cmsset_default.sh
+    source src/anaconda2/bin/activate
     
-for cshell:
-    
-    source /cvmfs/cms.cern.ch/cmsset_default.csh
-    
-for bash:
+Then clone this repository
 
-    export SCRAM_ARCH=slc6_amd64_gcc530
-    
-for cshell:
-
-    setenv SCRAM_ARCH slc6_amd64_gcc530
-    
-either way:
-    
-    cmsrel CMSSW_9_0_1
-    cd CMSSW_9_0_1/src
-    cmsenv
+    git clone https://github.com/jmduarte/scientific-python-hats
+    cd scientific-python-hats/cms-open-data-ml
 
 And now start Jupyter with this command:
 
@@ -79,4 +40,4 @@ After a pause (while cmslpc loads the necessary libraries for the first time) yo
 
 Copy/paste the URL it gives you into your web browser and from now on, all interactions with Python and your user account will be through the browser. The `-L` option we passed to ssh is forwarding Jupyter's web traffic through SSH, so your account is safe, even if you access it from home.
 
-Jupyter and all the other Python libraries we will be studying are bundled in CMSSW. For these exercises, there is no need to install anything else.
+Jupyter and all the other Python libraries we will be studying are bundled in CMSSW / AWS. For these exercises, there is no need to install anything else.

@@ -8,11 +8,23 @@ This is introductory tutorial for hands-on session of the DS@HEP2017 workshop an
 
  1. `dshep2017.ipynb`
 
-## Getting started
+## Getting started with AWS
 
-When you log into cmslpc or AWS, add a `-L` option to your ssh command:
+You will be issued a unique IP in class for access to an Amazon Web Services GPU node. The disk is persistent, but the IP may change day-to-day.
 
-    ssh -L localhost:8888:localhost:8888 <YOUR USERNAME>@cmslpc-sl6.fnal.gov
+Download the encrypted access key:
+
+    wget http://home.fnal.gov/~burt/ds.pem.enc
+
+Decrypt and protect the access key (the decryption password will be given at the session):
+
+    openssl aes-256-cbc -in ds.pem.enc -d -a -out ds.pem
+    chmod 400 ds.pem
+
+When you log into AWS, add a `-L` option to your ssh command, and use the access key:
+
+    ssh -i ds.pem -L localhost:8888:localhost:8888 ec2-user@<your AWS IP>
+
 After you're logged in source the python distribution you want for example:
 
     source src/anaconda2/bin/activate

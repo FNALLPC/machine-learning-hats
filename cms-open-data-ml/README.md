@@ -36,6 +36,7 @@ Then cottoncandy is useful for reading from S3:
      cd cottoncandy
      sudo python setup.py install
      eval `./parse_metadata.py`
+     cd ..
     
 Then clone this repository
 

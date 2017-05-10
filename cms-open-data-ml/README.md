@@ -28,6 +28,13 @@ When you log into AWS, add a `-L` option to your ssh command, and use the access
 After you're logged in source the python distribution you want for example:
 
     source src/anaconda2/bin/activate
+   
+Then cottoncandy is useful for reading from S3:
+     sudo pip install boto3 pydrive
+     git clone https://github.com/holzman/cottoncandy
+     cd cottoncandy
+     sudo python setup.py install
+     eval `./parse_metadata.py`
     
 Then clone this repository
 

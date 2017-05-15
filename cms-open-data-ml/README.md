@@ -35,7 +35,7 @@ To start the notebook, execute the following commands (you only need to run `cms
     
 You should see something similar to the following
 
-    vmp901.vampire
+    gpu0013.vampire
     [I 08:22:45.871 NotebookApp] Serving notebooks from local directory: /home/cmsdemo01/CMSSW_9_0_0_pre6/src
     [I 08:22:45.871 NotebookApp] 0 active kernels 
     [I 08:22:45.871 NotebookApp] The Jupyter Notebook is running at: http://localhost:88<ID>/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -46,9 +46,9 @@ You should see something similar to the following
         to login with a token:
             http://localhost:88<ID>/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-Remember the hostname `vmpXXX.vampire`, this is the hostname your notebook is running on. To access the notebook from your local laptop web browser, first create an SSH tunnel to ACCRE in order to view your jupyter instance.
+Remember the hostname `gpuXXXX.vampire`, this is the hostname your notebook is running on. To access the notebook from your local laptop web browser, first create an SSH tunnel to ACCRE in order to view your jupyter instance.
 
-    ssh -L 88<ID>:vmpXXX.vampire:88<ID> <username>@login.accre.vanderbilt.edu
+    ssh -L 88<ID>:gpuXXX.vampire:88<ID> <username>@login.accre.vanderbilt.edu
  
 Then, copy/paste the URL from the first step into your web browser and from now on, all interactions with Python and your user account will be through the browser. The `-L` option we passed to ssh is forwarding Jupyter's web traffic through SSH, so your account is safe, even if you access it from home.
 

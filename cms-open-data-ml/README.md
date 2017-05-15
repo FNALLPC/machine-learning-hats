@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This is introductory tutorial for hands-on session of the DS@HEP2017 workshop and the CMS Hands on Tutorial Session (HATS). It is intended to show you how to analyze simulated and reconstructed pp collision events from the 2011 CMS Open Data release and build classifiers for differentiating boosted, merged W boson jets from QCD jets.
+This is introductory tutorial for hands-on session of the DS@HEP2017 workshop and the CMS Hands-on Advanced Tutorial Session (HATS). It is intended to show you how to analyze simulated and reconstructed pp collision events from the 2011 CMS Open Data release and build classifiers for differentiating boosted, merged W boson jets from QCD jets.
 
 # Main notebook in this tutorial
 
- 1. `dshep2017.ipynb`
+ 1. `cms-open-data-ml.ipynb`
 
 ## Getting started
 
@@ -24,10 +24,10 @@ To begin the tutorial, you will need to make two SSH connections to ACCRE - one 
 To start the notebook, execute the following commands (you only need to run `cmsrel` and `git` the first time).  To prevent different users trying to use the same port, please replace <ID> with your demo id in these example commands. (For example, `cmsdemo60` is id `60`.)
     
     ssh <username>@login.accre.vanderbilt.edu
-    srun --time=12:00:00 --mem=8G -p mic --pty /bin/bash
+    srun --time=12:00:00 --mem=16G -p pascal --pty /bin/bash
     source /cvmfs/cms.cern.ch/cmsset_default.sh
-    cmsrel CMSSW_9_0_0_pre6
-    cd CMSSW_9_0_0_pre6/src
+    cmsrel CMSSW_9_0_2
+    cd CMSSW_9_0_2/src
     cmsenv
     git clone https://github.com/jmduarte/scientific-python-hats
     hostname
@@ -38,13 +38,13 @@ You should see something similar to the following
     vmp901.vampire
     [I 08:22:45.871 NotebookApp] Serving notebooks from local directory: /home/cmsdemo01/CMSSW_9_0_0_pre6/src
     [I 08:22:45.871 NotebookApp] 0 active kernels 
-    [I 08:22:45.871 NotebookApp] The Jupyter Notebook is running at: http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    [I 08:22:45.871 NotebookApp] The Jupyter Notebook is running at: http://localhost:88<ID>/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     [I 08:22:45.871 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
     [C 08:22:45.873 NotebookApp] 
         
         Copy/paste this URL into your browser when you connect for the first time,
         to login with a token:
-            http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            http://localhost:88<ID>/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 Remember the hostname `vmpXXX.vampire`, this is the hostname your notebook is running on. To access the notebook from your local laptop web browser, first create an SSH tunnel to ACCRE in order to view your jupyter instance.
 

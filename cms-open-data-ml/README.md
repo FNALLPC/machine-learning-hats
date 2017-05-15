@@ -29,7 +29,7 @@ To start the notebook, execute the following commands (you only need to run `cms
     cmsrel CMSSW_9_0_0_pre6
     cd CMSSW_9_0_0_pre6/src
     cmsenv
-    git clone https://github.com/PerilousApricot/scientific-python-hats
+    git clone https://github.com/jmduarte/scientific-python-hats
     hostname
     jupyter notebook --no-browser --port=88<ID> --ip='*'
     

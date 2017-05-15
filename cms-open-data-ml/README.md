@@ -24,7 +24,7 @@ To begin the tutorial, you will need to make two SSH connections to ACCRE - one 
 To start the notebook, execute the following commands (you only need to run `cmsrel` and `git` the first time).  To prevent different users trying to use the same port, please replace <ID> with your demo id in these example commands. (For example, `cmsdemo60` is id `60`.)
     
     ssh <username>@login.accre.vanderbilt.edu
-    srun --mem=16G -p mic --pty /bin/bash
+    srun --time=12:00:00 --mem=8G -p mic --pty /bin/bash
     source /cvmfs/cms.cern.ch/cmsset_default.sh
     cmsrel CMSSW_9_0_0_pre6
     cd CMSSW_9_0_0_pre6/src

@@ -24,18 +24,12 @@ To begin the tutorial, you will need to make two SSH connections to ACCRE - one 
 To start the notebook, execute the following commands (you only need to run `cmsrel` and `git` the first time).  To prevent different users trying to use the same port, please replace <ID> with your demo id in these example commands. (For example, `cmsdemo60` is id `60`.)
     
     ssh <username>@login.accre.vanderbilt.edu
-    srun --time=12:00:00 --mem=16G -p pascal --pty /bin/bash
-    source /cvmfs/cms.cern.ch/cmsset_default.sh
-    cmsrel CMSSW_9_0_2
-    cd CMSSW_9_0_2/src
-    cmsenv
     git clone https://github.com/jmduarte/scientific-python-hats
-    hostname
-    jupyter notebook --no-browser --port=88<ID> --ip='*'
+    srun --pty --partition pascal --time=12:00:00 --mem=17G  /home/meloam/ml-hats-2017/jupyter-accre.sh
     
 You should see something similar to the following
 
-    gpu0013.vampire
+    gpuXXXX.vampire
     [I 08:22:45.871 NotebookApp] Serving notebooks from local directory: /home/cmsdemo01/CMSSW_9_0_0_pre6/src
     [I 08:22:45.871 NotebookApp] 0 active kernels 
     [I 08:22:45.871 NotebookApp] The Jupyter Notebook is running at: http://localhost:88<ID>/?token=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -48,7 +42,7 @@ You should see something similar to the following
 
 Remember the hostname `gpuXXXX.vampire`, this is the hostname your notebook is running on. To access the notebook from your local laptop web browser, first create an SSH tunnel to ACCRE in order to view your jupyter instance.
 
-    ssh -L 88<ID>:gpuXXX.vampire:88<ID> <username>@login.accre.vanderbilt.edu
+    ssh -L 88<ID>:gpuXXXX.vampire:88<ID> <username>@login.accre.vanderbilt.edu
  
 Then, copy/paste the URL from the first step into your web browser and from now on, all interactions with Python and your user account will be through the browser. The `-L` option we passed to ssh is forwarding Jupyter's web traffic through SSH, so your account is safe, even if you access it from home.
 

@@ -1,12 +1,13 @@
-# Scientific Python HATS
+# CMS Open Data + Machine Learning
 
 ## Introduction
 
-This Hands on Tutorial Session (HATS) is intended to provide you with basic familiarity of pyROOT and ROOTpy. pyROOT is a Python extension module which provides bindings for all classes within the ROOT libraries and is easily used in unison with C++. Whereas the ROOTpy project provides a more pythonic interface with ROOT on top of the PyROOT bindings. 
+This is introductory tutorial for hands-on session of the DS@HEP2017 workshop and the CMS Hands-on Advanced Tutorial Session (HATS). It is intended to show you how to analyze simulated and reconstructed pp collision events from the 2011 CMS Open Data release and build classifiers for differentiating boosted, merged W boson jets from QCD jets.
 
-The primary goal of these exercises is to obtain a general understanding of the syntax required to import and make use of the ROOT libraries within a basic Python script as well as to illustrate how to make use of C++ classes in order to save computing time.
+# Main notebook in this tutorial
 
-Whether you use Python, C++ or some combination of the two to complete your analysis is a personal preference, however with the current lack of documentation on pyROOT, many students stick with C++ in order to ensure their access to coding examples and experts. It is our hope that through providing you with this basic introduction and Github repository of example scripts, that we can bring together the existing pyROOT/ROOTpy community within CMS and foster its growth. 
+ 1. `cms-open-data-ml.ipynb`
+
 
 ## Getting started
 
@@ -103,16 +104,14 @@ to see that you are in your CMSSW directory. (Alternatively, you can start a tra
 
 To download the tutorials, type
 
-    !git clone https://github.com/FNALLPC/scientific-python-hats.git
+    !git clone https://github.com/FNALLPC/machine-learning-hats
 
 and hit shift-enter in your notebook. After a few seconds, you should see output like this:
 
-    Cloning into 'scientific-python-hats'...
+    Cloning into 'machine-learning-hats'...
     remote: Counting objects: 9, done.
     remote: Compressing objects: 100% (7/7), done.
     remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
     Unpacking objects: 100% (9/9), done.
 
-and in your directory tab, there's a new directory called `scientific-python-hats`. All of the tutorials and exercises are in there.
-
-From this point on, follow the instructions in the notebook of your choice (for the PyROOT and rootpy HATS@LPC start from the [README.md](https://github.com/FNALLPC/scientific-python-hats/blob/master/pyROOT_essentials/README.md) in the `pyROOT_essentials` directory.
+and in your directory tab, there's a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there.

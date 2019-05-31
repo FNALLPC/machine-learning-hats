@@ -25,7 +25,7 @@ If this is the first time using this JupyterHub, you should see:
   <img src="vanderbilt.png" width="500"/>
 </p>
 
-Click the "Sign in with Jupyter ACCRE" button. On the following page, select CERN as your identity provider and click the "Log On" button. Then, enter your CERN credentials or use your CERN grid certificate to autheticate. Click "Spawn" to start a "Default ACCRE Image v2" image.
+Click the "Sign in with Jupyter ACCRE" button. On the following page, select CERN as your identity provider and click the "Log On" button. Then, enter your CERN credentials or use your CERN grid certificate to autheticate. Click "Spawn" to start a "Default ACCRE Image v5" image with "8 Cores, 8 GB RAM, 1 day timeout."
 
 Now you should see the JupyterHub home directory. Click on "New" then "Terminal" in the top right to launch a new terminal. 
 

@@ -7,7 +7,7 @@ This is a set of tutorials for the CMS Machine Learning Hands-on Advanced Tutori
 ## Main notebooks in this tutorial
 
  0. [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb): setting up libraries using `CMSSW`
- 1. [`1.1-datasets-uproot.ipynb`](1-datasets.ipynb): reading/writing datasets from `ROOT` files with `uproot`
+ 1. [`1-datasets-uproot.ipynb`](1-datasets-uproot.ipynb): reading/writing datasets from `ROOT` files with `uproot`
  2. [`2-plotting.ipynb`](2-plotting.ipynb): plotting with `pyROOT` and `matplotlib`
  3. [`3-dense.ipynb`](3-dense.ipynb): building, training, and evaluating a fully connected (dense) neural network in `Keras`
  4. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional)

@@ -8,8 +8,8 @@ This is a set of tutorials for the Machine Learning Hands-on Advanced Tutorial S
 
  0. [`a-dataset-and-plot.ipynb`](0-setup-libraries.ipynb): reading/writing datasets from `ROOT` files with `uproot` and plotting with `matplotlib`
  1. [`b-dense.ipynb`](1-datasets-uproot.ipynb): building, training, and evaluating a fully connected (dense) neural network in `Keras`
- 2. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional)
- 3. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras`
+ 2. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional) -- *still adapting, do not try yet*
+ 3. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras` -- *still adapting, do not try yet*
 
 ## Setup
 

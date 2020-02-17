@@ -11,5 +11,5 @@ pip install jupyter
 pip install uproot
 pip install h5py keras tensorflow
 pip install pandas matplotlib
-pip install sklearn
+pip install sklearn scikit-optimize
 pip install torch

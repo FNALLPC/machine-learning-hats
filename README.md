@@ -51,6 +51,42 @@ Now close this notebook by clicking on `File->Close and Halt`. Click the "New" b
   <img src="new_mlhats.png" width="200"/>
 </p>
 
+## Notes for working on ACCRE
+
+  1. Please remember to close and halt your notebooks when you're done with them. While it's possible to have multiple notebooks open, this can sometimes cause issues with a lack of memory and kernels becoming unstable. The best procatice is to close the notebooks you aren't using. The notebook symbol will be green while it is in use and gray when it is shutdown.
+  2. Remember to shutdown your server when your are done using it. Go to `Control Panel --> Stop My Server` when you are completely finished.
+
+## FAQ
+
+### If someone updates the notebooks after it've clones the repository, how do I get they updates?
+
+In this case you will want to open a terminal, just as you did when you first cloned the repository. Move (`cd`) to the repository directory if not already there. Then do `git pull origin master`. This will pull the latest changes from GitHub. If you've already made edits to a notebook which will be updated, those changes will be conflict. You may want to stash those changes or copy your notebook.
+
+### I want to follow along on the LPC rather than ACCRE.
+
+This is possible, but with a little less user support. You will need to use the following command to open up your ssh connection:
+```bash
+ssh -L localhost:8888:localhost:8888 <username>@cmslpc-sl7.fnal.gov
+```
+Replace `<username>` with your LPC username. Then `cd` to the directory of your choice where you will clone the repository as before:
+```bash
+git clone https://github.com/FNALLPC/machine-learning-hats
+```
+
+In order to open Jupyter, you will need to have either installed Jupyter in your user are or have a CMSSW environment setup. I usually choose any CMSSW directory I've already setup, just for this initial step. In the future, we will have installed CMSSW inside the tutorial folder.
+
+Once you have a CMSSW environment, open Jupyter:
+```bash
+jupyter notebook --no-browser --port=8888 --ip 127.0.0.1
+```
+If everything worked, the last line of the output should be a url of the form:
+```bash
+http://127.0.0.1:8888/?token=<long string of numbers and letters>
+```
+Copy this url into your browser. You may now perform the rest of the exercise like normal, begining by running notebook [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb).
+
+In the future, when you need access to Jupyter and want to run this exercise, you can do a `cmsenv` from inside the `machine-learning-hats/cmssw-env/` directory.
+
 ## Links
 
 The indico page is: [https://indico.cern.ch/event/917681/](https://indico.cern.ch/event/917681/)

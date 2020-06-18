@@ -10,8 +10,12 @@ This is a set of tutorials for the CMS Machine Learning Hands-on Advanced Tutori
  1. [`1-datasets-uproot.ipynb`](1-datasets-uproot.ipynb): reading/writing datasets from `ROOT` files with `uproot`
  2. [`2-plotting.ipynb`](2-plotting.ipynb): plotting with `pyROOT` and `matplotlib`
  3. [`3-dense.ipynb`](3-dense.ipynb): building, training, and evaluating a fully connected (dense) neural network in `Keras`
- 4. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional)
- 5. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras`
+ 4. [`3.1-dense-pytorch.ipynb`](3.1-dense-pytorch.ipynb): The same as [`3-dense.ipynb`](3-dense.ipynb), but using `PyTorch` rather than `Keras`/`TensorFlow.
+ 5. [`3.2-dense-bayesian-optimization.ipynb`](3.2-dense-bayesian-optimization.ipynb): The same as [`3-dense.ipynb`](3-dense.ipynb), but using Bayesian optimization of the hyperparameters of the model
+ 6. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional)
+ 7. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras`
+ 8. [`7-vae-mnist.ipynb`](8-gan-mnist.ipynb): building, training, and evaluating a variational autoencoder in `Keras`
+ 9. [`8-gan-mnist.ipynb`](8-gan-mnist.ipynb): building, training, and evaluating a generative adversarial neural network in `Keras`
 
 ## Setup
 
@@ -39,7 +43,13 @@ To download the tutorials, type
 git clone https://github.com/FNALLPC/machine-learning-hats
 ```
 
-Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it.
+Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the last cell may take up to 20 minutes to run.
+
+Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats`. If you do not, refresh the page and look again.
+
+<p align="center">
+  <img src="new_mlhats.png" width="200"/>
+</p>
 
 ## Links
 

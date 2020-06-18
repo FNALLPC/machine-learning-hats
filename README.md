@@ -53,7 +53,7 @@ Now close this notebook by clicking on `File->Close and Halt`. Click the "New" b
 
 ## Links
 
-The indico page is: [https://indico.cern.ch/event/814896/](https://indico.cern.ch/event/814896/)
+The indico page is: [https://indico.cern.ch/event/917681/](https://indico.cern.ch/event/917681/)
 
-The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/machine-learning-hats](https://mattermost.web.cern.ch/cms-exp/channels/machine-learning-hats)
+The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020)
 

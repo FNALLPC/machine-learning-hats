@@ -1,0 +1,15 @@
+name: machine-learning-hats-2020
+channels:
+    - conda-forge
+    - pytorch
+dependencies:
+    - uproot
+    - h5py
+    - keras
+    - tensorflow
+    - scikit-learn
+    - scikit-optimize
+    - matplotlib
+    - pandas
+    - pytorch
+    - ipykernel

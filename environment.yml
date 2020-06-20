@@ -14,3 +14,4 @@ dependencies:
     - pandas
     - pytorch
     - ipykernel
+    - tqdm

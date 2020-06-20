@@ -14,7 +14,7 @@ This is a set of tutorials for the CMS Machine Learning Hands-on Advanced Tutori
  5. [`3.2-dense-bayesian-optimization.ipynb`](3.2-dense-bayesian-optimization.ipynb): The same as [`3-dense.ipynb`](3-dense.ipynb), but using Bayesian optimization of the hyperparameters of the model
  6. [`4-preprocessing.ipynb`](4-preprocessing.ipynb): preprocessing CMS open data to build jet-images (optional)
  7. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras`
- 8. [`7-vae-mnist.ipynb`](8-gan-mnist.ipynb): building, training, and evaluating a variational autoencoder in `Keras`
+ 8. [`7-vae-mnist.ipynb`](7-vae-mnist.ipynb): building, training, and evaluating a variational autoencoder in `Keras`
  9. [`8-gan-mnist.ipynb`](8-gan-mnist.ipynb): building, training, and evaluating a generative adversarial neural network in `Keras`
 
 ## Setup
@@ -43,9 +43,9 @@ To download the tutorials, type
 git clone https://github.com/FNALLPC/machine-learning-hats
 ```
 
-Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the last cell may take up to 20 minutes to run.
+Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
 
-Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats`. If you do not, refresh the page and look again.
+Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2020`. If you do not, refresh the page and look again.
 
 <p align="center">
   <img src="new_mlhats.png" width="200"/>
@@ -73,9 +73,16 @@ Replace `<username>` with your LPC username. Then `cd` to the directory of your 
 git clone https://github.com/FNALLPC/machine-learning-hats
 ```
 
-In order to open Jupyter, you will need to have either installed Jupyter in your user are or have a CMSSW environment setup. I usually choose any CMSSW directory I've already setup, just for this initial step. In the future, we will have installed CMSSW inside the tutorial folder.
+In order to open Jupyter with all the appopriate libraries, you will need to have either installed a `conda` environment Jupyter in your user are or have a CMSSW environment setup. To install and activate a `conda` environment you can do:
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/miniconda3.sh
+bash $HOME/miniconda3.sh -b -f -u -p $HOME/miniconda3
+source $HOME/miniconda3/etc/profile.d/conda.sh
+conda env create -f environment.yml --name machine-learning-hats-2020
+conda activate machine-learning-hats-2020
+```
 
-Once you have a CMSSW environment, open Jupyter:
+Once you have a conda environment, open Jupyter:
 ```bash
 jupyter notebook --no-browser --port=8888 --ip 127.0.0.1
 ```
@@ -83,13 +90,15 @@ If everything worked, the last line of the output should be a url of the form:
 ```bash
 http://127.0.0.1:8888/?token=<long string of numbers and letters>
 ```
-Copy this url into your browser. You may now perform the rest of the exercise like normal, begining by running notebook [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb).
+Copy this url into your browser. You may now perform the rest of the exercise like normal.
 
-In the future, when you need access to Jupyter and want to run this exercise, you can do a `cmsenv` from inside the `machine-learning-hats/cmssw-env/` directory.
+In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2020`
 
 ## Links
 
 The indico page is: [https://indico.cern.ch/event/917681/](https://indico.cern.ch/event/917681/)
 
 The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020)
+
+The datasets we will use are located here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3901869.svg)](https://doi.org/10.5281/zenodo.3901869)
 

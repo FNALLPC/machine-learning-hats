@@ -73,7 +73,7 @@ Replace `<username>` with your LPC username. Then `cd` to the directory of your 
 git clone https://github.com/FNALLPC/machine-learning-hats
 ```
 
-In order to open Jupyter with all the appopriate libraries, you will need to have either installed a `conda` environment Jupyter in your `nobackup` area (where you have more space) or have a CMSSW environment setup. To install and activate a `conda` environment you can do:
+In order to open Jupyter with all the appopriate libraries, you will need to have either installed a `conda` environment with Jupyter in your `nobackup` area (where you have more space) or have a CMSSW environment setup. To install and activate a `conda` environment you can do:
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
 bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3

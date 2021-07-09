@@ -44,7 +44,7 @@ To download the tutorials, type
 git clone https://github.com/FNALLPC/machine-learning-hats machine-learning-hats-2021
 ```
 
-Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
+Now, in your directory tab, there should be a new directory called `machine-learning-hats-2021`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
 
 Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2021`. If you do not, refresh the page and look again.
 

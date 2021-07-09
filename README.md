@@ -49,7 +49,7 @@ Now, in your directory tab, there should be a new directory called `machine-lear
 Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2021`. If you do not, refresh the page and look again.
 
 <p align="center">
-  <img src="new_mlhats.png" width="200"/>
+  <img src="new_mlhats_2021.png" width="200"/>
 </p>
 
 ## Notes for working on ACCRE

@@ -46,7 +46,7 @@ git clone https://github.com/FNALLPC/machine-learning-hats machine-learning-hats
 
 Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
 
-Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2020`. If you do not, refresh the page and look again.
+Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2021`. If you do not, refresh the page and look again.
 
 <p align="center">
   <img src="new_mlhats.png" width="200"/>
@@ -96,8 +96,8 @@ In order to open Jupyter with all the appopriate libraries, you will need to hav
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
 bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda env create -f environment.yml --name machine-learning-hats-2020
-conda activate machine-learning-hats-2020
+conda env create -f environment.yml --name machine-learning-hats-2021
+conda activate machine-learning-hats-2021
 ```
 
 Once you have a `conda` environment, open Jupyter (which is actually the Jupyter that gets installed as part of the `conda` environment):
@@ -110,13 +110,13 @@ http://127.0.0.1:8888/?token=<long string of numbers and letters>
 ```
 Copy this url into your browser. You may now perform the rest of the exercise like normal, except you will have to change the kernel to the default python3 one (it will have all the necessary libararies because you are using the Jupyter version that is part of your `conda` installation).
 
-In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2020`
+In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2021`
 
 ## Links
 
-The indico page is: [https://indico.cern.ch/event/917681/](https://indico.cern.ch/event/917681/)
+The indico page is: [https://indico.cern.ch/event/1042663/](https://indico.cern.ch/event/1042663/)
 
-The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2020)
+The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2021](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2021)
 
 The datasets we will use are located here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3901869.svg)](https://doi.org/10.5281/zenodo.3901869)
 

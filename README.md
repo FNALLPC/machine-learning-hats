@@ -41,7 +41,7 @@ Now you should see the JupyterHub home directory. Click on "New" then "Terminal"
 To download the tutorials, type
 
 ```
-git clone https://github.com/FNALLPC/machine-learning-hats
+git clone https://github.com/FNALLPC/machine-learning-hats machine-learning-hats-2021
 ```
 
 Now, in your directory tab, there should be a new directory called `machine-learning-hats`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
@@ -61,7 +61,24 @@ Now close this notebook by clicking on `File->Close and Halt`. Click the "New" b
 
 ### If someone updates the notebooks after it've clones the repository, how do I get they updates?
 
-In this case you will want to open a terminal, just as you did when you first cloned the repository. Move (`cd`) to the repository directory if not already there. Then do `git pull origin master`. This will pull the latest changes from GitHub. If you've already made edits to a notebook which will be updated, those changes will be conflict. You may want to stash those changes or copy your notebook.
+In this case you will want to open a terminal, just as you did when you first cloned the repository. Move (`cd`) to the repository directory if not already there. Then do `git pull origin master`. This will pull the latest changes from GitHub. If you've already made edits to a notebook which will be updated, those changes will be conflict. You may want to stash those changes or copy your modified notebook.
+
+To revert the changes made to all of your notebooks you can use the command:
+```
+git checkout .
+```
+If you would like to save your changes first, you can copy your modified notebook to a new name and then run the `checkout` command.
+
+Alternatively, to stash your un-staged changes, use the command:
+```
+git stash
+```
+
+You can then return those changes with the command:
+```
+git stash pop
+```
+Be aware that you may have conflicts that need to be fixed before the notebook can be run again.
 
 ### I want to follow along on the LPC rather than ACCRE.
 

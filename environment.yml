@@ -1,18 +1,20 @@
 name: machine-learning-hats-2021
 channels:
-    - conda-forge
     - pytorch
+    - conda-forge
     - defaults
 dependencies:
     - uproot
     - h5py
-    - keras
-    - tensorflow
+    - tensorflow-mkl>=2
     - scikit-learn
     - scikit-optimize
     - matplotlib
     - pandas
     - pytorch
+    - torchvision
+    - torchaudio
+    - cpuonly
     - ipykernel
     - tqdm
     - jupyter

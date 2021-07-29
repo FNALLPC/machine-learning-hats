@@ -4,6 +4,7 @@ channels:
     - conda-forge
     - defaults
 dependencies:
+    - numpy==1.19.5
     - uproot
     - h5py
     - tensorflow-mkl>=2

@@ -1,10 +1,10 @@
-name: machine-learning-hats-2021
+name: machine-learning-hats-2022
 channels:
     - pytorch
     - conda-forge
     - defaults
 dependencies:
-    - numpy==1.19.5
+    - numpy
     - uproot
     - h5py
     - tensorflow-mkl>=2

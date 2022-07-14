@@ -97,7 +97,9 @@ In order to open Jupyter with all the appopriate libraries, you will need to hav
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
 bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda env create -f environment.yml --name machine-learning-hats-2022
+conda install -c conda-forge mamba
+mamba create -n machine-learning-hats-2022 python=3.9 -c -conda-forge
+mamba env update -n machine-learning-hats-2022 -f environment.yml
 conda activate machine-learning-hats-2022
 ```
 

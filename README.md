@@ -17,6 +17,7 @@ This is a set of tutorials for the CMS Machine Learning Hands-on Advanced Tutori
  7. [`5-conv2d.ipynb`](5-conv2d.ipynb): building, training, and evaluating a 2D convolutional neural network in `Keras`
  8. [`7-vae-mnist.ipynb`](7-vae-mnist.ipynb): building, training, and evaluating a variational autoencoder in `Keras`
  9. [`8-gan-mnist.ipynb`](8-gan-mnist.ipynb): building, training, and evaluating a generative adversarial neural network in `Keras`
+ 10. [`9-gnn-cora.ipynb`](9-gnn-cora.ipynb): introduction to graph neural networks
 
 ## Setup
 
@@ -41,12 +42,12 @@ Now you should see the JupyterHub home directory. Click on "New" then "Terminal"
 To download the tutorials, type
 
 ```
-git clone https://github.com/FNALLPC/machine-learning-hats machine-learning-hats-2021
+git clone https://github.com/FNALLPC/machine-learning-hats machine-learning-hats-2022
 ```
 
-Now, in your directory tab, there should be a new directory called `machine-learning-hats-2021`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
+Now, in your directory tab, there should be a new directory called `machine-learning-hats-2022`. All of the tutorials and exercises are in there. Start by clicking on [`0-setup-libraries.ipynb`](0-setup-libraries.ipynb) and running it. Please note that the first cell may take up to 20 minutes to run.
 
-Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2021`. If you do not, refresh the page and look again.
+Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats-2022`. If you do not, refresh the page and look again.
 
 <p align="center">
   <img src="new_mlhats_2021.png" width="200"/>
@@ -96,8 +97,10 @@ In order to open Jupyter with all the appopriate libraries, you will need to hav
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
 bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda env create -f environment.yml --name machine-learning-hats-2021
-conda activate machine-learning-hats-2021
+conda install -c conda-forge mamba
+mamba create -n machine-learning-hats-2022 python=3.9 -c -conda-forge
+mamba env update -n machine-learning-hats-2022 -f environment.yml
+conda activate machine-learning-hats-2022
 ```
 
 Once you have a `conda` environment, open Jupyter (which is actually the Jupyter that gets installed as part of the `conda` environment):
@@ -110,13 +113,13 @@ http://127.0.0.1:8888/?token=<long string of numbers and letters>
 ```
 Copy this url into your browser. You may now perform the rest of the exercise like normal, except you will have to change the kernel to the default python3 one (it will have all the necessary libararies because you are using the Jupyter version that is part of your `conda` installation).
 
-In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2021`
+In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2022`
 
 ## Links
 
-The indico page is: [https://indico.cern.ch/event/1042663/](https://indico.cern.ch/event/1042663/)
+The indico page is: [https://indico.cern.ch/event/1180509/](https://indico.cern.ch/event/1180509/)
 
-The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2021](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2021)
+The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc2022](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc2022)
 
 The datasets we will use are located here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3901869.svg)](https://doi.org/10.5281/zenodo.3901869)
 

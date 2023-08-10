@@ -1,0 +1,15 @@
+jupyter-book
+matplotlib
+numpy
+ghp-import
+uproot
+h5py
+keras
+tensorflow
+scikit-learn
+scikit-optimize
+pandas
+pytorch
+ipykernel
+tqdm
+jupyter

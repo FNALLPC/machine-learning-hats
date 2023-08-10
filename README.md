@@ -58,8 +58,10 @@ In order to open Jupyter with all the appopriate libraries, you will need to hav
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
 bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
 source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda env create -f environment.yml --name machine-learning-hats-2021
-conda activate machine-learning-hats-2021
+conda install -c conda-forge mamba
+mamba create -n machine-learning-hats-2022 python=3.9 -c -conda-forge
+mamba env update -n machine-learning-hats-2022 -f environment.yml
+conda activate machine-learning-hats-2022
 ```
 
 Once you have a `conda` environment, open Jupyter (which is actually the Jupyter that gets installed as part of the `conda` environment):
@@ -72,7 +74,7 @@ http://127.0.0.1:8888/?token=<long string of numbers and letters>
 ```
 Copy this url into your browser. You may now perform the rest of the exercise like normal, except you will have to change the kernel to the default python3 one (it will have all the necessary libararies because you are using the Jupyter version that is part of your `conda` installation).
 
-In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2021`
+In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2022`
 
 ## Links
 

@@ -2,7 +2,7 @@
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats)
 [![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/main.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/main)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/master.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/master)
 
 ## Introduction
 

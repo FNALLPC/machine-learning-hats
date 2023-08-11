@@ -370,6 +370,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sign-in">1. Sign-in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-repository">2. Download repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-libraries">3. Setup libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-for-working-on-accre">Notes for working on ACCRE</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates">If someone updates the notebooks after it’ve clones the repository, how do I get they updates?</a></li>
 </ul>
@@ -385,30 +388,36 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="vanderbilt-jupyterhub">
 <h1>Vanderbilt JupyterHub<a class="headerlink" href="#vanderbilt-jupyterhub" title="Permalink to this heading">#</a></h1>
+<section id="sign-in">
+<h2>1. Sign-in<a class="headerlink" href="#sign-in" title="Permalink to this heading">#</a></h2>
 <p>Point your browser to:</p>
 <p><a class="reference external" href="https://jupyter.accre.vanderbilt.edu/">https://jupyter.accre.vanderbilt.edu/</a></p>
 <p>If this is the first time using this JupyterHub, you should see:</p>
-<p align="center">
-  <img src="vanderbilt.png" width="500"/>
-</p>
+<p><img alt="vanderbilt" src="../../_images/vanderbilt.png" /></p>
 <p>Click the “Sign in with Jupyter ACCRE” button. On the following page, select CERN as your identity provider and click the “Log On” button. Then, enter your CERN credentials or use your CERN grid certificate to autheticate. Click “Spawn” to start a “Default ACCRE Image v5” image with “8 Cores, 8 GB RAM, 1 day timeout.”</p>
+</section>
+<section id="download-repository">
+<h2>2. Download repository<a class="headerlink" href="#download-repository" title="Permalink to this heading">#</a></h2>
 <p>Now you should see the JupyterHub home directory. Click on “New” then “Terminal” in the top right to launch a new terminal.</p>
-<p align="center">
-  <img src="new_terminal.png" width="200"/>
-</p>
+<p><img alt="new_terminal" src="../../_images/new_terminal.png" /></p>
 <p>To download the tutorials, type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">FNALLPC</span><span class="o">/</span><span class="n">machine</span><span class="o">-</span><span class="n">learning</span><span class="o">-</span><span class="n">hats</span>
 </pre></div>
 </div>
 <p>Now, in your directory tab, there should be a new directory called <code class="docutils literal notranslate"><span class="pre">machine-learning-hats</span></code>.
-All of the tutorials and exercises are inside <code class="docutils literal notranslate"><span class="pre">machine-learning-hats/machine-learning-hats</span></code>
-Start by clicking on <a class="reference external" href="https://github.com/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/setup-libraries.ipynb"><code class="docutils literal notranslate"><span class="pre">setup-libraries.ipynb</span></code></a> and running it.
-Please note that the first cell may take up to 20 minutes to run.</p>
+All of the tutorials and exercises are inside <code class="docutils literal notranslate"><span class="pre">machine-learning-hats/machine-learning-hats</span></code>.</p>
+</section>
+<section id="setup-libraries">
+<h2>3. Setup libraries<a class="headerlink" href="#setup-libraries" title="Permalink to this heading">#</a></h2>
+<p>Start by clicking on <a class="reference external" href="https://github.com/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/setup-libraries.ipynb"><code class="docutils literal notranslate"><span class="pre">setup-libraries.ipynb</span></code></a> and running it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please note that the first cell may take up to 20 minutes to run.</p>
+</div>
 <p>Now close this notebook by clicking on <code class="docutils literal notranslate"><span class="pre">File-&gt;Close</span> <span class="pre">and</span> <span class="pre">Halt</span></code>. Click the “New” button again. You should see a new kernal called <code class="docutils literal notranslate"><span class="pre">machine-learning-hats</span></code>.
 If you do not, refresh the page and look again.</p>
-<p align="center">
-  <img src="new_mlhats_2021.png" width="200"/>
-</p>
+<p><img alt="new_mlhats" src="../../_images/new_mlhats_2021.png" /></p>
+</section>
 <section id="notes-for-working-on-accre">
 <h2>Notes for working on ACCRE<a class="headerlink" href="#notes-for-working-on-accre" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -503,6 +512,9 @@ If you do not, refresh the page and look again.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sign-in">1. Sign-in</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-repository">2. Download repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-libraries">3. Setup libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-for-working-on-accre">Notes for working on ACCRE</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates">If someone updates the notebooks after it’ve clones the repository, how do I get they updates?</a></li>
 </ul>

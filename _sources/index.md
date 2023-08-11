@@ -1,6 +1,7 @@
 # CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/HEAD)
 [![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/master.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/master)
 
@@ -44,12 +45,18 @@ jupyter lab  # this will create a JupyterLab instance from which you can run all
 
 ### Binder
 
-TODO
+You can launch this repository in a "Binder" instance using: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/HEAD),
+or for a specific notebook by navigating to the rocket icon on the website and clicking on the Binder option.
+
+![launch_notebooks](figures/launch_notebooks.png)
+
+This may be a more convenient, but it has not been well tested and the set-up time can be slow.
 
 
 ### Google Colab
 
-TODO
+Each notebook can also be launched in a Google Colab instance by clicking "Google Colab" option in the menu bar above. 
+To use this, you will have to install any extra libraries needed for the tutorial yourself and re-download the relevant datasets each time.
 
 
 ## Links

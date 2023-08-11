@@ -15,11 +15,11 @@ We will also explore more advanced models such as graph neural networks (GNNs), 
 
 ### Vanderbilt Jupyterhub (Recommended!)
 
-The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions [here](asdf).
+The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/vanderbilt-jupyterhub/vanderbilt.html).
 
 ### FNAL LPC
 
-Not as well supported, but instructions are [here](asdf).
+Not as well supported, but instructions are [here](https://fnallpc.github.io/machine-learning-hats/setup/lpc.html).
 
 ### Locally
 

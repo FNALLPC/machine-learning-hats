@@ -1,0 +1,13 @@
+matplotlib
+numpy
+uproot
+h5py
+keras
+tensorflow
+scikit-learn
+scikit-optimize
+pandas
+torch
+ipykernel
+tqdm
+jupyter

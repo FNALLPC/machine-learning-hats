@@ -2,3 +2,6 @@
 *~
 *.pyc
 **/.DS_Store
+
+machine-learning-hats/_build
+machine-learning-hats/notebooks/data

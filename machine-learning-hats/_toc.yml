@@ -2,8 +2,16 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: index
+options:
+  numbered: true
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: notebooks/1-datasets-uproot
+- file: notebooks/2-dense-keras
+  sections:
+    - file: notebooks/2.1-dense-pytorch
+    - file: notebooks/2.2-dense-bayesian-optimization
+- file: notebooks/3-conv2d
+- file: notebooks/4-gnn-cora
+- file: notebooks/5-vae-mnist
+- file: notebooks/6-gan-mnist

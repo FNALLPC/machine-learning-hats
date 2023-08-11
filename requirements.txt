@@ -2,6 +2,8 @@ jupyter-book
 matplotlib
 numpy
 ghp-import
+pre-commit
+black
 uproot
 h5py
 keras
@@ -9,7 +11,7 @@ tensorflow
 scikit-learn
 scikit-optimize
 pandas
-pytorch
+torch
 ipykernel
 tqdm
 jupyter

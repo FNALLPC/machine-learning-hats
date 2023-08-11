@@ -1,6 +1,6 @@
 # CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
 
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats/main.html)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats)
 [![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/main.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/main)
 

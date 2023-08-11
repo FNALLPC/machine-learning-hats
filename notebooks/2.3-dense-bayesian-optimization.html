@@ -1,0 +1,1436 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Optimize a dense network with Bayesian optimization &#8212; Machine Learning HATS</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2.3-dense-bayesian-optimization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convolutional Neural Networks for Jet-Images" href="3-conv2d.html" />
+    <link rel="prev" title="Dense neural network with PyTorch" href="2.2-dense-pytorch.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.pdf" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.pdf" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">Loading Datasets</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="2-dense.html">Dense networks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Optimize a dense network with Bayesian optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">Variational Autoencoders with Keras and MNIST</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/main?urlpath=tree/notebooks/2.3-dense-bayesian-optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/main/notebooks/2.3-dense-bayesian-optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2.3-dense-bayesian-optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/2.3-dense-bayesian-optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Optimize a dense network with Bayesian optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-pandas-dataframes">Loading <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-model">Define the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-the-hyperparameters-of-the-model">Optimize the hyperparameters of the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-improvement">Visualize the improvement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">Plot performance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="optimize-a-dense-network-with-bayesian-optimization">
+<h1>Optimize a dense network with Bayesian optimization<a class="headerlink" href="#optimize-a-dense-network-with-bayesian-optimization" title="Permalink to this heading">#</a></h1>
+<p>Authors: Javier Duarte, Thong Nguyen</p>
+<section id="loading-pandas-dataframes">
+<h2>Loading <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames<a class="headerlink" href="#loading-pandas-dataframes" title="Permalink to this heading">#</a></h2>
+<p>Now we load two different <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> arrays. One corresponding to the VV signal and one corresponding to the background.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uproot</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="c1"># fix random seed for reproducibility</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+<span class="n">treename</span> <span class="o">=</span> <span class="s2">&quot;HZZ4LeptonsAnalysisReduced&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">upfile</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">filename</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;data/ntuple_4mu_VV.root&quot;</span>
+<span class="n">filename</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;data/ntuple_4mu_bkg.root&quot;</span>
+
+<span class="n">VARS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f_mass4l&quot;</span><span class="p">,</span> <span class="s2">&quot;f_massjj&quot;</span><span class="p">]</span>  <span class="c1"># choose which vars to use (2d)</span>
+
+<span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">])</span>
+<span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">])</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">treename</span><span class="p">]</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">VARS</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">treename</span><span class="p">]</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">VARS</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">)</span>
+
+<span class="c1"># cut out undefined variables VARS[0] and VARS[1] &gt; -999</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">999</span><span class="p">)]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">999</span><span class="p">)]</span>
+
+<span class="c1"># add isSignal variable</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="s2">&quot;isSignal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="s2">&quot;isSignal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-model">
+<h2>Define the model<a class="headerlink" href="#define-the-model" title="Permalink to this heading">#</a></h2>
+<p>We’ll start with a dense (fully-connected) NN layer.
+Our model will have a single fully-connected hidden layer with the same number of neurons as input variables.
+The weights are initialized using a small Gaussian random number.
+We will switch between linear and tanh activation functions for the hidden layer.
+The output layer contains a single neuron in order to make predictions.
+It uses the sigmoid activation function in order to produce a probability output in the range of 0 to 1.</p>
+<p>We are using the <code class="docutils literal notranslate"><span class="pre">binary_crossentropy</span></code> loss function during training, a standard loss function for binary classification problems.
+We will optimize the model with the Adam algorithm for stochastic gradient descent and we will collect accuracy metrics while the model is trained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># baseline keras model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Input</span><span class="p">,</span>
+    <span class="n">Activation</span><span class="p">,</span>
+    <span class="n">Dense</span><span class="p">,</span>
+    <span class="n">Convolution2D</span><span class="p">,</span>
+    <span class="n">MaxPooling2D</span><span class="p">,</span>
+    <span class="n">Dropout</span><span class="p">,</span>
+    <span class="n">Flatten</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">optimizers</span>
+
+<span class="n">NDIM</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">VARS</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">NDIM</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="c1"># creae the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="c1"># compile the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="c1"># print the model summary</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 3         
+=================================================================
+Total params: 3
+Trainable params: 3
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-07-11 21:53:58.557604: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dividing-the-data-into-testing-and-training-dataset">
+<h2>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
+<p>We will split the data into two parts (one for training+validation and one for testing).
+We will also apply “standard scaling” preprocessing: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html</a> i.e. making the mean = 0 and the RMS = 1 for all input variables (based <strong>only</strong> on the training/validation dataset).
+We will also define our early stopping criteria to prevent over-fitting and we will save the model based on the best <code class="docutils literal notranslate"><span class="pre">val_loss</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]])</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">df_all</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">NDIM</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[:,</span> <span class="n">NDIM</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train_val</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># preprocessing: standard scalar</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_val</span><span class="p">)</span>
+<span class="n">X_train_val</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_val</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># early stopping callback</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
+
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># model checkpoint callback</span>
+<span class="c1"># this saves our model architecture + parameters into dense_model.h5</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+
+<span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="s2">&quot;dense_model.h5&quot;</span><span class="p">,</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-training">
+<h2>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
+<p>Here, we run the training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train classifier</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">begt</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train_val</span><span class="p">,</span>
+    <span class="n">Y_train_val</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># switch to 1 for more verbosity</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">],</span>
+    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished in </span><span class="si">{}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">begt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-07-11 21:54:07.493636: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2022-07-11 21:54:07.494348: I tensorflow/core/platform/profile_utils/cpu_utils.cc:114] CPU Frequency: 2099920000 Hz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished in 4.753435134887695s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimize-the-hyperparameters-of-the-model">
+<h2>Optimize the hyperparameters of the model<a class="headerlink" href="#optimize-the-hyperparameters-of-the-model" title="Permalink to this heading">#</a></h2>
+<p>The hyperperparameters of the model that we weill optimize are the number of hidden layers <code class="docutils literal notranslate"><span class="pre">num_hidden</span></code>, the number of nodes in each layer <code class="docutils literal notranslate"><span class="pre">initial_node</span></code>, and the fraction of dropout <code class="docutils literal notranslate"><span class="pre">dropout</span></code>.</p>
+<div class="cell tag_scrolling_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">gp_minimize</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Real</span><span class="p">,</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">skopt.utils</span> <span class="kn">import</span> <span class="n">use_named_args</span>
+
+
+<span class="k">def</span> <span class="nf">build_custom_model</span><span class="p">(</span><span class="n">num_hiddens</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">initial_node</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">NDIM</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_hiddens</span><span class="p">):</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">initial_node</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">))),</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span>
+            <span class="n">inputs</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">hidden</span>
+        <span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">dropout</span><span class="p">))(</span><span class="n">hidden</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)(</span><span class="n">hidden</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">X_train_val</span><span class="p">,</span>
+        <span class="n">Y_train_val</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># switch to 1 for more verbosity</span>
+        <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">],</span>
+        <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">best_acc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">best_acc</span>
+
+
+<span class="n">space</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hidden_layers&quot;</span><span class="p">),</span>
+    <span class="n">Integer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;initial_nodes&quot;</span><span class="p">),</span>
+    <span class="n">Real</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dropout&quot;</span><span class="p">),</span>
+    <span class="n">Integer</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;batch_size&quot;</span><span class="p">),</span>
+    <span class="n">Real</span><span class="p">(</span><span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;log-uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="nd">@use_named_args</span><span class="p">(</span><span class="n">space</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="o">**</span><span class="n">X</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New configuration: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">build_custom_model</span><span class="p">(</span>
+        <span class="n">num_hiddens</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;hidden_layers&quot;</span><span class="p">],</span> <span class="n">initial_node</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;initial_nodes&quot;</span><span class="p">],</span> <span class="n">dropout</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;dropout&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">]),</span>
+        <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+    <span class="n">best_acc</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best acc: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_acc</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">best_acc</span>
+
+
+<span class="n">begt</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_gp</span> <span class="o">=</span> <span class="n">gp_minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">n_calls</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finish optimization in </span><span class="si">{}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">begt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 85, &#39;dropout&#39;: 0.10919572308469448, &#39;batch_size&#39;: 3062, &#39;learning_rate&#39;: 0.0005600770399424082}
+Model: &quot;model_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense (Dense)                (None, 85)                255       
+_________________________________________________________________
+dropout (Dropout)            (None, 85)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 86        
+=================================================================
+Total params: 341
+Trainable params: 341
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9269527196884155
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 9, &#39;dropout&#39;: 0.22309946750343207, &#39;batch_size&#39;: 921, &#39;learning_rate&#39;: 0.006015816920825813}
+Model: &quot;model_2&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 9)                 27        
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 9)                 0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 10        
+=================================================================
+Total params: 37
+Trainable params: 37
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9390067458152771
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 48, &#39;dropout&#39;: 0.19401930757342695, &#39;batch_size&#39;: 2093, &#39;learning_rate&#39;: 0.0009344233883787171}
+Model: &quot;model_3&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 48)                144       
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 48)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 49        
+=================================================================
+Total params: 193
+Trainable params: 193
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9402121305465698
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 78, &#39;dropout&#39;: 0.8762834402421655, &#39;batch_size&#39;: 2311, &#39;learning_rate&#39;: 0.001625877427086297}
+Model: &quot;model_4&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 78)                234       
+_________________________________________________________________
+dropout_3 (Dropout)          (None, 78)                0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 39)                3081      
+_________________________________________________________________
+dropout_4 (Dropout)          (None, 39)                0         
+_________________________________________________________________
+dense_5 (Dense)              (None, 20)                800       
+_________________________________________________________________
+dropout_5 (Dropout)          (None, 20)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 21        
+=================================================================
+Total params: 4,136
+Trainable params: 4,136
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9440694451332092
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 61, &#39;dropout&#39;: 0.2474280963926089, &#39;batch_size&#39;: 2546, &#39;learning_rate&#39;: 0.010731513601673247}
+Model: &quot;model_5&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_6 (Dense)              (None, 61)                183       
+_________________________________________________________________
+dropout_6 (Dropout)          (None, 61)                0         
+_________________________________________________________________
+dense_7 (Dense)              (None, 30)                1860      
+_________________________________________________________________
+dropout_7 (Dropout)          (None, 30)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 31        
+=================================================================
+Total params: 2,074
+Trainable params: 2,074
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9457569718360901
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 29, &#39;dropout&#39;: 0.8037585947601061, &#39;batch_size&#39;: 3733, &#39;learning_rate&#39;: 1.2090882997080298e-05}
+Model: &quot;model_6&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_8 (Dense)              (None, 29)                87        
+_________________________________________________________________
+dropout_8 (Dropout)          (None, 29)                0         
+_________________________________________________________________
+dense_9 (Dense)              (None, 14)                420       
+_________________________________________________________________
+dropout_9 (Dropout)          (None, 14)                0         
+_________________________________________________________________
+dense_10 (Dense)             (None, 7)                 105       
+_________________________________________________________________
+dropout_10 (Dropout)         (None, 7)                 0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 8         
+=================================================================
+Total params: 620
+Trainable params: 620
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9469624161720276
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 36, &#39;dropout&#39;: 0.7280362834123955, &#39;batch_size&#39;: 2295, &#39;learning_rate&#39;: 0.000499811722314133}
+Model: &quot;model_7&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_11 (Dense)             (None, 36)                108       
+_________________________________________________________________
+dropout_11 (Dropout)         (None, 36)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 37        
+=================================================================
+Total params: 145
+Trainable params: 145
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9491320848464966
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 80, &#39;dropout&#39;: 0.6422091724381469, &#39;batch_size&#39;: 604, &#39;learning_rate&#39;: 0.00018326055021161485}
+Model: &quot;model_8&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_12 (Dense)             (None, 80)                240       
+_________________________________________________________________
+dropout_12 (Dropout)         (None, 80)                0         
+_________________________________________________________________
+dense_13 (Dense)             (None, 40)                3240      
+_________________________________________________________________
+dropout_13 (Dropout)         (None, 40)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 41        
+=================================================================
+Total params: 3,521
+Trainable params: 3,521
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9505785703659058
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 76, &#39;dropout&#39;: 0.5486612987713032, &#39;batch_size&#39;: 1415, &#39;learning_rate&#39;: 0.004116455326627872}
+Model: &quot;model_9&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_14 (Dense)             (None, 76)                228       
+_________________________________________________________________
+dropout_14 (Dropout)         (None, 76)                0         
+_________________________________________________________________
+dense_15 (Dense)             (None, 38)                2926      
+_________________________________________________________________
+dropout_15 (Dropout)         (None, 38)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 39        
+=================================================================
+Total params: 3,193
+Trainable params: 3,193
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9508196711540222
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 88, &#39;dropout&#39;: 0.730104980246572, &#39;batch_size&#39;: 2184, &#39;learning_rate&#39;: 1.9989431770225823e-05}
+Model: &quot;model_10&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_16 (Dense)             (None, 88)                264       
+_________________________________________________________________
+dropout_16 (Dropout)         (None, 88)                0         
+_________________________________________________________________
+dense_17 (Dense)             (None, 44)                3916      
+_________________________________________________________________
+dropout_17 (Dropout)         (None, 44)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 45        
+=================================================================
+Total params: 4,225
+Trainable params: 4,225
+Non-trainable params: 0
+_________________________________________________________________
+Best acc: 0.9513018131256104
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 65, &#39;dropout&#39;: 0.4067110900503197, &#39;batch_size&#39;: 4536, &#39;learning_rate&#39;: 1.6909401832406566e-05}
+Model: &quot;model_11&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_18 (Dense)             (None, 65)                195       
+_________________________________________________________________
+dropout_18 (Dropout)         (None, 65)                0         
+_________________________________________________________________
+dense_19 (Dense)             (None, 32)                2112      
+_________________________________________________________________
+dropout_19 (Dropout)         (None, 32)                0         
+_________________________________________________________________
+dense_20 (Dense)             (None, 16)                528       
+_________________________________________________________________
+dropout_20 (Dropout)         (None, 16)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 17        
+=================================================================
+Total params: 2,852
+Trainable params: 2,852
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9513018131256104
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 44, &#39;dropout&#39;: 0.46309479901862954, &#39;batch_size&#39;: 556, &#39;learning_rate&#39;: 0.0798827198804181}
+Model: &quot;model_12&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_21 (Dense)             (None, 44)                132       
+_________________________________________________________________
+dropout_21 (Dropout)         (None, 44)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 45        
+=================================================================
+Total params: 177
+Trainable params: 177
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9515429139137268
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 100, &#39;dropout&#39;: 0.4067987179973009, &#39;batch_size&#39;: 5000, &#39;learning_rate&#39;: 0.1}
+Model: &quot;model_13&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_22 (Dense)             (None, 100)               300       
+_________________________________________________________________
+dropout_22 (Dropout)         (None, 100)               0         
+_________________________________________________________________
+dense_23 (Dense)             (None, 50)                5050      
+_________________________________________________________________
+dropout_23 (Dropout)         (None, 50)                0         
+_________________________________________________________________
+dense_24 (Dense)             (None, 25)                1275      
+_________________________________________________________________
+dropout_24 (Dropout)         (None, 25)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 26        
+=================================================================
+Total params: 6,651
+Trainable params: 6,651
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9515429139137268
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 100, &#39;dropout&#39;: 0.4982381104731523, &#39;batch_size&#39;: 5000, &#39;learning_rate&#39;: 1e-05}
+Model: &quot;model_14&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_25 (Dense)             (None, 100)               300       
+_________________________________________________________________
+dropout_25 (Dropout)         (None, 100)               0         
+_________________________________________________________________
+dense_26 (Dense)             (None, 50)                5050      
+_________________________________________________________________
+dropout_26 (Dropout)         (None, 50)                0         
+_________________________________________________________________
+dense_27 (Dense)             (None, 25)                1275      
+_________________________________________________________________
+dropout_27 (Dropout)         (None, 25)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 26        
+=================================================================
+Total params: 6,651
+Trainable params: 6,651
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9515429139137268
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 14, &#39;dropout&#39;: 0.34733425561414655, &#39;batch_size&#39;: 601, &#39;learning_rate&#39;: 0.00017779328843182263}
+Model: &quot;model_15&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_28 (Dense)             (None, 14)                42        
+_________________________________________________________________
+dropout_28 (Dropout)         (None, 14)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 15        
+=================================================================
+Total params: 57
+Trainable params: 57
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9517840147018433
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 63, &#39;dropout&#39;: 5.503648636758786e-05, &#39;batch_size&#39;: 2413, &#39;learning_rate&#39;: 2.260306625151787e-05}
+Model: &quot;model_16&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_29 (Dense)             (None, 63)                189       
+_________________________________________________________________
+dropout_29 (Dropout)         (None, 63)                0         
+_________________________________________________________________
+dense_30 (Dense)             (None, 32)                2048      
+_________________________________________________________________
+dropout_30 (Dropout)         (None, 32)                0         
+_________________________________________________________________
+dense_31 (Dense)             (None, 16)                528       
+_________________________________________________________________
+dropout_31 (Dropout)         (None, 16)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 17        
+=================================================================
+Total params: 2,782
+Trainable params: 2,782
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9517840147018433
+New configuration: {&#39;hidden_layers&#39;: 1, &#39;initial_nodes&#39;: 93, &#39;dropout&#39;: 0.9, &#39;batch_size&#39;: 4594, &#39;learning_rate&#39;: 0.07356215620398546}
+Model: &quot;model_17&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_32 (Dense)             (None, 93)                279       
+_________________________________________________________________
+dropout_32 (Dropout)         (None, 93)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 94        
+=================================================================
+Total params: 373
+Trainable params: 373
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9517840147018433
+New configuration: {&#39;hidden_layers&#39;: 3, &#39;initial_nodes&#39;: 23, &#39;dropout&#39;: 0.18499533850346483, &#39;batch_size&#39;: 4459, &#39;learning_rate&#39;: 0.0005377686889554435}
+Model: &quot;model_18&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_33 (Dense)             (None, 23)                69        
+_________________________________________________________________
+dropout_33 (Dropout)         (None, 23)                0         
+_________________________________________________________________
+dense_34 (Dense)             (None, 12)                288       
+_________________________________________________________________
+dropout_34 (Dropout)         (None, 12)                0         
+_________________________________________________________________
+dense_35 (Dense)             (None, 6)                 78        
+_________________________________________________________________
+dropout_35 (Dropout)         (None, 6)                 0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 7         
+=================================================================
+Total params: 442
+Trainable params: 442
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9515429139137268
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 22, &#39;dropout&#39;: 0.8998211088920843, &#39;batch_size&#39;: 639, &#39;learning_rate&#39;: 0.007478381525904193}
+Model: &quot;model_19&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_36 (Dense)             (None, 22)                66        
+_________________________________________________________________
+dropout_36 (Dropout)         (None, 22)                0         
+_________________________________________________________________
+dense_37 (Dense)             (None, 11)                253       
+_________________________________________________________________
+dropout_37 (Dropout)         (None, 11)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 12        
+=================================================================
+Total params: 331
+Trainable params: 331
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9517840147018433
+New configuration: {&#39;hidden_layers&#39;: 2, &#39;initial_nodes&#39;: 26, &#39;dropout&#39;: 0.42163653305477045, &#39;batch_size&#39;: 4824, &#39;learning_rate&#39;: 1.4616042209619643e-05}
+Model: &quot;model_20&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           [(None, 2)]               0         
+_________________________________________________________________
+dense_38 (Dense)             (None, 26)                78        
+_________________________________________________________________
+dropout_38 (Dropout)         (None, 26)                0         
+_________________________________________________________________
+dense_39 (Dense)             (None, 13)                351       
+_________________________________________________________________
+dropout_39 (Dropout)         (None, 13)                0         
+_________________________________________________________________
+output (Dense)               (None, 1)                 14        
+=================================================================
+Total params: 443
+Trainable params: 443
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/cms.rkansal/miniconda3/envs/machine-learning-hats-2022/lib/python3.9/site-packages/tensorflow/python/keras/optimizer_v2/optimizer_v2.py:374: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best acc: 0.9517840147018433
+Finish optimization in 53.88740849494934s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-the-improvement">
+<h2>Visualize the improvement<a class="headerlink" href="#visualize-the-improvement" title="Permalink to this heading">#</a></h2>
+<p>Let’s see how Bayesian optimization improves the accuracy</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skopt.plots</span> <span class="kn">import</span> <span class="n">plot_convergence</span>
+
+<span class="n">plot_convergence</span><span class="p">(</span><span class="n">res_gp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Convergence plot&#39;}, xlabel=&#39;Number of calls $n$&#39;, ylabel=&#39;$\\min f(x)$ after $n$ calls&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/fbd09c8974625c6d912d23493688be41a752e9dd59a2e25c70633ee916036278.png" src="../_images/fbd09c8974625c6d912d23493688be41a752e9dd59a2e25c70633ee916036278.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Best parameters: </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">best_hidden_layers = </span><span class="si">{}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">best_initial_nodes = </span><span class="si">{}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">best_dropout = </span><span class="si">{}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">best_batch_size = </span><span class="si">{}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">best_learning_rate = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">res_gp</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_gp</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_gp</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">res_gp</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">res_gp</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters: 
+best_hidden_layers = 1 
+best_initial_nodes = 14 
+best_dropout = 0.34733425561414655 
+best_batch_size = 601 
+best_learning_rate = 0.00017779328843182263
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-performance">
+<h2>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
+<p>Here, we plot the history of the training and the performance in a ROC curve</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="c1"># plot loss vs epoch</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot accuracy vs epoch</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;acc&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;val_acc&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot ROC</span>
+<span class="n">Y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">Y_predict</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;auc = </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">roc_auc</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random chance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;false positive rate&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;true positive rate&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;receiver operating curve&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3546882a2e5e9f21c36c522e0fe87a83d9a336bfd3fbd13d25db01835fa4ae70.png" src="../_images/3546882a2e5e9f21c36c522e0fe87a83d9a336bfd3fbd13d25db01835fa4ae70.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2.2-dense-pytorch.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dense neural network with PyTorch</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-conv2d.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Convolutional Neural Networks for Jet-Images</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-pandas-dataframes">Loading <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-model">Define the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-the-hyperparameters-of-the-model">Optimize the hyperparameters of the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-improvement">Visualize the improvement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">Plot performance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raghav Kansal, on behalf of the LPC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1080 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Loading Datasets &#8212; Machine Learning HATS</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/1-datasets-uproot';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dense networks" href="2-dense.html" />
+    <link rel="prev" title="CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.pdf" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.pdf" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Loading Datasets</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">Optimize a dense network with Bayesian optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">Variational Autoencoders with Keras and MNIST</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/main?urlpath=tree/notebooks/1-datasets-uproot.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/main/notebooks/1-datasets-uproot.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/1-datasets-uproot.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/1-datasets-uproot.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Loading Datasets</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-datasets-from-root-files-using-uproot">Load datasets from <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files using <code class="docutils literal notranslate"><span class="pre">uproot</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-root-files">Load <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-tree-to-pandas-dataframes">Convert tree to <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-matplotlib">Plotting in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="loading-datasets">
+<h1>Loading Datasets<a class="headerlink" href="#loading-datasets" title="Permalink to this heading">#</a></h1>
+<p>Authors: Javier Duarte, Raghav Kansal</p>
+<section id="load-datasets-from-root-files-using-uproot">
+<h2>Load datasets from <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files using <code class="docutils literal notranslate"><span class="pre">uproot</span></code><a class="headerlink" href="#load-datasets-from-root-files-using-uproot" title="Permalink to this heading">#</a></h2>
+<p>Here we load the <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> datasets in python using <code class="docutils literal notranslate"><span class="pre">uproot</span></code> (see: <a class="github reference external" href="https://github.com/scikit-hep/uproot">scikit-hep/uproot</a>). For more information about how to use uproot, see the <a class="reference external" href="https://indico.cern.ch/event/1297663/"><code class="docutils literal notranslate"><span class="pre">Uproot</span> <span class="pre">and</span> <span class="pre">Awkward</span> <span class="pre">Array</span> <span class="pre">for</span> <span class="pre">columnar</span> <span class="pre">analysis</span> <span class="pre">HATS&#64;LPC</span> <span class="pre">2023</span></code></a> tutorial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uproot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Download datasets from Zenodo:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+mkdir -p data
+wget -O data/ntuple_4mu_bkg.root &quot;https://zenodo.org/record/3901869/files/ntuple_4mu_bkg.root?download=1&quot;
+wget -O data/ntuple_4mu_VV.root &quot;https://zenodo.org/record/3901869/files/ntuple_4mu_VV.root?download=1&quot;
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-08-10 20:18:37--  https://zenodo.org/record/3901869/files/ntuple_4mu_bkg.root?download=1
+Resolving zenodo.org (zenodo.org)... 188.185.124.72
+Connecting to zenodo.org (zenodo.org)|188.185.124.72|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 8867265 (8.5M) [application/octet-stream]
+Saving to: ‘data/ntuple_4mu_bkg.root’
+
+     0K .......... .......... .......... .......... ..........  0%  465K 18s
+    50K .......... .......... .......... .......... ..........  1%  353K 21s
+   100K .......... .......... .......... .......... ..........  1%  378K 22s
+   150K .......... .......... .......... .......... ..........  2%  210M 16s
+   200K .......... .......... .......... .......... ..........  2%  466K 16s
+   250K .......... .......... .......... .......... ..........  3%  463K 17s
+   300K .......... .......... .......... .......... ..........  4%  163K 21s
+   350K .......... .......... .......... .......... ..........  4%  461K 21s
+   400K .......... .......... .......... .......... ..........  5%  469K 20s
+   450K .......... .......... .......... .......... ..........  5% 22.0M 18s
+   500K .......... .......... .......... .......... ..........  6%  284K 19s
+   550K .......... .......... .......... .......... ..........  6% 58.7K 29s
+   600K .......... .......... .......... .......... ..........  7% 74.8M 26s
+   650K .......... .......... .......... .......... ..........  8%  252K 27s
+   700K .......... .......... .......... .......... ..........  8%  389K 26s
+   750K .......... .......... .......... .......... ..........  9%  460K 25s
+   800K .......... .......... .......... .......... ..........  9%  474K 25s
+   850K .......... .......... .......... .......... .......... 10%  158K 26s
+   900K .......... .......... .......... .......... .......... 10%  174M 24s
+   950K .......... .......... .......... .......... .......... 11%  403K 24s
+  1000K .......... .......... .......... .......... .......... 12%  472K 23s
+  1050K .......... .......... .......... .......... .......... 12%  324K 23s
+  1100K .......... .......... .......... .......... .......... 13%  375K 23s
+  1150K .......... .......... .......... .......... .......... 13%  463K 23s
+  1200K .......... .......... .......... .......... .......... 14%  470K 22s
+  1250K .......... .......... .......... .......... .......... 15% 58.5M 21s
+  1300K .......... .......... .......... .......... .......... 15%  162K 22s
+  1350K .......... .......... .......... .......... .......... 16%  466K 22s
+  1400K .......... .......... .......... .......... .......... 16%  473K 21s
+  1450K .......... .......... .......... .......... .......... 17%  283K 21s
+  1500K .......... .......... .......... .......... .......... 17%  219M 20s
+  1550K .......... .......... .......... .......... .......... 18%  325K 20s
+  1600K .......... .......... .......... .......... .......... 19%  457K 20s
+  1650K .......... .......... .......... .......... .......... 19%  472K 20s
+  1700K .......... .......... .......... .......... .......... 20%  173K 20s
+  1750K .......... .......... .......... .......... .......... 20%  477K 20s
+  1800K .......... .......... .......... .......... .......... 21%  474K 20s
+  1850K .......... .......... .......... .......... .......... 21% 15.8M 19s
+  1900K .......... .......... .......... .......... .......... 22%  277K 19s
+  1950K .......... .......... .......... .......... .......... 23%  378K 19s
+  2000K .......... .......... .......... .......... .......... 23%  463K 18s
+  2050K .......... .......... .......... .......... .......... 24%  463K 18s
+  2100K .......... .......... .......... .......... .......... 24%  158K 19s
+  2150K .......... .......... .......... .......... .......... 25%  130M 18s
+  2200K .......... .......... .......... .......... .......... 25%  376K 18s
+  2250K .......... .......... .......... .......... .......... 26%  520K 18s
+  2300K .......... .......... .......... .......... .......... 27%  320K 18s
+  2350K .......... .......... .......... .......... .......... 27%  378K 17s
+  2400K .......... .......... .......... .......... .......... 28%  465K 17s
+  2450K .......... .......... .......... .......... .......... 28% 12.7M 17s
+  2500K .......... .......... .......... .......... .......... 29%  468K 17s
+  2550K .......... .......... .......... .......... .......... 30%  164K 17s
+  2600K .......... .......... .......... .......... .......... 30%  467K 17s
+  2650K .......... .......... .......... .......... .......... 31%  472K 16s
+  2700K .......... .......... .......... .......... .......... 31% 13.2M 16s
+  2750K .......... .......... .......... .......... .......... 32%  160K 16s
+  2800K .......... .......... .......... .......... .......... 32%  415K 16s
+  2850K .......... .......... .......... .......... .......... 33% 12.9M 16s
+  2900K .......... .......... .......... .......... .......... 34%  477K 15s
+  2950K .......... .......... .......... .......... .......... 34%  172K 16s
+  3000K .......... .......... .......... .......... .......... 35%  470K 15s
+  3050K .......... .......... .......... .......... .......... 35%  472K 15s
+  3100K .......... .......... .......... .......... .......... 36% 12.8M 15s
+  3150K .......... .......... .......... .......... .......... 36%  283K 15s
+  3200K .......... .......... .......... .......... .......... 37%  385K 15s
+  3250K .......... .......... .......... .......... .......... 38%  467K 14s
+  3300K .......... .......... .......... .......... .......... 38%  484K 14s
+  3350K .......... .......... .......... .......... .......... 39% 7.22M 14s
+  3400K .......... .......... .......... .......... .......... 39%  158K 14s
+  3450K .......... .......... .......... .......... .......... 40%  404K 14s
+  3500K .......... .......... .......... .......... .......... 40%  470K 14s
+  3550K .......... .......... .......... .......... .......... 41%  327K 14s
+  3600K .......... .......... .......... .......... .......... 42%  382K 13s
+  3650K .......... .......... .......... .......... .......... 42%  181M 13s
+  3700K .......... .......... .......... .......... .......... 43%  462K 13s
+  3750K .......... .......... .......... .......... .......... 43%  478K 13s
+  3800K .......... .......... .......... .......... .......... 44% 98.5K 13s
+  3850K .......... .......... .......... .......... .......... 45% 95.5K 13s
+  3900K .......... .......... .......... .......... .......... 45%  117M 13s
+  3950K .......... .......... .......... .......... .......... 46%  152K 13s
+  4000K .......... .......... .......... .......... .......... 46%  459K 13s
+  4050K .......... .......... .......... .......... .......... 47%  474K 13s
+  4100K .......... .......... .......... .......... .......... 47% 9.51M 13s
+  4150K .......... .......... .......... .......... .......... 48%  288K 13s
+  4200K .......... .......... .......... .......... .......... 49%  382K 12s
+  4250K .......... .......... .......... .......... .......... 49%  463K 12s
+  4300K .......... .......... .......... .......... .......... 50%  475K 12s
+  4350K .......... .......... .......... .......... .......... 50%  146K 12s
+  4400K .......... .......... .......... .......... .......... 51%  229M 12s
+  4450K .......... .......... .......... .......... .......... 51%  467K 12s
+  4500K .......... .......... .......... .......... .......... 52%  472K 11s
+  4550K .......... .......... .......... .......... .......... 53%  335K 11s
+  4600K .......... .......... .......... .......... .......... 53%  385K 11s
+  4650K .......... .......... .......... .......... .......... 54%  474K 11s
+  4700K .......... .......... .......... .......... .......... 54%  480K 11s
+  4750K .......... .......... .......... .......... .......... 55%  158K 11s
+  4800K .......... .......... .......... .......... .......... 56% 59.5M 11s
+  4850K .......... .......... .......... .......... .......... 56%  463K 10s
+  4900K .......... .......... .......... .......... .......... 57%  463K 10s
+  4950K .......... .......... .......... .......... .......... 57%  287K 10s
+  5000K .......... .......... .......... .......... .......... 58% 63.7M 10s
+  5050K .......... .......... .......... .......... .......... 58%  366K 10s
+  5100K .......... .......... .......... .......... .......... 59%  403K 10s
+  5150K .......... .......... .......... .......... .......... 60%  465K 9s
+  5200K .......... .......... .......... .......... .......... 60%  170K 9s
+  5250K .......... .......... .......... .......... .......... 61%  474K 9s
+  5300K .......... .......... .......... .......... .......... 61%  466K 9s
+  5350K .......... .......... .......... .......... .......... 62%  286K 9s
+  5400K .......... .......... .......... .......... .......... 62% 91.3M 9s
+  5450K .......... .......... .......... .......... .......... 63%  383K 9s
+  5500K .......... .......... .......... .......... .......... 64%  466K 8s
+  5550K .......... .......... .......... .......... .......... 64%  472K 8s
+  5600K .......... .......... .......... .......... .......... 65%  157K 8s
+  5650K .......... .......... .......... .......... .......... 65%  417K 8s
+  5700K .......... .......... .......... .......... .......... 66% 11.7M 8s
+  5750K .......... .......... .......... .......... .......... 66%  472K 8s
+  5800K .......... .......... .......... .......... .......... 67%  323K 8s
+  5850K .......... .......... .......... .......... .......... 68%  384K 8s
+  5900K .......... .......... .......... .......... .......... 68% 51.0M 7s
+  5950K .......... .......... .......... .......... .......... 69%  233K 7s
+  6000K .......... .......... .......... .......... .......... 69% 11.4M 7s
+  6050K .......... .......... .......... .......... .......... 70%  160K 7s
+  6100K .......... .......... .......... .......... .......... 71%  462K 7s
+  6150K .......... .......... .......... .......... .......... 71%  474K 7s
+  6200K .......... .......... .......... .......... .......... 72%  294K 7s
+  6250K .......... .......... .......... .......... .......... 72%  357K 6s
+  6300K .......... .......... .......... .......... .......... 73%  196M 6s
+  6350K .......... .......... .......... .......... .......... 73%  393K 6s
+  6400K .......... .......... .......... .......... .......... 74%  469K 6s
+  6450K .......... .......... .......... .......... .......... 75%  176K 6s
+  6500K .......... .......... .......... .......... .......... 75%  468K 6s
+  6550K .......... .......... .......... .......... .......... 76% 15.2M 6s
+  6600K .......... .......... .......... .......... .......... 76%  468K 5s
+  6650K .......... .......... .......... .......... .......... 77%  281K 5s
+  6700K .......... .......... .......... .......... .......... 77%  379K 5s
+  6750K .......... .......... .......... .......... .......... 78%  475K 5s
+  6800K .......... .......... .......... .......... .......... 79%  468K 5s
+  6850K .......... .......... .......... .......... .......... 79% 27.3M 5s
+  6900K .......... .......... .......... .......... .......... 80%  157K 5s
+  6950K .......... .......... .......... .......... .......... 80%  409K 4s
+  7000K .......... .......... .......... .......... .......... 81%  489K 4s
+  7050K .......... .......... .......... .......... .......... 81%  309K 4s
+  7100K .......... .......... .......... .......... .......... 82% 43.5M 4s
+  7150K .......... .......... .......... .......... .......... 83%  154K 4s
+  7200K .......... .......... .......... .......... .......... 83% 28.1M 4s
+  7250K .......... .......... .......... .......... .......... 84% 95.8K 4s
+  7300K .......... .......... .......... .......... .......... 84%  130K 4s
+  7350K .......... .......... .......... .......... .......... 85%  468K 3s
+  7400K .......... .......... .......... .......... .......... 86%  471K 3s
+  7450K .......... .......... .......... .......... .......... 86%  195K 3s
+  7500K .......... .......... .......... .......... .......... 87%  209M 3s
+  7550K .......... .......... .......... .......... .......... 87%  455K 3s
+  7600K .......... .......... .......... .......... .......... 88%  463K 3s
+  7650K .......... .......... .......... .......... .......... 88%  282K 3s
+  7700K .......... .......... .......... .......... .......... 89%  389K 3s
+  7750K .......... .......... .......... .......... .......... 90% 55.1M 2s
+  7800K .......... .......... .......... .......... .......... 90%  460K 2s
+  7850K .......... .......... .......... .......... .......... 91%  457K 2s
+  7900K .......... .......... .......... .......... .......... 91%  159K 2s
+  7950K .......... .......... .......... .......... .......... 92%  424K 2s
+  8000K .......... .......... .......... .......... .......... 92% 8.90M 2s
+  8050K .......... .......... .......... .......... .......... 93%  469K 2s
+  8100K .......... .......... .......... .......... .......... 94%  321K 1s
+  8150K .......... .......... .......... .......... .......... 94%  374K 1s
+  8200K .......... .......... .......... .......... .......... 95%  464K 1s
+  8250K .......... .......... .......... .......... .......... 95% 9.14M 1s
+  8300K .......... .......... .......... .......... .......... 96%  472K 1s
+  8350K .......... .......... .......... .......... .......... 97%  164K 1s
+  8400K .......... .......... .......... .......... .......... 97%  465K 1s
+  8450K .......... .......... .......... .......... .......... 98% 11.9M 0s
+  8500K .......... .......... .......... .......... .......... 98%  481K 0s
+  8550K .......... .......... .......... .......... .......... 99%  290K 0s
+  8600K .......... .......... .......... .......... .......... 99%  384K 0s
+  8650K .........                                             100%  159M=23s
+
+2023-08-10 20:19:02 (369 KB/s) - ‘data/ntuple_4mu_bkg.root’ saved [8867265/8867265]
+
+--2023-08-10 20:19:02--  https://zenodo.org/record/3901869/files/ntuple_4mu_VV.root?download=1
+Resolving zenodo.org (zenodo.org)... 188.185.124.72
+Connecting to zenodo.org (zenodo.org)|188.185.124.72|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4505518 (4.3M) [application/octet-stream]
+Saving to: ‘data/ntuple_4mu_VV.root’
+
+     0K .......... .......... .......... .......... ..........  1%  463K 9s
+    50K .......... .......... .......... .......... ..........  2%  181K 17s
+   100K .......... .......... .......... .......... ..........  3%  380K 15s
+   150K .......... .......... .......... .......... ..........  4%  460K 13s
+   200K .......... .......... .......... .......... ..........  5%  176K 15s
+   250K .......... .......... .......... .......... ..........  6%  307M 12s
+   300K .......... .......... .......... .......... ..........  7%  464K 12s
+   350K .......... .......... .......... .......... ..........  9%  479K 11s
+   400K .......... .......... .......... .......... .......... 10%  160K 13s
+   450K .......... .......... .......... .......... .......... 11% 58.3M 11s
+   500K .......... .......... .......... .......... .......... 12%  237K 12s
+   550K .......... .......... .......... .......... .......... 13%  278K 12s
+   600K .......... .......... .......... .......... .......... 14%  295K 12s
+   650K .......... .......... .......... .......... .......... 15% 90.6M 11s
+   700K .......... .......... .......... .......... .......... 17%  455K 10s
+   750K .......... .......... .......... .......... .......... 18%  468K 10s
+   800K .......... .......... .......... .......... .......... 19%  184K 10s
+   850K .......... .......... .......... .......... .......... 20%  464K 10s
+   900K .......... .......... .......... .......... .......... 21%  469K 10s
+   950K .......... .......... .......... .......... .......... 22% 10.0M 9s
+  1000K .......... .......... .......... .......... .......... 23%  286K 9s
+  1050K .......... .......... .......... .......... .......... 25%  391K 9s
+  1100K .......... .......... .......... .......... .......... 26%  452K 9s
+  1150K .......... .......... .......... .......... .......... 27%  452K 9s
+  1200K .......... .......... .......... .......... .......... 28%  165K 9s
+  1250K .......... .......... .......... .......... .......... 29% 1.78M 8s
+  1300K .......... .......... .......... .......... .......... 30%  478K 8s
+  1350K .......... .......... .......... .......... .......... 31%  458K 8s
+  1400K .......... .......... .......... .......... .......... 32%  104K 9s
+  1450K .......... .......... .......... .......... .......... 34%  108K 9s
+  1500K .......... .......... .......... .......... .......... 35%  465K 9s
+  1550K .......... .......... .......... .......... .......... 36%  326K 9s
+  1600K .......... .......... .......... .......... .......... 37% 74.0M 8s
+  1650K .......... .......... .......... .......... .......... 38%  324K 8s
+  1700K .......... .......... .......... .......... .......... 39%  465K 8s
+  1750K .......... .......... .......... .......... .......... 40%  458K 8s
+  1800K .......... .......... .......... .......... .......... 42%  175K 8s
+  1850K .......... .......... .......... .......... .......... 43%  467K 8s
+  1900K .......... .......... .......... .......... .......... 44% 13.8M 7s
+  1950K .......... .......... .......... .......... .......... 45%  463K 7s
+  2000K .......... .......... .......... .......... .......... 46%  288K 7s
+  2050K .......... .......... .......... .......... .......... 47%  388K 7s
+  2100K .......... .......... .......... .......... .......... 48%  468K 7s
+  2150K .......... .......... .......... .......... .......... 50% 19.8M 6s
+  2200K .......... .......... .......... .......... .......... 51%  462K 6s
+  2250K .......... .......... .......... .......... .......... 52%  151K 6s
+  2300K .......... .......... .......... .......... .......... 53%  468K 6s
+  2350K .......... .......... .......... .......... .......... 54%  463K 6s
+  2400K .......... .......... .......... .......... .......... 55%  323K 6s
+  2450K .......... .......... .......... .......... .......... 56% 85.2M 5s
+  2500K .......... .......... .......... .......... .......... 57%  381K 5s
+  2550K .......... .......... .......... .......... .......... 59%  465K 5s
+  2600K .......... .......... .......... .......... .......... 60%  470K 5s
+  2650K .......... .......... .......... .......... .......... 61%  162K 5s
+  2700K .......... .......... .......... .......... .......... 62% 43.6M 5s
+  2750K .......... .......... .......... .......... .......... 63%  453K 4s
+  2800K .......... .......... .......... .......... .......... 64%  475K 4s
+  2850K .......... .......... .......... .......... .......... 65%  285K 4s
+  2900K .......... .......... .......... .......... .......... 67%  387K 4s
+  2950K .......... .......... .......... .......... .......... 68%  373K 4s
+  3000K .......... .......... .......... .......... .......... 69% 9.85M 4s
+  3050K .......... .......... .......... .......... .......... 70%  480K 4s
+  3100K .......... .......... .......... .......... .......... 71%  176K 3s
+  3150K .......... .......... .......... .......... .......... 72%  457K 3s
+  3200K .......... .......... .......... .......... .......... 73% 17.3M 3s
+  3250K .......... .......... .......... .......... .......... 75%  457K 3s
+  3300K .......... .......... .......... .......... .......... 76%  290K 3s
+  3350K .......... .......... .......... .......... .......... 77%  382K 3s
+  3400K .......... .......... .......... .......... .......... 78%  467K 3s
+  3450K .......... .......... .......... .......... .......... 79%  466K 2s
+  3500K .......... .......... .......... .......... .......... 80%  157K 2s
+  3550K .......... .......... .......... .......... .......... 81%  404K 2s
+  3600K .......... .......... .......... .......... .......... 82% 26.4M 2s
+  3650K .......... .......... .......... .......... .......... 84%  452K 2s
+  3700K .......... .......... .......... .......... .......... 85%  323K 2s
+  3750K .......... .......... .......... .......... .......... 86%  401K 2s
+  3800K .......... .......... .......... .......... .......... 87% 14.4M 1s
+  3850K .......... .......... .......... .......... .......... 88%  456K 1s
+  3900K .......... .......... .......... .......... .......... 89%  461K 1s
+  3950K .......... .......... .......... .......... .......... 90%  164K 1s
+  4000K .......... .......... .......... .......... .......... 92%  464K 1s
+  4050K .......... .......... .......... .......... .......... 93%  471K 1s
+  4100K .......... .......... .......... .......... .......... 94%  288K 1s
+  4150K .......... .......... .......... .......... .......... 95% 44.9M 1s
+  4200K .......... .......... .......... .......... .......... 96%  359K 0s
+  4250K .......... .......... .......... .......... .......... 97%  389K 0s
+  4300K .......... .......... .......... .......... .......... 98%  464K 0s
+  4350K .......... .......... .......... .......... ......... 100%  174K=12s
+
+2023-08-10 20:19:15 (369 KB/s) - ‘data/ntuple_4mu_VV.root’ saved [4505518/4505518]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="load-root-files">
+<h2>Load <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files<a class="headerlink" href="#load-root-files" title="Permalink to this heading">#</a></h2>
+<p>Here we simply open two <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files using <code class="docutils literal notranslate"><span class="pre">uproot</span></code> and display the branch content of one of the trees.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="n">treename</span> <span class="o">=</span> <span class="s2">&quot;HZZ4LeptonsAnalysisReduced&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">upfile</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">filename</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;data/ntuple_4mu_bkg.root&quot;</span>
+<span class="n">filename</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;data/ntuple_4mu_VV.root&quot;</span>
+
+<span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">])</span>
+<span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uproot</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">treename</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name                 | typename                 | interpretation                
+---------------------+--------------------------+-------------------------------
+f_run                | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+f_lumi               | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+f_event              | int32_t                  | AsDtype(&#39;&gt;i4&#39;)
+f_weight             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_int_weight         | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_pu_weight          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_eff_weight         | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_pt           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_eta          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_phi          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_charge       | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_pfx          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept1_sip          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_pt           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_eta          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_phi          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_charge       | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_pfx          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept2_sip          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_pt           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_eta          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_phi          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_charge       | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_pfx          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept3_sip          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_pt           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_eta          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_phi          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_charge       | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_pfx          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_lept4_sip          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_iso_max            | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_sip_max            | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_Z1mass             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_Z2mass             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_angle_costhetastar | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_angle_costheta1    | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_angle_costheta2    | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_angle_phi          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_angle_phistar1     | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_pt4l               | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_eta4l              | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_mass4l             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_mass4lErr          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_njets_pass         | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_deltajj            | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_massjj             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_D_jet              | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet1_pt            | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet1_eta           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet1_phi           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet1_e             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet2_pt            | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet2_eta           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet2_phi           | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_jet2_e             | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_D_bkg_kin          | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_D_bkg              | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_D_gg               | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_D_g4               | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_Djet_VAJHU         | float                    | AsDtype(&#39;&gt;f4&#39;)
+f_pfmet              | float                    | AsDtype(&#39;&gt;f4&#39;)
+None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-tree-to-pandas-dataframes">
+<h2>Convert tree to <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames<a class="headerlink" href="#convert-tree-to-pandas-dataframes" title="Permalink to this heading">#</a></h2>
+<p>In my opinion, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames are a more convenient/flexible data container in python: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">branches</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f_mass4l&quot;</span><span class="p">,</span> <span class="s2">&quot;f_massjj&quot;</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">treename</span><span class="p">]</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">upfile</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">treename</span><span class="p">]</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="n">branches</span><span class="p">,</span> <span class="n">library</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">)</span>
+
+<span class="c1"># print first entry</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># print shape of DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># print first entry for f_mass4l and f_massjj</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">branches</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># convert back into unstructured NumPY array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># get boolean mask array</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="s2">&quot;f_mass4l&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">125</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+<span class="c1"># cut using this boolean mask array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="s2">&quot;f_mass4l&quot;</span><span class="p">][</span><span class="n">mask</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    f_mass4l  f_massjj
+0  91.098129    -999.0
+(58107, 2)
+    f_mass4l  f_massjj
+0  91.098129    -999.0
+[[  91.09813  -999.      ]
+ [ 201.84761  -999.      ]
+ [  89.279076 -999.      ]
+ ...
+ [  90.129845 -999.      ]
+ [ 250.97742  -999.      ]
+ [ 229.47015  -999.      ]]
+(58107, 2)
+0        False
+1         True
+2        False
+3         True
+4         True
+         ...  
+58102    False
+58103     True
+58104    False
+58105     True
+58106     True
+Name: f_mass4l, Length: 58107, dtype: bool
+1        201.847610
+3        586.597412
+4        135.589798
+5        734.903442
+6        341.958466
+            ...    
+58097    225.355103
+58098    214.074249
+58103    252.845184
+58105    250.977417
+58106    229.470154
+Name: f_mass4l, Length: 42219, dtype: float32
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-in-matplotlib">
+<h2>Plotting in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code><a class="headerlink" href="#plotting-in-matplotlib" title="Permalink to this heading">#</a></h2>
+<p>Finally, it is always useful to visualize the dataset before using machine learning. Here, we plot some key features in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> with <code class="docutils literal notranslate"><span class="pre">uproot</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">VARS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f_mass4l&quot;</span><span class="p">,</span> <span class="s2">&quot;f_massjj&quot;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">VARS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bkg&quot;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VV&quot;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">VARS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bkg&quot;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;VV&quot;</span><span class="p">][</span><span class="n">VARS</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VV&quot;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8f0153804eb731cb815744273a15b39d1e531ee0fdd1dcb58dc4afd69943ec43.png" src="../_images/8f0153804eb731cb815744273a15b39d1e531ee0fdd1dcb58dc4afd69943ec43.png" />
+<img alt="../_images/6a141196a71050323bde33e43597407a8891736fb629207a2c1c1ad778760366.png" src="../_images/6a141196a71050323bde33e43597407a8891736fb629207a2c1c1ad778760366.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-dense.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dense networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-datasets-from-root-files-using-uproot">Load datasets from <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files using <code class="docutils literal notranslate"><span class="pre">uproot</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-root-files">Load <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-tree-to-pandas-dataframes">Convert tree to <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-matplotlib">Plotting in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raghav Kansal, on behalf of the LPC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

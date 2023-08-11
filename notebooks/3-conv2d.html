@@ -1,0 +1,1006 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Convolutional Neural Networks for Jet-Images &#8212; Machine Learning HATS</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3-conv2d';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Graph Neural Networks with Keras and Cora" href="4-gnn-cora.html" />
+    <link rel="prev" title="Optimize a dense network with Bayesian optimization" href="2.3-dense-bayesian-optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.pdf" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.pdf" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">Loading Datasets</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">Optimize a dense network with Bayesian optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">Variational Autoencoders with Keras and MNIST</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/main?urlpath=tree/notebooks/3-conv2d.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/main/notebooks/3-conv2d.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/3-conv2d.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/3-conv2d.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Convolutional Neural Networks for Jet-Images</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">Plot performance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="convolutional-neural-networks-for-jet-images">
+<h1>Convolutional Neural Networks for Jet-Images<a class="headerlink" href="#convolutional-neural-networks-for-jet-images" title="Permalink to this heading">#</a></h1>
+<p>Author: Javier Duarte</p>
+<section id="load-numpy-arrays">
+<h2>Load numpy arrays<a class="headerlink" href="#load-numpy-arrays" title="Permalink to this heading">#</a></h2>
+<p>Here, we load the numpy arrays containing the 4D tensors of “jet-images” (see <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">https://arxiv.org/pdf/1511.05190.pdf</a>)</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>data
+<span class="o">!</span>wget<span class="w"> </span>-O<span class="w"> </span>data/jet_images.h5<span class="w"> </span><span class="s2">&quot;https://zenodo.org/record/3901869/files/jet_images.h5?download=1&quot;</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-08-10 21:01:04--  https://zenodo.org/record/3901869/files/jet_images.h5?download=1
+Resolving zenodo.org (zenodo.org)... 188.185.124.72
+Connecting to zenodo.org (zenodo.org)|188.185.124.72|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 85520350 (82M) [application/octet-stream]
+Saving to: ‘data/jet_images.h5’
+
+data/jet_images.h5  100%[===================&gt;]  81.56M   362KB/s    in 3m 46s  
+
+2023-08-10 21:04:52 (370 KB/s) - ‘data/jet_images.h5’ saved [85520350/85520350]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="n">h5f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;data/jet_images.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+<span class="n">jet_images_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5f</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">][()]</span>
+<span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5f</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">][()]</span>
+
+<span class="n">h5f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4D tensor (tensorflow backend)</span>
+<span class="c1"># 1st dim is jet index</span>
+<span class="c1"># 2nd dim is eta bin</span>
+<span class="c1"># 3rd dim is phi bin</span>
+<span class="c1"># 4th dim is pt value (or rgb values, etc.)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3305, 30, 30, 1)
+(1722, 30, 30, 1)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-jet-images">
+<h2>Plotting jet-images<a class="headerlink" href="#plotting-jet-images" title="Permalink to this heading">#</a></h2>
+<p>Let’s plot some jet-images (individual jets and averaged over all jets)</p>
+<p><strong>Question 1:</strong>  Try to plot the average W and QCD jet-images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># plot one W jet</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span>
+    <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;pT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;ieta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;iphi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># plot average W jet</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9b1a1634bfb5727e229c1d5750d01272105bd03d660130fdb100c09749ce1fe1.png" src="../_images/9b1a1634bfb5727e229c1d5750d01272105bd03d660130fdb100c09749ce1fe1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot one QCD jet</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span>
+    <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;pT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;ieta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;iphi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># plot average QCD jet</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f6e50674ead51e6ba2912ae8439577db6e209c801db963bb3cbc61ea90fda33.png" src="../_images/9f6e50674ead51e6ba2912ae8439577db6e209c801db963bb3cbc61ea90fda33.png" />
+</div>
+</div>
+</section>
+<section id="define-our-convolutional-model">
+<h2>Define our convolutional model<a class="headerlink" href="#define-our-convolutional-model" title="Permalink to this heading">#</a></h2>
+<p><strong>Question 2:</strong> Here we have a relatively simple <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> model using regularization, batch normalization, max pooling, and a fully connected layer before the ouput. Implement the network defined in <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">https://arxiv.org/pdf/1511.05190.pdf</a>. Compare the performance and number of parameters when using fully connected layers instead of convolutional layers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow.keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Input</span><span class="p">,</span>
+    <span class="n">Conv2D</span><span class="p">,</span>
+    <span class="n">MaxPool2D</span><span class="p">,</span>
+    <span class="n">Flatten</span><span class="p">,</span>
+    <span class="n">Dropout</span><span class="p">,</span>
+    <span class="n">Dense</span><span class="p">,</span>
+    <span class="n">BatchNormalization</span><span class="p">,</span>
+    <span class="n">Concatenate</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.regularizers</span> <span class="kn">import</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span>
+
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span>
+    <span class="mi">8</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;conv2d_1&quot;</span><span class="p">,</span>
+    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.01</span><span class="p">),</span>
+<span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">momentum</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;batchnorm_1&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">MaxPool2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;maxpool2d_1&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;flatten&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input (InputLayer)          [(None, 30, 30, 1)]       0         
+                                                                 
+ conv2d_1 (Conv2D)           (None, 30, 30, 8)         80        
+                                                                 
+ batchnorm_1 (BatchNormaliz  (None, 30, 30, 8)         32        
+ ation)                                                          
+                                                                 
+ maxpool2d_1 (MaxPooling2D)  (None, 15, 15, 8)         0         
+                                                                 
+ flatten (Flatten)           (None, 1800)              0         
+                                                                 
+ dense (Dense)               (None, 64)                115264    
+                                                                 
+ output (Dense)              (None, 1)                 65        
+                                                                 
+=================================================================
+Total params: 115441 (450.94 KB)
+Trainable params: 115425 (450.88 KB)
+Non-trainable params: 16 (64.00 Byte)
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dividing-the-data-into-testing-and-training-dataset">
+<h2>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
+<p>We will split the data into two parts (one for training+validation and one for testing).
+<strong>Note:</strong>  We will not apply “image normalization” preprocessing: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html">http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html</a>.
+<strong>Question 3:</strong> Why not?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jet_images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">],</span> <span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">]])</span>
+<span class="n">jet_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;TT&quot;</span><span class="p">])),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">jet_images_dict</span><span class="p">[</span><span class="s2">&quot;QCD&quot;</span><span class="p">]))]</span>
+<span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">jet_images</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">jet_labels</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train_val</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of W jets for training/validation: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Y_train_val</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of QCD jets for training/validation: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Y_train_val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of W jets for testing: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of QCD jets for testing: </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Y_test</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># early stopping callback</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
+
+<span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># model checkpoint callback</span>
+<span class="c1"># this saves our model architecture + parameters into conv2d_model.h5</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+
+<span class="n">model_checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="s2">&quot;conv2d_model.h5&quot;</span><span class="p">,</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">save_freq</span><span class="o">=</span><span class="s2">&quot;epoch&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of W jets for training/validation: 1384
+number of QCD jets for training/validation: 2637
+number of W jets for testing: 338
+number of QCD jets for testing: 668
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-training">
+<h2>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
+<p>Here, we run the training.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train classifier</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train_val</span><span class="p">,</span>
+    <span class="n">Y_train_val</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stopping</span><span class="p">,</span> <span class="n">model_checkpoint</span><span class="p">],</span>
+    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/100
+3/3 [==============================] - 1s 174ms/step - loss: 0.7311 - accuracy: 0.6358 - val_loss: 0.4656 - val_accuracy: 0.7962
+Epoch 2/100
+3/3 [==============================] - 0s 116ms/step - loss: 0.3778 - accuracy: 0.8434 - val_loss: 0.4191 - val_accuracy: 0.8807
+Epoch 3/100
+3/3 [==============================] - 0s 124ms/step - loss: 0.3685 - accuracy: 0.8968 - val_loss: 0.4036 - val_accuracy: 0.8887
+Epoch 4/100
+3/3 [==============================] - 0s 126ms/step - loss: 0.3310 - accuracy: 0.8962 - val_loss: 0.4073 - val_accuracy: 0.8757
+Epoch 5/100
+3/3 [==============================] - 0s 110ms/step - loss: 0.3365 - accuracy: 0.8902 - val_loss: 0.4026 - val_accuracy: 0.8807
+Epoch 6/100
+3/3 [==============================] - 0s 107ms/step - loss: 0.3213 - accuracy: 0.8955 - val_loss: 0.3848 - val_accuracy: 0.8907
+Epoch 7/100
+3/3 [==============================] - 0s 126ms/step - loss: 0.3077 - accuracy: 0.9022 - val_loss: 0.3808 - val_accuracy: 0.8837
+Epoch 8/100
+3/3 [==============================] - 0s 113ms/step - loss: 0.3051 - accuracy: 0.9058 - val_loss: 0.3687 - val_accuracy: 0.8867
+Epoch 9/100
+3/3 [==============================] - 0s 115ms/step - loss: 0.2946 - accuracy: 0.9035 - val_loss: 0.3565 - val_accuracy: 0.8897
+Epoch 10/100
+3/3 [==============================] - 0s 154ms/step - loss: 0.2885 - accuracy: 0.9038 - val_loss: 0.3483 - val_accuracy: 0.8877
+Epoch 11/100
+3/3 [==============================] - 0s 111ms/step - loss: 0.2840 - accuracy: 0.9038 - val_loss: 0.3413 - val_accuracy: 0.8907
+Epoch 12/100
+3/3 [==============================] - 0s 108ms/step - loss: 0.2789 - accuracy: 0.9058 - val_loss: 0.3379 - val_accuracy: 0.8926
+Epoch 13/100
+3/3 [==============================] - 0s 124ms/step - loss: 0.2760 - accuracy: 0.9071 - val_loss: 0.3338 - val_accuracy: 0.8907
+Epoch 14/100
+3/3 [==============================] - 0s 104ms/step - loss: 0.2734 - accuracy: 0.9075 - val_loss: 0.3317 - val_accuracy: 0.8907
+Epoch 15/100
+3/3 [==============================] - 0s 121ms/step - loss: 0.2692 - accuracy: 0.9078 - val_loss: 0.3297 - val_accuracy: 0.8966
+Epoch 16/100
+3/3 [==============================] - 0s 138ms/step - loss: 0.2662 - accuracy: 0.9108 - val_loss: 0.3291 - val_accuracy: 0.8966
+Epoch 17/100
+3/3 [==============================] - 0s 113ms/step - loss: 0.2629 - accuracy: 0.9101 - val_loss: 0.3274 - val_accuracy: 0.8936
+Epoch 18/100
+3/3 [==============================] - 0s 112ms/step - loss: 0.2598 - accuracy: 0.9091 - val_loss: 0.3274 - val_accuracy: 0.8907
+Epoch 19/100
+3/3 [==============================] - 0s 144ms/step - loss: 0.2577 - accuracy: 0.9071 - val_loss: 0.3247 - val_accuracy: 0.8966
+Epoch 20/100
+3/3 [==============================] - 0s 106ms/step - loss: 0.2540 - accuracy: 0.9124 - val_loss: 0.3228 - val_accuracy: 0.8976
+Epoch 21/100
+3/3 [==============================] - 0s 108ms/step - loss: 0.2514 - accuracy: 0.9124 - val_loss: 0.3196 - val_accuracy: 0.8976
+Epoch 22/100
+3/3 [==============================] - 0s 137ms/step - loss: 0.2486 - accuracy: 0.9131 - val_loss: 0.3177 - val_accuracy: 0.8966
+Epoch 23/100
+3/3 [==============================] - 0s 114ms/step - loss: 0.2459 - accuracy: 0.9161 - val_loss: 0.3158 - val_accuracy: 0.8966
+Epoch 24/100
+3/3 [==============================] - 0s 108ms/step - loss: 0.2433 - accuracy: 0.9177 - val_loss: 0.3146 - val_accuracy: 0.8966
+Epoch 25/100
+3/3 [==============================] - 0s 112ms/step - loss: 0.2407 - accuracy: 0.9164 - val_loss: 0.3136 - val_accuracy: 0.8956
+Epoch 26/100
+3/3 [==============================] - 0s 116ms/step - loss: 0.2388 - accuracy: 0.9171 - val_loss: 0.3122 - val_accuracy: 0.8946
+Epoch 27/100
+3/3 [==============================] - 0s 122ms/step - loss: 0.2356 - accuracy: 0.9191 - val_loss: 0.3107 - val_accuracy: 0.8956
+Epoch 28/100
+3/3 [==============================] - 0s 112ms/step - loss: 0.2334 - accuracy: 0.9187 - val_loss: 0.3087 - val_accuracy: 0.8936
+Epoch 29/100
+3/3 [==============================] - 0s 116ms/step - loss: 0.2313 - accuracy: 0.9197 - val_loss: 0.3080 - val_accuracy: 0.8946
+Epoch 30/100
+3/3 [==============================] - 0s 130ms/step - loss: 0.2291 - accuracy: 0.9204 - val_loss: 0.3061 - val_accuracy: 0.8966
+Epoch 31/100
+3/3 [==============================] - 0s 108ms/step - loss: 0.2273 - accuracy: 0.9214 - val_loss: 0.3051 - val_accuracy: 0.8966
+Epoch 32/100
+3/3 [==============================] - 0s 94ms/step - loss: 0.2247 - accuracy: 0.9224 - val_loss: 0.3054 - val_accuracy: 0.8966
+Epoch 33/100
+3/3 [==============================] - 0s 106ms/step - loss: 0.2228 - accuracy: 0.9231 - val_loss: 0.3053 - val_accuracy: 0.8966
+Epoch 34/100
+3/3 [==============================] - 0s 106ms/step - loss: 0.2209 - accuracy: 0.9234 - val_loss: 0.3049 - val_accuracy: 0.8956
+Epoch 35/100
+3/3 [==============================] - 0s 104ms/step - loss: 0.2188 - accuracy: 0.9250 - val_loss: 0.3054 - val_accuracy: 0.8936
+Epoch 36/100
+3/3 [==============================] - 0s 103ms/step - loss: 0.2170 - accuracy: 0.9257 - val_loss: 0.3041 - val_accuracy: 0.8946
+Epoch 37/100
+3/3 [==============================] - 0s 116ms/step - loss: 0.2148 - accuracy: 0.9270 - val_loss: 0.3041 - val_accuracy: 0.8956
+Epoch 38/100
+3/3 [==============================] - 0s 114ms/step - loss: 0.2129 - accuracy: 0.9270 - val_loss: 0.3027 - val_accuracy: 0.8956
+Epoch 39/100
+3/3 [==============================] - 0s 107ms/step - loss: 0.2109 - accuracy: 0.9270 - val_loss: 0.3027 - val_accuracy: 0.8956
+Epoch 40/100
+3/3 [==============================] - 0s 104ms/step - loss: 0.2090 - accuracy: 0.9300 - val_loss: 0.3028 - val_accuracy: 0.8966
+Epoch 41/100
+3/3 [==============================] - 0s 110ms/step - loss: 0.2078 - accuracy: 0.9284 - val_loss: 0.3024 - val_accuracy: 0.8956
+Epoch 42/100
+3/3 [==============================] - 0s 116ms/step - loss: 0.2057 - accuracy: 0.9310 - val_loss: 0.3018 - val_accuracy: 0.8946
+Epoch 43/100
+3/3 [==============================] - 0s 99ms/step - loss: 0.2030 - accuracy: 0.9313 - val_loss: 0.3020 - val_accuracy: 0.8936
+Epoch 44/100
+3/3 [==============================] - 0s 96ms/step - loss: 0.2022 - accuracy: 0.9300 - val_loss: 0.3021 - val_accuracy: 0.8926
+Epoch 45/100
+3/3 [==============================] - 0s 95ms/step - loss: 0.2000 - accuracy: 0.9323 - val_loss: 0.3022 - val_accuracy: 0.8907
+Epoch 46/100
+3/3 [==============================] - 0s 107ms/step - loss: 0.1981 - accuracy: 0.9320 - val_loss: 0.3013 - val_accuracy: 0.8917
+Epoch 47/100
+3/3 [==============================] - 0s 106ms/step - loss: 0.1964 - accuracy: 0.9327 - val_loss: 0.3015 - val_accuracy: 0.8926
+Epoch 48/100
+3/3 [==============================] - 0s 104ms/step - loss: 0.1949 - accuracy: 0.9333 - val_loss: 0.3022 - val_accuracy: 0.8907
+Epoch 49/100
+3/3 [==============================] - 0s 102ms/step - loss: 0.1935 - accuracy: 0.9323 - val_loss: 0.3017 - val_accuracy: 0.8926
+Epoch 50/100
+3/3 [==============================] - 0s 97ms/step - loss: 0.1908 - accuracy: 0.9363 - val_loss: 0.3023 - val_accuracy: 0.8917
+Epoch 51/100
+3/3 [==============================] - 0s 88ms/step - loss: 0.1900 - accuracy: 0.9350 - val_loss: 0.3015 - val_accuracy: 0.8936
+Epoch 52/100
+3/3 [==============================] - 0s 90ms/step - loss: 0.1876 - accuracy: 0.9360 - val_loss: 0.3014 - val_accuracy: 0.8907
+Epoch 53/100
+3/3 [==============================] - 0s 91ms/step - loss: 0.1858 - accuracy: 0.9370 - val_loss: 0.3027 - val_accuracy: 0.8907
+Epoch 54/100
+3/3 [==============================] - 0s 93ms/step - loss: 0.1838 - accuracy: 0.9390 - val_loss: 0.3024 - val_accuracy: 0.8926
+Epoch 55/100
+3/3 [==============================] - 0s 88ms/step - loss: 0.1821 - accuracy: 0.9393 - val_loss: 0.3014 - val_accuracy: 0.8926
+Epoch 56/100
+3/3 [==============================] - 0s 99ms/step - loss: 0.1806 - accuracy: 0.9410 - val_loss: 0.3034 - val_accuracy: 0.8936
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-performance">
+<h2>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
+<p>Here, we plot the history of the training and the performance in a ROC curve</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="c1"># plot loss vs epoch</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot accuracy vs epoch</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;acc&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_accuracy&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;val_acc&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;acc&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot ROC</span>
+<span class="n">Y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">Y_predict</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;auc = </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">roc_auc</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random chance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;false positive rate&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;true positive rate&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;receiver operating curve&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32/32 [==============================] - 0s 3ms/step
+</pre></div>
+</div>
+<img alt="../_images/72b3bbfb6c867e646cacd50ab1491d831dc781403055ee20600f30f6d57b98d0.png" src="../_images/72b3bbfb6c867e646cacd50ab1491d831dc781403055ee20600f30f6d57b98d0.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2.3-dense-bayesian-optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Optimize a dense network with Bayesian optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4-gnn-cora.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Graph Neural Networks with Keras and Cora</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">Plot performance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raghav Kansal, on behalf of the LPC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

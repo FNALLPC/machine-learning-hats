@@ -3,11 +3,15 @@
 
 format: jb-book
 root: index
-options:
-  numbered: true
-  maxdepth: 2
 parts:
+  - caption: Setup
+    chapters:
+    - file: setup/vanderbilt-jupyterhub/vanderbilt
+    - file: setup/lpc
+    - file: setup-libraries
   - caption: Tutorials
+    numbered: true
+    maxdepth: 2
     chapters:
     - file: notebooks/1-datasets-uproot
     - file: notebooks/2-dense

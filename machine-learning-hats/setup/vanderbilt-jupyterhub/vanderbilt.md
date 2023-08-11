@@ -1,22 +1,23 @@
 # Vanderbilt JupyterHub
 
+## 1. Sign-in
+
 Point your browser to:
 
 [https://jupyter.accre.vanderbilt.edu/](https://jupyter.accre.vanderbilt.edu/)
 
 If this is the first time using this JupyterHub, you should see:
 
-<p align="center">
-  <img src="vanderbilt.png" width="500"/>
-</p>
+![vanderbilt](vanderbilt.png)
 
 Click the "Sign in with Jupyter ACCRE" button. On the following page, select CERN as your identity provider and click the "Log On" button. Then, enter your CERN credentials or use your CERN grid certificate to autheticate. Click "Spawn" to start a "Default ACCRE Image v5" image with "8 Cores, 8 GB RAM, 1 day timeout."
 
+
+## 2. Download repository
+
 Now you should see the JupyterHub home directory. Click on "New" then "Terminal" in the top right to launch a new terminal. 
 
-<p align="center">
-  <img src="new_terminal.png" width="200"/>
-</p>
+![new_terminal](new_terminal.png)
 
 To download the tutorials, type
 
@@ -25,16 +26,22 @@ git clone https://github.com/FNALLPC/machine-learning-hats
 ```
 
 Now, in your directory tab, there should be a new directory called `machine-learning-hats`. 
-All of the tutorials and exercises are inside `machine-learning-hats/machine-learning-hats`
+All of the tutorials and exercises are inside `machine-learning-hats/machine-learning-hats`.
+
+
+## 3. Setup libraries
+
 Start by clicking on [`setup-libraries.ipynb`](https://github.com/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/setup-libraries.ipynb) and running it. 
+
+```{important}
 Please note that the first cell may take up to 20 minutes to run.
+```
 
 Now close this notebook by clicking on `File->Close and Halt`. Click the "New" button again. You should see a new kernal called `machine-learning-hats`. 
 If you do not, refresh the page and look again.
 
-<p align="center">
-  <img src="new_mlhats_2021.png" width="200"/>
-</p>
+![new_mlhats](new_mlhats_2021.png)
+
 
 ## Notes for working on ACCRE
 

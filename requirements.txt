@@ -1,9 +1,5 @@
-jupyter-book
 matplotlib
 numpy
-ghp-import
-pre-commit
-black
 uproot
 h5py
 keras

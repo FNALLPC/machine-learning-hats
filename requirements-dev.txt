@@ -1,0 +1,7 @@
+-r requirements.txt
+jupyter-book
+matplotlib
+numpy
+ghp-import
+pre-commit
+black

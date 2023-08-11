@@ -1,9 +1,26 @@
-# CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
+![logo](logo.pdf)
+
+______________________________________________________________________
+
+<p align="center">
+  <a href="#introduction">Introduction</a> •
+  <a href="#setup">Setup</a> •
+  <a href="#links">Links</a> •
+  <a href="#credits">Credits</a>
+</p>
+
+______________________________________________________________________
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/HEAD)
 [![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/master.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/master)
+
+______________________________________________________________________
+
+
+# CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)
+
 
 ## Introduction
 

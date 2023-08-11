@@ -13,69 +13,44 @@ We will also explore more advanced models such as graph neural networks (GNNs), 
 
 ## Setup
 
-**TODO**
+### Vanderbilt Jupyterhub (Recommended!)
 
+The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions [here](asdf).
 
-### Vanderbilt Jupyterhub
+### FNAL LPC
 
-Check out the instructions in **TODO**.
+Not as well supported, but instructions are [here](asdf).
 
-## FAQ
+### Locally
 
-### If someone updates the notebooks after it've clones the repository, how do I get they updates?
+All these notebooks can be run on your local machine as well. 
+It can often be useful to test your models and pipelines locally, but it is not recommended to run full trainings as these can be resource-intensive.
 
-In this case you will want to open a terminal, just as you did when you first cloned the repository. Move (`cd`) to the repository directory if not already there. Then do `git pull origin master`. This will pull the latest changes from GitHub. If you've already made edits to a notebook which will be updated, those changes will be conflict. You may want to stash those changes or copy your modified notebook.
+To run locally, run these commands from your terminal:
 
-To revert the changes made to all of your notebooks you can use the command:
-```
-git checkout .
-```
-If you would like to save your changes first, you can copy your modified notebook to a new name and then run the `checkout` command.
-
-Alternatively, to stash your un-staged changes, use the command:
-```
-git stash
-```
-
-You can then return those changes with the command:
-```
-git stash pop
-```
-Be aware that you may have conflicts that need to be fixed before the notebook can be run again.
-
-### I want to follow along on the LPC rather than ACCRE.
-
-This is possible, but with a little less user support. You will need to use the following command to open up your ssh connection:
 ```bash
-ssh -L localhost:8888:localhost:8888 <username>@cmslpc-sl7.fnal.gov
-```
-Replace `<username>` with your LPC username. Then `cd` to the directory of your choice where you will clone the repository as before:
-```bash
-git clone https://github.com/FNALLPC/machine-learning-hats
+# Download the setup bash file for your machine from here https://github.com/conda-forge/miniforge#mambaforge
+# e.g. wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
+# Install: (the mamba directory can end up taking O(1-10GB) so make sure the directory you're using allows that quota)
+chmod u+x Mambaforge-Linux-x86_64.sh
+./Mambaforge-Linux-x86_64.sh  # follow instructions in the installation
+
+git clone https://github.com/FNALLPC/machine-learning-hats/
+cd machine-learning-hats
+mamba create -f environment.yml
+mamba activate machine-learning-hats
+jupyter lab  # this will create a JupyterLab instance from which you can run all the notebooks.
 ```
 
-In order to open Jupyter with all the appopriate libraries, you will need to have either installed a `conda` environment with Jupyter in your `nobackup` area (where you have more space) or have a CMSSW environment setup. To install and activate a `conda` environment you can do:
-```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/nobackup/miniconda3.sh
-bash $HOME/nobackup/miniconda3.sh -b -f -u -p $HOME/nobackup/miniconda3
-source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh
-conda install -c conda-forge mamba
-mamba create -n machine-learning-hats-2022 python=3.9 -c -conda-forge
-mamba env update -n machine-learning-hats-2022 -f environment.yml
-conda activate machine-learning-hats-2022
-```
+### Binder
 
-Once you have a `conda` environment, open Jupyter (which is actually the Jupyter that gets installed as part of the `conda` environment):
-```bash
-jupyter notebook --no-browser --port=8888 --ip 127.0.0.1
-```
-If everything worked, the last line of the output should be a url of the form:
-```bash
-http://127.0.0.1:8888/?token=<long string of numbers and letters>
-```
-Copy this url into your browser. You may now perform the rest of the exercise like normal, except you will have to change the kernel to the default python3 one (it will have all the necessary libararies because you are using the Jupyter version that is part of your `conda` installation).
+TODO
 
-In the future, when you need access to Jupyter and want to run this exercise, you can do `source $HOME/nobackup/miniconda3/etc/profile.d/conda.sh; conda activate machine-learning-hats-2022`
+
+### Google Colab
+
+TODO
+
 
 ## Links
 

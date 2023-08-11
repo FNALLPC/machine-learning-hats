@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Loading Datasets" href="notebooks/1-datasets-uproot.html" />
+    <link rel="next" title="Vanderbilt JupyterHub" href="setup/vanderbilt-jupyterhub/vanderbilt.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,20 +155,27 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/1-datasets-uproot.html">Loading Datasets</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/2-dense.html">Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/2.1-dense-keras.html">Dense neural network with Keras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/2.3-dense-bayesian-optimization.html">Optimize a dense network with Bayesian optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/vanderbilt-jupyterhub/vanderbilt.html">Vanderbilt JupyterHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/lpc.html">LPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup-libraries.html">Setup Libraries</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/1-datasets-uproot.html">1. Loading Datasets</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/2-dense.html">2. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2.1-dense-keras.html">2.1. Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2.2-dense-pytorch.html">2.2. Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2.3-dense-bayesian-optimization.html">2.3. Optimize a dense network with Bayesian optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/3-conv2d.html">Convolutional Neural Networks for Jet-Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/4-gnn-cora.html">Graph Neural Networks with Keras and Cora</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/5-vae-mnist.html">Variational Autoencoders with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/3-conv2d.html">3. Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/4-gnn-cora.html">4. Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/5-vae-mnist.html">5. Variational Autoencoders with Keras and MNIST</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="notebooks/6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/6-gan-mnist.html">7. Generative Adversarial Networks with Keras and MNIST</a></li>
 </ul>
 
     </div>
@@ -364,12 +371,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanderbilt-jupyterhub">Vanderbilt Jupyterhub</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faq">FAQ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates">If someone updates the notebooks after it’ve clones the repository, how do I get they updates?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-want-to-follow-along-on-the-lpc-rather-than-accre">I want to follow along on the LPC rather than ACCRE.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanderbilt-jupyterhub-recommended">Vanderbilt Jupyterhub (Recommended!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fnal-lpc">FNAL LPC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#locally">Locally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binder">Binder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#links">Links</a></li>
@@ -399,62 +405,40 @@ We will also explore more advanced models such as graph neural networks (GNNs), 
 </section>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
-<p><strong>TODO</strong></p>
-<section id="vanderbilt-jupyterhub">
-<h3>Vanderbilt Jupyterhub<a class="headerlink" href="#vanderbilt-jupyterhub" title="Permalink to this heading">#</a></h3>
-<p>Check out the instructions in <strong>TODO</strong>.</p>
+<section id="vanderbilt-jupyterhub-recommended">
+<h3>Vanderbilt Jupyterhub (Recommended!)<a class="headerlink" href="#vanderbilt-jupyterhub-recommended" title="Permalink to this heading">#</a></h3>
+<p>The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions <span class="xref myst">here</span>.</p>
 </section>
+<section id="fnal-lpc">
+<h3>FNAL LPC<a class="headerlink" href="#fnal-lpc" title="Permalink to this heading">#</a></h3>
+<p>Not as well supported, but instructions are <span class="xref myst">here</span>.</p>
 </section>
-<section id="faq">
-<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h2>
-<section id="if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates">
-<h3>If someone updates the notebooks after it’ve clones the repository, how do I get they updates?<a class="headerlink" href="#if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates" title="Permalink to this heading">#</a></h3>
-<p>In this case you will want to open a terminal, just as you did when you first cloned the repository. Move (<code class="docutils literal notranslate"><span class="pre">cd</span></code>) to the repository directory if not already there. Then do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code>. This will pull the latest changes from GitHub. If you’ve already made edits to a notebook which will be updated, those changes will be conflict. You may want to stash those changes or copy your modified notebook.</p>
-<p>To revert the changes made to all of your notebooks you can use the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">.</span>
+<section id="locally">
+<h3>Locally<a class="headerlink" href="#locally" title="Permalink to this heading">#</a></h3>
+<p>All these notebooks can be run on your local machine as well.
+It can often be useful to test your models and pipelines locally, but it is not recommended to run full trainings as these can be resource-intensive.</p>
+<p>To run locally, run these commands from your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download the setup bash file for your machine from here https://github.com/conda-forge/miniforge#mambaforge</span>
+<span class="c1"># e.g. wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh</span>
+<span class="c1"># Install: (the mamba directory can end up taking O(1-10GB) so make sure the directory you&#39;re using allows that quota)</span>
+chmod<span class="w"> </span>u+x<span class="w"> </span>Mambaforge-Linux-x86_64.sh
+./Mambaforge-Linux-x86_64.sh<span class="w">  </span><span class="c1"># follow instructions in the installation</span>
+
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FNALLPC/machine-learning-hats/
+<span class="nb">cd</span><span class="w"> </span>machine-learning-hats
+mamba<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+mamba<span class="w"> </span>activate<span class="w"> </span>machine-learning-hats
+jupyter<span class="w"> </span>lab<span class="w">  </span><span class="c1"># this will create a JupyterLab instance from which you can run all the notebooks.</span>
 </pre></div>
 </div>
-<p>If you would like to save your changes first, you can copy your modified notebook to a new name and then run the <code class="docutils literal notranslate"><span class="pre">checkout</span></code> command.</p>
-<p>Alternatively, to stash your un-staged changes, use the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">stash</span>
-</pre></div>
-</div>
-<p>You can then return those changes with the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">stash</span> <span class="n">pop</span>
-</pre></div>
-</div>
-<p>Be aware that you may have conflicts that need to be fixed before the notebook can be run again.</p>
 </section>
-<section id="i-want-to-follow-along-on-the-lpc-rather-than-accre">
-<h3>I want to follow along on the LPC rather than ACCRE.<a class="headerlink" href="#i-want-to-follow-along-on-the-lpc-rather-than-accre" title="Permalink to this heading">#</a></h3>
-<p>This is possible, but with a little less user support. You will need to use the following command to open up your ssh connection:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-L<span class="w"> </span>localhost:8888:localhost:8888<span class="w"> </span>&lt;username&gt;@cmslpc-sl7.fnal.gov
-</pre></div>
-</div>
-<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> with your LPC username. Then <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the directory of your choice where you will clone the repository as before:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FNALLPC/machine-learning-hats
-</pre></div>
-</div>
-<p>In order to open Jupyter with all the appopriate libraries, you will need to have either installed a <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment with Jupyter in your <code class="docutils literal notranslate"><span class="pre">nobackup</span></code> area (where you have more space) or have a CMSSW environment setup. To install and activate a <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment you can do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh<span class="w"> </span>-O<span class="w"> </span><span class="nv">$HOME</span>/nobackup/miniconda3.sh
-bash<span class="w"> </span><span class="nv">$HOME</span>/nobackup/miniconda3.sh<span class="w"> </span>-b<span class="w"> </span>-f<span class="w"> </span>-u<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/nobackup/miniconda3
-<span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/nobackup/miniconda3/etc/profile.d/conda.sh
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>mamba
-mamba<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>machine-learning-hats-2022<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span>-c<span class="w"> </span>-conda-forge
-mamba<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-n<span class="w"> </span>machine-learning-hats-2022<span class="w"> </span>-f<span class="w"> </span>environment.yml
-conda<span class="w"> </span>activate<span class="w"> </span>machine-learning-hats-2022
-</pre></div>
-</div>
-<p>Once you have a <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment, open Jupyter (which is actually the Jupyter that gets installed as part of the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook<span class="w"> </span>--no-browser<span class="w"> </span>--port<span class="o">=</span><span class="m">8888</span><span class="w"> </span>--ip<span class="w"> </span><span class="m">127</span>.0.0.1
-</pre></div>
-</div>
-<p>If everything worked, the last line of the output should be a url of the form:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1:8888/?token<span class="o">=</span>&lt;long<span class="w"> </span>string<span class="w"> </span>of<span class="w"> </span>numbers<span class="w"> </span>and<span class="w"> </span>letters&gt;
-</pre></div>
-</div>
-<p>Copy this url into your browser. You may now perform the rest of the exercise like normal, except you will have to change the kernel to the default python3 one (it will have all the necessary libararies because you are using the Jupyter version that is part of your <code class="docutils literal notranslate"><span class="pre">conda</span></code> installation).</p>
-<p>In the future, when you need access to Jupyter and want to run this exercise, you can do <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">$HOME/nobackup/miniconda3/etc/profile.d/conda.sh;</span> <span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">machine-learning-hats-2022</span></code></p>
+<section id="binder">
+<h3>Binder<a class="headerlink" href="#binder" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="google-colab">
+<h3>Google Colab<a class="headerlink" href="#google-colab" title="Permalink to this heading">#</a></h3>
+<p>TODO</p>
 </section>
 </section>
 <section id="links">
@@ -467,6 +451,8 @@ conda<span class="w"> </span>activate<span class="w"> </span>machine-learning-ha
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this heading">#</a></h2>
 <p>This project is created using the excellent open source <a class="reference external" href="https://jupyterbook.org/">Jupyter Book project</a> and the <a class="reference external" href="https://github.com/executablebooks/cookiecutter-jupyter-book">executablebooks/cookiecutter-jupyter-book template</a>.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -503,11 +489,11 @@ conda<span class="w"> </span>activate<span class="w"> </span>machine-learning-ha
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="notebooks/1-datasets-uproot.html"
+       href="setup/vanderbilt-jupyterhub/vanderbilt.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Loading Datasets</p>
+        <p class="prev-next-title">Vanderbilt JupyterHub</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -531,12 +517,11 @@ conda<span class="w"> </span>activate<span class="w"> </span>machine-learning-ha
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanderbilt-jupyterhub">Vanderbilt Jupyterhub</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faq">FAQ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-someone-updates-the-notebooks-after-it-ve-clones-the-repository-how-do-i-get-they-updates">If someone updates the notebooks after it’ve clones the repository, how do I get they updates?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-want-to-follow-along-on-the-lpc-rather-than-accre">I want to follow along on the LPC rather than ACCRE.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanderbilt-jupyterhub-recommended">Vanderbilt Jupyterhub (Recommended!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fnal-lpc">FNAL LPC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#locally">Locally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binder">Binder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#links">Links</a></li>

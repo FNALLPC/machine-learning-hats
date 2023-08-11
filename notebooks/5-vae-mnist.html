@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Variational Autoencoders with Keras and MNIST &#8212; Machine Learning HATS</title>
+    <title>5. Variational Autoencoders with Keras and MNIST &#8212; Machine Learning HATS</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/5-vae-mnist';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Generative Adversarial Networks with Keras and MNIST" href="6-gan-mnist.html" />
-    <link rel="prev" title="Graph Neural Networks with Keras and Cora" href="4-gnn-cora.html" />
+    <link rel="next" title="7. Generative Adversarial Networks with Keras and MNIST" href="6-gan-mnist.html" />
+    <link rel="prev" title="4. Graph Neural Networks with Keras and Cora" href="4-gnn-cora.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -158,20 +158,27 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup/vanderbilt-jupyterhub/vanderbilt.html">Vanderbilt JupyterHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/lpc.html">LPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-libraries.html">Setup Libraries</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">Loading Datasets</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">Dense neural network with Keras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">Optimize a dense network with Bayesian optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">1. Loading Datasets</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">2. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">2.1. Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">2.2. Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">2.3. Optimize a dense network with Bayesian optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">Convolutional Neural Networks for Jet-Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">Graph Neural Networks with Keras and Cora</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Variational Autoencoders with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">3. Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">4. Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Variational Autoencoders with Keras and MNIST</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">7. Generative Adversarial Networks with Keras and MNIST</a></li>
 </ul>
 
     </div>
@@ -226,7 +233,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/notebooks/5-vae-mnist.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/5-vae-mnist.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +251,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/notebooks/5-vae-mnist.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/5-vae-mnist.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,19 +421,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Variational Autoencoders with Keras and MNIST</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-and-specifying-hyperparameters">Importing Data and specifying hyperparameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-loss-function">Specifying the loss function</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Variational Autoencoders with Keras and MNIST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">5.1. Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">5.2. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-and-specifying-hyperparameters">5.3. Importing Data and specifying hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-loss-function">5.4. Specifying the loss function</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-and-decoder">Encoder and Decoder</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-model">Training the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-loss-function">Visualizing the loss function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-embedding-in-latent-space">Visualizing embedding in latent space</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-examples">Generating new examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-and-decoder">6. Encoder and Decoder</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-model">6.1. Training the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-loss-function">6.2. Visualizing the loss function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-embedding-in-latent-space">6.3. Visualizing embedding in latent space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-examples">6.4. Generating new examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.5. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -442,15 +449,15 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="variational-autoencoders-with-keras-and-mnist">
-<h1>Variational Autoencoders with Keras and MNIST<a class="headerlink" href="#variational-autoencoders-with-keras-and-mnist" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">5. </span>Variational Autoencoders with Keras and MNIST<a class="headerlink" href="#variational-autoencoders-with-keras-and-mnist" title="Permalink to this heading">#</a></h1>
 <p>Authors: Charles Kenneth Fisher, Raghav Kansal</p>
 <p>Adapted from <a class="reference external" href="https://github.com/drckf/mlreview_notebooks/blob/master/jupyter_notebooks/notebooks/NB19_CXVII-Keras_VAE_MNIST.ipynb">this notebook</a>.</p>
 <section id="learning-goals">
-<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this heading">#</a></h2>
 <p>The goals of this notebook is to learn how to code a variational autoencoder in Keras. We will discuss hyperparameters, training, and loss-functions. In addition, we will familiarize ourselves with the Keras sequential GUI as well as how to visualize results and make predictions using a VAE with a small number of latent dimensions.</p>
 </section>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This notebook teaches the reader how to build a Variational Autoencoder (VAE) with Keras. The code is a minimally modified, stripped-down version of the code from Lous Tiao in his wonderful <a class="reference external" href="http://tiao.io/posts/implementing-variational-autoencoders-in-keras-beyond-the-quickstart-tutorial/">blog post</a> which the reader is strongly encouraged to also read.</p>
 <p>Our VAE will have Gaussian Latent variables and a Gaussian Posterior distribution <span class="math notranslate nohighlight">\(q_\phi({\mathbf z}|{\mathbf x})\)</span> with a diagonal covariance matrix.</p>
 <p>Recall, that a VAE consists of four essential elements:</p>
@@ -467,7 +474,7 @@ deviation <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></l
 <p><img alt="VAE" src="https://lilianweng.github.io/lil-log/assets/images/vae-gaussian.png" /></p>
 </section>
 <section id="importing-data-and-specifying-hyperparameters">
-<h2>Importing Data and specifying hyperparameters<a class="headerlink" href="#importing-data-and-specifying-hyperparameters" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Importing Data and specifying hyperparameters<a class="headerlink" href="#importing-data-and-specifying-hyperparameters" title="Permalink to this heading">#</a></h2>
 <p>In the next section of code, we import the data and specify hyperparameters. The MNIST data are gray scale ranging in values from 0 to 255 for each pixel. We normalize this range to lie between 0 and 1.</p>
 <p>The hyperparameters we need to specify the architecture and train the VAE are:</p>
 <ul class="simple">
@@ -527,7 +534,7 @@ non-resource variables are not supported in the long term
 </div>
 </section>
 <section id="specifying-the-loss-function">
-<h2>Specifying the loss function<a class="headerlink" href="#specifying-the-loss-function" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>Specifying the loss function<a class="headerlink" href="#specifying-the-loss-function" title="Permalink to this heading">#</a></h2>
 <p>Here we specify the loss function. The first block of code is just the reconstruction error which is given by the cross-entropy. The second block of code calculates the KL-divergence analytically and adds it to the loss function with the line <code class="docutils literal notranslate"><span class="pre">self.add_loss</span></code>. It represents the KL-divergence as just another layer in the neural network with the inputs equal to the outputs: the means and variances for the variational encoder (i.e. <span class="math notranslate nohighlight">\(\boldsymbol{\mu}({\bf x})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}^2({\bf x})\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -564,7 +571,7 @@ non-resource variables are not supported in the long term
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="encoder-and-decoder">
-<h1>Encoder and Decoder<a class="headerlink" href="#encoder-and-decoder" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Encoder and Decoder<a class="headerlink" href="#encoder-and-decoder" title="Permalink to this heading">#</a></h1>
 <p>The following specifies both the encoder and decoder. The encoder is a MLP with three layers that maps <span class="math notranslate nohighlight">\({\bf x}\)</span> to <span class="math notranslate nohighlight">\(\boldsymbol{\mu}({\bf x})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}^2({\bf x})\)</span>, followed by the generation of a latent variable using the reparametrization trick (see main text). The decoder is specified as a single sequential Keras layer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,7 +611,7 @@ non-resource variables are not supported in the long term
 </div>
 </div>
 <section id="training-the-model">
-<h2>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Training the model<a class="headerlink" href="#training-the-model" title="Permalink to this heading">#</a></h2>
 <p>We now train the model. Even though the loss function is the negative log likelihood (cross-entropy), recall that the KL-layer adds the analytic form of the loss function as well. We also have to reshape the data to make it a vector, and specify an optimizer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -711,7 +718,7 @@ Epoch 10/10
 </div>
 </section>
 <section id="visualizing-the-loss-function">
-<h2>Visualizing the loss function<a class="headerlink" href="#visualizing-the-loss-function" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Visualizing the loss function<a class="headerlink" href="#visualizing-the-loss-function" title="Permalink to this heading">#</a></h2>
 <p>We can automatically visualize the loss function as a function of the epoch using the standard Keras interface for fitting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -739,7 +746,7 @@ Epoch 10/10
 </div>
 </section>
 <section id="visualizing-embedding-in-latent-space">
-<h2>Visualizing embedding in latent space<a class="headerlink" href="#visualizing-embedding-in-latent-space" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Visualizing embedding in latent space<a class="headerlink" href="#visualizing-embedding-in-latent-space" title="Permalink to this heading">#</a></h2>
 <p>Since our latent space is two dimensional, we can think of our encoder as defining a dimensional reduction of the original 784 dimensional space to just two dimensions! We can visualize the structure of this mapping by plotting the MNIST dataset in the latent space, with each point colored by which number it is <span class="math notranslate nohighlight">\([0,1,\ldots,9]\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -757,7 +764,7 @@ Epoch 10/10
 </div>
 </section>
 <section id="generating-new-examples">
-<h2>Generating new examples<a class="headerlink" href="#generating-new-examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Generating new examples<a class="headerlink" href="#generating-new-examples" title="Permalink to this heading">#</a></h2>
 <p>One of the nice things about VAEs is that they are generative models. Thus, we can generate new examples.</p>
 <ul class="simple">
 <li><p>Sampling uniformally in the latent space</p></li>
@@ -837,7 +844,7 @@ Epoch 10/10
 </div>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Play with the standard deviation of the latent variables <span class="math notranslate nohighlight">\(\epsilon\)</span>. How does this effect your results?</p></li>
 <li><p>Generate samples as you increase the number of latent dimensions. Do your generated samples look better? Visualize the latent variables using a dimensional reduction technique such as PCA or t-SNE. How does it compare to the case with two latent dimensions showed above?</p></li>
@@ -883,7 +890,7 @@ Epoch 10/10
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Graph Neural Networks with Keras and Cora</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Graph Neural Networks with Keras and Cora</p>
       </div>
     </a>
     <a class="right-next"
@@ -891,7 +898,7 @@ Epoch 10/10
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Generative Adversarial Networks with Keras and MNIST</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Generative Adversarial Networks with Keras and MNIST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -913,19 +920,19 @@ Epoch 10/10
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Variational Autoencoders with Keras and MNIST</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">Learning Goals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-and-specifying-hyperparameters">Importing Data and specifying hyperparameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-loss-function">Specifying the loss function</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Variational Autoencoders with Keras and MNIST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-goals">5.1. Learning Goals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">5.2. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data-and-specifying-hyperparameters">5.3. Importing Data and specifying hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-loss-function">5.4. Specifying the loss function</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-and-decoder">Encoder and Decoder</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-model">Training the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-loss-function">Visualizing the loss function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-embedding-in-latent-space">Visualizing embedding in latent space</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-examples">Generating new examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-and-decoder">6. Encoder and Decoder</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-model">6.1. Training the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-loss-function">6.2. Visualizing the loss function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-embedding-in-latent-space">6.3. Visualizing embedding in latent space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-examples">6.4. Generating new examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">6.5. Exercises</a></li>
 </ul>
 </li>
 </ul>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Graph Neural Networks with Keras and Cora &#8212; Machine Learning HATS</title>
+    <title>4. Graph Neural Networks with Keras and Cora &#8212; Machine Learning HATS</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4-gnn-cora';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Variational Autoencoders with Keras and MNIST" href="5-vae-mnist.html" />
-    <link rel="prev" title="Convolutional Neural Networks for Jet-Images" href="3-conv2d.html" />
+    <link rel="next" title="5. Variational Autoencoders with Keras and MNIST" href="5-vae-mnist.html" />
+    <link rel="prev" title="3. Convolutional Neural Networks for Jet-Images" href="3-conv2d.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -158,20 +158,27 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup/vanderbilt-jupyterhub/vanderbilt.html">Vanderbilt JupyterHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/lpc.html">LPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup-libraries.html">Setup Libraries</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">Loading Datasets</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">Dense neural network with Keras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">Dense neural network with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">Optimize a dense network with Bayesian optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">1. Loading Datasets</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">2. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">2.1. Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">2.2. Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">2.3. Optimize a dense network with Bayesian optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">Convolutional Neural Networks for Jet-Images</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Graph Neural Networks with Keras and Cora</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">Variational Autoencoders with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">3. Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Graph Neural Networks with Keras and Cora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">5. Variational Autoencoders with Keras and MNIST</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">Generative Adversarial Networks with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">7. Generative Adversarial Networks with Keras and MNIST</a></li>
 </ul>
 
     </div>
@@ -226,7 +233,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/notebooks/4-gnn-cora.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/4-gnn-cora.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +251,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/notebooks/4-gnn-cora.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/4-gnn-cora.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,13 +421,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">Coding!</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dataset">The Dataset</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-setup">Experiment setup</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-to-a-graph">Converting data to a graph</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model">Build the model!</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">4.1.1. Coding!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dataset">4.1.1.1. The Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-setup">4.1.1.2. Experiment setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-to-a-graph">4.1.1.3. Converting data to a graph</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model">4.1.1.4. Build the model!</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">4.1.1.5. Train the model</a></li>
 </ul>
 </li>
 </ul>
@@ -437,11 +444,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="graph-neural-networks-with-keras-and-cora">
-<h1>Graph Neural Networks with Keras and Cora<a class="headerlink" href="#graph-neural-networks-with-keras-and-cora" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Graph Neural Networks with Keras and Cora<a class="headerlink" href="#graph-neural-networks-with-keras-and-cora" title="Permalink to this heading">#</a></h1>
 <p>Author: <a class="reference external" href="https://github.com/savvy379">Savannah Thais</a></p>
 <p>Adapted from the <a class="reference external" href="https://keras.io/examples/graph/gnn_citations/">Keras Tutorial</a></p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>This notebook teaches the reader how to build a Graph Neural Network (GNN) with Keras. It is a modified version of the Keras <a class="reference external" href="https://keras.io/examples/graph/gnn_citations/">Tutorial</a> on GNNs. This setup and example was selected to work well with the existing LPC-HATS ML Tutorial tech stack, however I note that <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/">Pytorch Geometric</a>(PyG) is much more commonly used to construct and train GNNs and other Geometric Deep Learning models. This notebook introduces the theory and basics of building and training a GNN, but I encourage you to explore the PyG <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/introduction.html">tutorials</a> as well.</p>
 <p>A graph <span class="math notranslate nohighlight">\(G\)</span> is a mathematical object consisting of a set of nodes (vertices) <span class="math notranslate nohighlight">\(N\)</span> and edges <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(G=(N,E)\)</span>. Graphs can easily represent a wide range of structured data including atoms in molecules, users in a social network, cities and roads in a transportation system, players in team sports, objects interacting in a dynamical physical system, detector events , and more. The nodes and edges of the graph can have associated features as defined by the developer; these can include geometric information (ie particle hit locations in a detector) and non-geometric information (ie particle momenta). Graphs can be directed or undirected. A major advantage of GNNs is that they can handle input data of varying sizes: each graph processed by the network can have a different number of nodes and edges, making them well suited for a range of HEP applications.</p>
 <div>
@@ -457,9 +464,9 @@ document.write(`
 <p>This entire process is visualized in the below diagram, taken from the excellent paper <a class="reference external" href="https://arxiv.org/abs/2010.05234">A Practical Guide to Graph Neural Networks</a></p>
 <p><img alt="image.png" src="notebooks/attachment:image.png" /></p>
 <section id="coding">
-<h3>Coding!<a class="headerlink" href="#coding" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.1.1. </span>Coding!<a class="headerlink" href="#coding" title="Permalink to this heading">#</a></h3>
 <section id="the-dataset">
-<h4>The Dataset<a class="headerlink" href="#the-dataset" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.1.1.1. </span>The Dataset<a class="headerlink" href="#the-dataset" title="Permalink to this heading">#</a></h4>
 <p>In this tutorial we will use the <a class="reference external" href="https://relational.fit.cvut.cz/dataset/CORA">Cora dataset</a> to predict the subject of a research paper given its words and citation network. The cora dataset consists of 2,708 scientific papers with a unique id classified into one of 7 classes. The citation network consists of 5,429 links. Each paper has an associated binary word vector of size 1,433 indiating the presence of correpsonding word fromt he pre-defined dictionary.</p>
 <p>The dataset cnotains two tab-separateve files: <code class="docutils literal notranslate"><span class="pre">cora.cites</span></code> and <code class="docutils literal notranslate"><span class="pre">cora.content</span></code>. The cites file includes all pairs of citation records formulated as two columns: <code class="docutils literal notranslate"><span class="pre">cited_paper_id</span></code> (target) and <code class="docutils literal notranslate"><span class="pre">citing_paper_id</span></code> (source). The content file includes the paper content recors with 1,435 columns: <code class="docutils literal notranslate"><span class="pre">paper_id</span></code>, <code class="docutils literal notranslate"><span class="pre">subject</span></code> (training target), and 1,433 binary features corresponding to the binary word vector.</p>
 <p>Let’s download the dataset</p>
@@ -712,7 +719,7 @@ Test data shape: (1347, 1435)
 </div>
 </section>
 <section id="experiment-setup">
-<h4>Experiment setup<a class="headerlink" href="#experiment-setup" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.1.1.2. </span>Experiment setup<a class="headerlink" href="#experiment-setup" title="Permalink to this heading">#</a></h4>
 <p>We’ll define a few helper functions to use as we develop and train our GNN. Let’s start with setting some hyperparameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -794,7 +801,7 @@ Test data shape: (1347, 1435)
 </div>
 </section>
 <section id="converting-data-to-a-graph">
-<h4>Converting data to a graph<a class="headerlink" href="#converting-data-to-a-graph" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.1.1.3. </span>Converting data to a graph<a class="headerlink" href="#converting-data-to-a-graph" title="Permalink to this heading">#</a></h4>
 <p>In order to use the Cora dataset with a GNN we need to transform it into the format expected by Keras. This is often one of the most challenging parts of building a GNN model as each library has slightly different expected data formats and different systems have varying memory constraints. Here we will demonstrate a simple approach for preparing and using graph data if your dataset contains only a signle graph that fits entirely in memory.</p>
 <p>In Keras, the graph data is represented by a <code class="docutils literal notranslate"><span class="pre">graph_info</span></code> tuple which consists of three elements:</p>
 <ol class="arabic simple">
@@ -861,7 +868,7 @@ Nodes shape: (2708, 1433)
 </div>
 </section>
 <section id="build-the-model">
-<h4>Build the model!<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.1.1.4. </span>Build the model!<a class="headerlink" href="#build-the-model" title="Permalink to this heading">#</a></h4>
 <p>We’ll start by defining a graph convolution layer. It performs the following steps:</p>
 <ol class="arabic simple">
 <li><p><strong>Prepare</strong>: The input node representations are processed using a Feed-Forward Network (FFN) to produce a message. You can simplify the processing by only applying linear transformation to the representations.</p></li>
@@ -1110,7 +1117,7 @@ _________________________________________________________________
 </div>
 </section>
 <section id="train-the-model">
-<h4>Train the model<a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.1.1.5. </span>Train the model<a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h4>
 <p>We’re ready to train our GNN! We’ll use standard supervised cross-entropy loss to train the model as defined in our helper function above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1315,7 +1322,7 @@ Epoch 64/300
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Convolutional Neural Networks for Jet-Images</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Convolutional Neural Networks for Jet-Images</p>
       </div>
     </a>
     <a class="right-next"
@@ -1323,7 +1330,7 @@ Epoch 64/300
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Variational Autoencoders with Keras and MNIST</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Variational Autoencoders with Keras and MNIST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1345,13 +1352,13 @@ Epoch 64/300
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">Coding!</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dataset">The Dataset</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-setup">Experiment setup</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-to-a-graph">Converting data to a graph</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model">Build the model!</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coding">4.1.1. Coding!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dataset">4.1.1.1. The Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-setup">4.1.1.2. Experiment setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-to-a-graph">4.1.1.3. Converting data to a graph</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model">4.1.1.4. Build the model!</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">4.1.1.5. Train the model</a></li>
 </ul>
 </li>
 </ul>

@@ -447,68 +447,44 @@ document.write(`
 
 KERNEL_NAME=&quot;machine-learning-hats&quot;
 
-# Download miniconda3 install script
-if [[ ! -f $HOME/miniconda3.sh ]]; then
-    wget --progress=dot:giga https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/miniconda3.sh 2&gt;&amp;1 || { echo &quot;Failed to download the miniconda3 installation script.&quot;; exit $?; }
+# Download mambaforge install script
+if [[ ! -f $HOME/mambaforge.sh ]]; then
+    wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -O $HOME/mambaforge.sh || { echo &quot;Failed to download the mambaforge installation script.&quot;; exit $?; }
 fi
 
 # Install miniconda3
-if [[ ! -d $HOME/miniconda3 ]]; then
-    echo &quot;Installing miniconda3...&quot;
-    bash $HOME/miniconda3.sh -b -f -u -p $HOME/miniconda3 2&gt;&amp;1 || { echo &quot;Failed to install miniconda3.&quot;; exit $?; }
+if [[ ! -d $HOME/mambaforge ]]; then
+    chmod u+x $HOME/mambaforge.sh
+    bash $HOME/mambaforge.sh -b -f -u -p $HOME/mambaforge
 fi
-echo &quot;Sourcing the miniconda3 setup script...&quot;
-source $HOME/miniconda3/etc/profile.d/conda.sh
 
-# Update miniconda3 to the latest version
-echo &quot;Updating the miniconda3 release...&quot;
-conda update -y -n base -c defaults conda 2&gt;&amp;1 || { echo &quot;Failed to properly update miniconda3.&quot;; exit $?; }
+echo &quot;Sourcing the conda and mamba setup scripts...&quot;
+source $HOME/mambaforge/etc/profile.d/conda.sh
+source $HOME/mambaforge/etc/profile.d/mamba.sh
+
+# # Not updating miniconda since that results in an issues with mamba 
+# # https://github.com/mamba-org/mamba/issues/1775
+# echo &quot;Updating the miniconda3 release...&quot;
+# conda update -y -n base -c defaults conda 2&gt;&amp;1 || { echo &quot;Failed to properly update miniconda3.&quot;; exit $?; }
 
 # Create conda environment
-if [[ ! -d $HOME/miniconda3/envs/$KERNEL_NAME ]]; then
-    echo &quot;Installing mamba...&quot;
-    conda install -y mamba -n base -c conda-forge
+if [[ ! -d $HOME/mambaforge/envs/$KERNEL_NAME ]]; then
     echo &quot;Creating the miniconda3 environment \&quot;$KERNEL_NAME\&quot;...&quot;
     mamba env create -n $KERNEL_NAME -f environment.yml || { echo &quot;Failed to properly setup the environment \&quot;$KERNEL_NAME\&quot; using mamba.&quot;; exit $?; }
 fi
 echo &quot;Activating the kernel \&quot;$KERNEL_NAME\&quot;...&quot;
 conda activate $KERNEL_NAME || { echo &quot;Failed to activate the kernel \&quot;$KERNEL_NAME\&quot;.&quot;; exit $?; }
 
-set -e
-
-# Make a wrapper script to load miniconda python
-if [[ ! -f python_wrapper.sh ]]; then
-    echo &quot;Creating the python_wrapper.sh script...&quot;
-    cat &lt;&lt; &#39;EOF&#39; &gt; python_wrapper.sh
-#!/bin/bash
-source $HOME/miniconda3/etc/profile.d/conda.sh
-conda activate $KERNEL_NAME
-exec python &quot;$@&quot;
-EOF
-    chmod +x python_wrapper.sh
-fi
-
-# Create the kernel
-if [[ ! -d $HOME/.local/share/jupyter/kernels/$KERNEL_NAME ]]; then
-    echo &quot;Creating the kernel $KERNEL_NAME...&quot;
-    mkdir -p &quot;$HOME/.local/share/jupyter/kernels/$KERNEL_NAME&quot;
-    cat &lt;&lt; EOF &gt; &quot;$HOME/.local/share/jupyter/kernels/$KERNEL_NAME/kernel.json&quot;
-{
- &quot;display_name&quot;: &quot;$KERNEL_NAME&quot;, 
- &quot;language&quot;: &quot;python&quot;, 
- &quot;argv&quot;: [
-  &quot;$PWD/python_wrapper.sh&quot;, 
-  &quot;-m&quot;, 
-  &quot;ipykernel_launcher&quot;, 
-  &quot;-f&quot;, 
-  &quot;{connection_file}&quot;
- ]
-}
-EOF
-fi
-
-# Report OK
-echo &quot;Loaded $KERNEL_NAME!&quot;
+python -m ipykernel install --name $KERNEL_NAME --user
+echo &quot;Installed \&quot;$KERNEL_NAME\&quot;!&quot;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sourcing the conda and mamba setup scripts...
+Activating the kernel &quot;machine-learning-hats&quot;...
+Installed kernelspec machine-learning-hats in /home/cms.rkansal/.local/share/jupyter/kernels/machine-learning-hats
+Installed &quot;machine-learning-hats&quot;!
 </pre></div>
 </div>
 </div>
@@ -517,7 +493,7 @@ echo &quot;Loaded $KERNEL_NAME!&quot;
 <section class="tex2jax_ignore mathjax_ignore" id="results">
 <h1>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h1>
 <p>If successful, you should see something similar to the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Loaded machine-learning-hats!
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Installed &quot;machine-learning-hats&quot;!
 </pre></div>
 </div>
 <p>The new kernel you just made will then show up in the various Jupyter notebooks after refreshing the page.</p>

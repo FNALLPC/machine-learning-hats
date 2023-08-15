@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3-conv2d';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -419,12 +421,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.1. Load numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.2. Plotting jet-images</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.3. Define our convolutional model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.4. Dividing the data into testing and training dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.5. Run training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.6. Plot performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">3.1.1. Convolution Operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">3.1.2. Pooling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.2. Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.3. Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.4. Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.5. Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.6. Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.7. Plot performance</a></li>
 </ul>
             </nav>
         </div>
@@ -438,10 +445,42 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="convolutional-neural-networks-for-jet-images">
 <h1><span class="section-number">3. </span>Convolutional Neural Networks for Jet-Images<a class="headerlink" href="#convolutional-neural-networks-for-jet-images" title="Permalink to this heading">#</a></h1>
-<p>Author: Javier Duarte</p>
+<p>Authors: Javier Duarte, Raghav Kansal</p>
+<section id="introduction">
+<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p><em>Introduction adapted from <a class="reference external" href="https://github.com/AdrianAlan/codas-hep-intro-ml-2023/blob/main/part3/2023-CoDaS-HEP-Exercises-3.ipynb">CoDaS-HEP 2023</a></em></p>
+<p>In this part you will learn how to build and train a Convolutional Neural Network (CNN). For this exercise, we will use the dataset containing <em>jet images</em> and corresponding labels.</p>
+<p>Traditional approaches to jet tagging rely on features, such as jet substructure, designed by experts that detect characteristic energy deposit patterns. In recent years, many studies applied computer vision for event reconstruction at particle colliders. This was obtained by projecting the lower level detector measurements of the emanating particles onto a cylindrical detector and then unwrapping the inner surface of the calorimeter on a rectangle. Such information was further interpreted as an image with calorimeter cells as pixels, where pixel intensity maps the energy deposit of the cell, i.e. <strong>jet images</strong>. The different appearance of these jets can be used as a handle to discriminate between them, i.e. <strong>jet tagging</strong>.</p>
+<p>While you can use transform images to work with dense networks, <strong>CNNs are better suited.</strong>
+Instead of transforming the data, we modify the architecture of the network to work with 2D/3D matrices: (from this great <a class="reference external" href="https://cs231n.github.io/convolutional-networks/">page</a>)</p>
+<p><img alt="densecnns" src="../_images/dense_cnns.png" /></p>
+<p>As the name suggestions, the main operation inside a CNN is the convolution layer.</p>
+<section id="convolution-operation">
+<h3><span class="section-number">3.1.1. </span>Convolution Operation<a class="headerlink" href="#convolution-operation" title="Permalink to this heading">#</a></h3>
+<p>Two-dimensional convolutional layer for image height <span class="math notranslate nohighlight">\(H\)</span>, width <span class="math notranslate nohighlight">\(W\)</span>, number of input channels <span class="math notranslate nohighlight">\(C\)</span>, number of output kernels (filters) <span class="math notranslate nohighlight">\(N\)</span>, and kernel height <span class="math notranslate nohighlight">\(J\)</span> and width <span class="math notranslate nohighlight">\(K\)</span> is given by:</p>
+<p>\begin{align}
+\label{convLayer}
+\boldsymbol{Y}[v,u,n] &amp;= \boldsymbol{\beta}[n] + \sum_{c=1}^{C} \sum_{j=1}^{J} \sum_{k=1}^{K} \boldsymbol{X}[v+j,u+k,c], \boldsymbol{W}[j,k,c,n],,
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is the output tensor of size <span class="math notranslate nohighlight">\(V \times U \times N\)</span>, <span class="math notranslate nohighlight">\(W\)</span> is the weight tensor of size <span class="math notranslate nohighlight">\(J \times K \times C \times N\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> is the bias vector of length <span class="math notranslate nohighlight">\(N\)</span> .</p>
+<p>The example below has <span class="math notranslate nohighlight">\(C=1\)</span> input channel and <span class="math notranslate nohighlight">\(N=1\)</span> (<span class="math notranslate nohighlight">\(J\times K=3\times 3\)</span>) kernel <a class="reference external" href="https://towardsdatascience.com/types-of-convolution-kernels-simplified-f040cb307c37">credit</a>:</p>
+<p><img alt="convolution" src="https://miro.medium.com/v2/resize:fit:780/1*Eai425FYQQSNOaahTXqtgg.gif" /></p>
+<p>Some terminology:</p>
+<ul class="simple">
+<li><p><strong>kernel</strong>: The matrix which is convolved with the image. The parameters of this matrix are what need to be learnt.</p></li>
+<li><p><strong>stride</strong>: The amount by which the kernel is translated for each output (above, it is 1).</p></li>
+<li><p><strong>padding</strong>: How to deal with with the edges of the image (here, we’re using “same” padding)</p></li>
+</ul>
+</section>
+<section id="pooling">
+<h3><span class="section-number">3.1.2. </span>Pooling<a class="headerlink" href="#pooling" title="Permalink to this heading">#</a></h3>
+<p>We also add pooling layers to reduce the image size between layers. For example, max pooling: (also from <span class="xref myst">here</span></p>
+<p><img alt="maxpool" src="https://cs231n.github.io/assets/cnn/maxpool.jpeg" /></p>
+</section>
+</section>
 <section id="load-numpy-arrays">
-<h2><span class="section-number">3.1. </span>Load numpy arrays<a class="headerlink" href="#load-numpy-arrays" title="Permalink to this heading">#</a></h2>
-<p>Here, we load the numpy arrays containing the 4D tensors of “jet-images” (see <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">https://arxiv.org/pdf/1511.05190.pdf</a>)</p>
+<h2><span class="section-number">3.2. </span>Load numpy arrays<a class="headerlink" href="#load-numpy-arrays" title="Permalink to this heading">#</a></h2>
+<p>Now let’s implement a CNN using Keras. Here, we load the numpy arrays containing the 4D tensors of “jet-images” (see <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">arxiv:1511.05190</a>).</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>data
@@ -506,7 +545,7 @@ Saving to: ‘data/jet_images.h5’
 </div>
 </section>
 <section id="plotting-jet-images">
-<h2><span class="section-number">3.2. </span>Plotting jet-images<a class="headerlink" href="#plotting-jet-images" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Plotting jet-images<a class="headerlink" href="#plotting-jet-images" title="Permalink to this heading">#</a></h2>
 <p>Let’s plot some jet-images (individual jets and averaged over all jets)</p>
 <p><strong>Question 1:</strong>  Try to plot the average W and QCD jet-images.</p>
 <div class="cell docutils container">
@@ -567,7 +606,7 @@ Saving to: ‘data/jet_images.h5’
 </div>
 </section>
 <section id="define-our-convolutional-model">
-<h2><span class="section-number">3.3. </span>Define our convolutional model<a class="headerlink" href="#define-our-convolutional-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Define our convolutional model<a class="headerlink" href="#define-our-convolutional-model" title="Permalink to this heading">#</a></h2>
 <p><strong>Question 2:</strong> Here we have a relatively simple <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> model using regularization, batch normalization, max pooling, and a fully connected layer before the ouput. Implement the network defined in <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">https://arxiv.org/pdf/1511.05190.pdf</a>. Compare the performance and number of parameters when using fully connected layers instead of convolutional layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,8 +628,8 @@ Saving to: ‘data/jet_images.h5’
 <span class="n">ny</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span>
-    <span class="mi">8</span><span class="p">,</span>
-    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">filters</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
     <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span>
     <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
@@ -639,7 +678,7 @@ _________________________________________________________________
 </div>
 </section>
 <section id="dividing-the-data-into-testing-and-training-dataset">
-<h2><span class="section-number">3.4. </span>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
 <p>We will split the data into two parts (one for training+validation and one for testing).
 <strong>Note:</strong>  We will not apply “image normalization” preprocessing: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html">http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html</a>.
 <strong>Question 3:</strong> Why not?</p>
@@ -695,7 +734,7 @@ number of QCD jets for testing: 668
 </div>
 </section>
 <section id="run-training">
-<h2><span class="section-number">3.5. </span>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
 <p>Here, we run the training.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
@@ -831,7 +870,7 @@ Epoch 56/100
 </div>
 </section>
 <section id="plot-performance">
-<h2><span class="section-number">3.6. </span>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.7. </span>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
 <p>Here, we plot the history of the training and the performance in a ROC curve</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -893,16 +932,16 @@ Epoch 56/100
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "machine-learning-hats"
+            mode: "python"
         },
         kernelOptions: {
-            name: "machine-learning-hats",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'machine-learning-hats'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -951,12 +990,17 @@ Epoch 56/100
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.1. Load numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.2. Plotting jet-images</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.3. Define our convolutional model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.4. Dividing the data into testing and training dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.5. Run training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.6. Plot performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">3.1.1. Convolution Operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">3.1.2. Pooling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.2. Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.3. Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.4. Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.5. Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.6. Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.7. Plot performance</a></li>
 </ul>
   </nav></div>
 

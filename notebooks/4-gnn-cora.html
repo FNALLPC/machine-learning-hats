@@ -421,11 +421,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.1. Step 2: Import Libraries and Load Cora Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.2. Step 3: Define the GNN Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.3. Step 4: Training and Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.4. Step 5: Plotting Loss and Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.5. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">4.1. Code!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.3. Step 3: Define the GNN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.4. Step 4: Training and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.5. Step 5: Plotting Loss and Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.6. Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -437,12 +438,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p>The contents of this tutorial are heavily adapted from a similar one make by <a class="reference external" href="https://github.com/savvy379">Savannah Thais</a> using tensorflow and keras.</p>
-<p>A graph <span class="math notranslate nohighlight">\(G=(N,E)\)</span>, comprising nodes <span class="math notranslate nohighlight">\(N\)</span> and edges <span class="math notranslate nohighlight">\(E\)</span>, is a versatile mathematical structure that can represent various data such as molecules, social networks, transportation systems, etc. Nodes and edges may have associated features like geometric or non-geometric information. Graphs can be directed or undirected, and GNNs, with their ability to handle graphs of varying sizes, are well-suited for diverse applications including High Energy Physics (HEP).</p>
-<p><img alt="" src="notebooks/toy_graph.png" /></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="graph-neural-network-gnn-with-pytorch-geometric">
+<h1><span class="section-number">4. </span>Graph Neural Network (GNN) with PyTorch Geometric<a class="headerlink" href="#graph-neural-network-gnn-with-pytorch-geometric" title="Permalink to this heading">#</a></h1>
+<p>The contents of this tutorial are heavily adapted from a similar one make by <a class="reference external" href="https://github.com/savvy379">Savannah Thais</a> using tensorflow and keras.</p>
+<p>A graph <span class="math notranslate nohighlight">\(G=(N,E)\)</span>, comprising of nodes <span class="math notranslate nohighlight">\(N\)</span> and edges <span class="math notranslate nohighlight">\(E\)</span>, is a versatile mathematical structure that can represent various data such as molecules, social networks, transportation systems, etc. Nodes and edges may have associated features like geometric or non-geometric information. Graphs can be directed or undirected, and GNNs, with their ability to handle graphs of varying shapes and sizes, are well-suited for diverse applications including High Energy Physics (HEP).</p>
+<p><img alt="" src="../_images/toy_graph.png" /></p>
 <p>GNNs, particularly Graph Convolutional Networks (GCNs), re-embed graph edges and nodes by applying convolution operations to node neighborhoods, unlike the fixed data tensors used in conventional CNNs. This process, termed as “Message Passing,” constructs messages by combining information from neighboring nodes, then passes them to target nodes to update features. The entire graph is thus transformed, incorporating valuable information within each node. The convolved graph is often further processed for classification or regression on individual elements or the entire graph. This structure can also be applied to update edge features.</p>
-<p><img alt="" src="notebooks/message_passing.png" /></p>
-<p><img alt="" src="notebooks/graph_eq.png" /></p>
+<p><img alt="" src="../_images/message_passing.png" /></p>
+<p><img alt="" src="../_images/graph_eq.png" /></p>
 <ul class="simple">
 <li><p>Initial Embedding: Each node <span class="math notranslate nohighlight">\(v\)</span> starts with an initial embedding <span class="math notranslate nohighlight">\(h_v^0\)</span>, representing the original node features.</p></li>
 <li><p>Neighbors: For each node <span class="math notranslate nohighlight">\(v\)</span>, the neighboring nodes are represented as <span class="math notranslate nohighlight">\(N(v)\)</span>.</p></li>
@@ -456,9 +459,9 @@ document.write(`
 </li>
 <li><p>Result: The entire process transforms the graph, updating the node and possibly edge features to include additional useful information. The final embeddings can then be used for further analysis like classification or regression on the graph’s elements or structure.</p></li>
 </ul>
-<section class="tex2jax_ignore mathjax_ignore" id="graph-neural-network-gnn-with-pytorch-geometric">
-<h1><span class="section-number">4. </span>Graph Neural Network (GNN) with PyTorch Geometric<a class="headerlink" href="#graph-neural-network-gnn-with-pytorch-geometric" title="Permalink to this heading">#</a></h1>
-<p>In this tutorial, we will implement a Graph Neural Network (GNN) using PyTorch Geometric. We’ll use the Cora dataset, which consists of scientific publications as nodes and citation links as edges.</p>
+<section id="code">
+<h2><span class="section-number">4.1. </span>Code!<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
+<p>In this tutorial, we will implement a Graph Neural Network (GNN) using PyTorch Geometric. We’ll perform node classification on the Cora dataset, which consists of scientific publications as nodes and citation links as edges.</p>
 <p>The steps in this tutorial include:</p>
 <ol class="arabic simple">
 <li><p>Installing PyTorch Geometric</p></li>
@@ -472,32 +475,55 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Install PyTorch Geometric</span>
 <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>torch_geometric
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>torchviz
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: torch_geometric in /usr/local/lib/python3.10/dist-packages (2.3.1)
-Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (4.66.0)
-Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (1.23.5)
-Requirement already satisfied: scipy in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (1.10.1)
-Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (3.1.2)
-Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (2.31.0)
-Requirement already satisfied: pyparsing in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (3.1.1)
-Requirement already satisfied: scikit-learn in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (1.2.2)
-Requirement already satisfied: psutil&gt;=5.8.0 in /usr/local/lib/python3.10/dist-packages (from torch_geometric) (5.9.5)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2-&gt;torch_geometric) (2.1.3)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torch_geometric) (3.2.0)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torch_geometric) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torch_geometric) (2.0.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torch_geometric) (2023.7.22)
-Requirement already satisfied: joblib&gt;=1.1.1 in /usr/local/lib/python3.10/dist-packages (from scikit-learn-&gt;torch_geometric) (1.3.2)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.10/dist-packages (from scikit-learn-&gt;torch_geometric) (3.2.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: torch_geometric in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (2.3.1)
+Requirement already satisfied: tqdm in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (4.65.0)
+Requirement already satisfied: numpy in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (1.25.1)
+Requirement already satisfied: scipy in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (1.11.1)
+Requirement already satisfied: jinja2 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (3.1.2)
+Requirement already satisfied: requests in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (2.31.0)
+Requirement already satisfied: pyparsing in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (3.0.4)
+Requirement already satisfied: scikit-learn in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (1.3.0)
+Requirement already satisfied: psutil&gt;=5.8.0 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch_geometric) (5.9.5)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from jinja2-&gt;torch_geometric) (2.1.3)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from requests-&gt;torch_geometric) (3.2.0)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from requests-&gt;torch_geometric) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from requests-&gt;torch_geometric) (2.0.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from requests-&gt;torch_geometric) (2023.5.7)
+Requirement already satisfied: joblib&gt;=1.1.1 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from scikit-learn-&gt;torch_geometric) (1.3.1)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from scikit-learn-&gt;torch_geometric) (3.2.0)
+Collecting torchviz
+  Downloading torchviz-0.0.2.tar.gz (4.9 kB)
+  Preparing metadata (setup.py) ... ?25ldone
+?25hRequirement already satisfied: torch in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torchviz) (2.0.1)
+Collecting graphviz (from torchviz)
+  Downloading graphviz-0.20.1-py3-none-any.whl (47 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">47.0/47.0 kB</span> <span class=" -Color -Color-Red">858.8 kB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>a <span class=" -Color -Color-Cyan">0:00:01</span>
+?25hRequirement already satisfied: filelock in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch-&gt;torchviz) (3.12.2)
+Requirement already satisfied: typing-extensions in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch-&gt;torchviz) (4.7.1)
+Requirement already satisfied: sympy in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch-&gt;torchviz) (1.12)
+Requirement already satisfied: networkx in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch-&gt;torchviz) (3.1)
+Requirement already satisfied: jinja2 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from torch-&gt;torchviz) (3.1.2)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from jinja2-&gt;torch-&gt;torchviz) (2.1.3)
+Requirement already satisfied: mpmath&gt;=0.19 in /uscms/home/aaportel/nobackup/mamba/envs/ml/lib/python3.11/site-packages (from sympy-&gt;torch-&gt;torchviz) (1.3.0)
+Building wheels for collected packages: torchviz
+  Building wheel for torchviz (setup.py) ... ?25ldone
+?25h  Created wheel for torchviz: filename=torchviz-0.0.2-py3-none-any.whl size=4131 sha256=3593429a9b86799f5b41f3251aeb3d1d55045ea88a70f3ac8410df2eb6c59242
+  Stored in directory: /uscms/homes/a/aaportel/.cache/pip/wheels/5a/d0/3f/b7014553eb74f12892b7d9b69c6083044564712d10fde8dfdc
+Successfully built torchviz
+Installing collected packages: graphviz, torchviz
+Successfully installed graphviz-0.20.1 torchviz-0.0.2
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="step-2-import-libraries-and-load-cora-dataset">
-<h2><span class="section-number">4.1. </span>Step 2: Import Libraries and Load Cora Dataset<a class="headerlink" href="#step-2-import-libraries-and-load-cora-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2. </span>Step 2: Import Libraries and Load Cora Dataset<a class="headerlink" href="#step-2-import-libraries-and-load-cora-dataset" title="Permalink to this heading">#</a></h2>
 <p>We’ll start by importing the necessary libraries and loading the Cora dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -517,6 +543,20 @@ Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load Cora dataset</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;/tmp/Cora&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.x
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.tx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.allx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.y
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.ty
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.ally
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.graph
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.test.index
+Processing...
+Done!
 </pre></div>
 </div>
 </div>
@@ -577,9 +617,35 @@ test_mask:
 </div>
 </div>
 </div>
+<p>We can also visualize the dataset using <code class="docutils literal notranslate"><span class="pre">networkx</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Convert to networkx graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">):</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">j</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+<span class="c1"># Draw a subset of the graph (e.g., first 300 nodes)</span>
+<span class="n">subset_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)[:</span><span class="mi">300</span><span class="p">]</span>
+<span class="n">subset_graph</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">subset_nodes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">subset_graph</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Visualization of a Subset of the Cora Graph&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a9a82aac7c24b7667aa4169603d2ab7a88272be59f6cfd5d31ca9010a2ea5996.png" src="../_images/a9a82aac7c24b7667aa4169603d2ab7a88272be59f6cfd5d31ca9010a2ea5996.png" />
+</div>
+</div>
 </section>
 <section id="step-3-define-the-gnn-model">
-<h2><span class="section-number">4.2. </span>Step 3: Define the GNN Model<a class="headerlink" href="#step-3-define-the-gnn-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Step 3: Define the GNN Model<a class="headerlink" href="#step-3-define-the-gnn-model" title="Permalink to this heading">#</a></h2>
 <p>Next, we’ll define the GNN model, consisting of two GCN convolution layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -602,7 +668,7 @@ test_mask:
 </div>
 </section>
 <section id="step-4-training-and-evaluation">
-<h2><span class="section-number">4.3. </span>Step 4: Training and Evaluation<a class="headerlink" href="#step-4-training-and-evaluation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.4. </span>Step 4: Training and Evaluation<a class="headerlink" href="#step-4-training-and-evaluation" title="Permalink to this heading">#</a></h2>
 <p>Now, we’ll train the GNN model and evaluate its performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -691,7 +757,7 @@ Test Accuracy: 0.806
 </div>
 </section>
 <section id="step-5-plotting-loss-and-accuracy">
-<h2><span class="section-number">4.4. </span>Step 5: Plotting Loss and Accuracy<a class="headerlink" href="#step-5-plotting-loss-and-accuracy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Step 5: Plotting Loss and Accuracy<a class="headerlink" href="#step-5-plotting-loss-and-accuracy" title="Permalink to this heading">#</a></h2>
 <p>Finally, we’ll visualize the training loss and test accuracy using Matplotlib.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -718,7 +784,7 @@ Test Accuracy: 0.806
 </div>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">4.5. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>In this tutorial, we implemented a GNN model to classify scientific publications in the Cora dataset. We trained the model and visualized the training progress. Experiment with different hyperparameters and architectures to see how the performance changes!</p>
 </section>
 </section>
@@ -732,16 +798,16 @@ Test Accuracy: 0.806
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "machine-learning-hats"
+            mode: "python"
         },
         kernelOptions: {
-            name: "machine-learning-hats",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'machine-learning-hats'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -790,11 +856,12 @@ Test Accuracy: 0.806
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.1. Step 2: Import Libraries and Load Cora Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.2. Step 3: Define the GNN Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.3. Step 4: Training and Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.4. Step 5: Plotting Loss and Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.5. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">4.1. Code!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.3. Step 3: Define the GNN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.4. Step 4: Training and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.5. Step 5: Plotting Loss and Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.6. Conclusion</a></li>
 </ul>
   </nav></div>
 

@@ -1,9 +1,26 @@
-name: machine-learning-hats
+name: cofi-2023
 channels:
     - pytorch
     - conda-forge
 dependencies:
     - python==3.10
     - pip
+    - numpy
+    - matplotlib
+    - uproot
+    - awkward
+    - pandas
+    - keras
+    - tensorflow
+    - pytorch::pytorch
+    - torchvision
+    - torchaudio
+    # - pyg
+    - ipykernel
+    - jupyterlab
+    - tqdm
+    - h5py
+    - scikit-learn
+    - scikit-optimize
     - pip:
-        - -r requirements.txt
+        - -r requirements-conda-extra.txt

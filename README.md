@@ -1,22 +1,22 @@
-![logo](logo.png)
+# COFI-2023
 
-______________________________________________________________________
+This repo usese the CMS ML HATS tutorial as a base for examples shown at the ML Basic Tools and Resources sessions of the COFI 2023 Winter School
 
-<p align="center">
-  <a href="#introduction">Introduction</a> •
-  <a href="#setup">Setup</a> •
-  <a href="#links">Links</a> •
-  <a href="#credits">Credits</a>
-</p>
+To run locally, run these commands from your terminal:
 
-______________________________________________________________________
+```bash
+# Download the setup bash file for your machine from here https://github.com/conda-forge/miniforge#mambaforge
+# e.g. wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
+# Install: (the mamba directory can end up taking O(1-10GB) so make sure the directory you're using allows that quota)
+chmod u+x Mambaforge-Linux-x86_64.sh
+./Mambaforge-Linux-x86_64.sh  # follow instructions in the installation
 
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://FNALLPC.github.io/machine-learning-hats)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/HEAD)
-[![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/FNALLPC/machine-learning-hats/master.svg)](https://results.pre-commit.ci/latest/github/FNALLPC/machine-learning-hats/master)
-
-______________________________________________________________________
+git clone https://github.com/nickmanganelli-sr/cofi-2023.git
+cd cofi-2023
+mamba create -f environment.yml
+mamba activate cofi-2023-ext
+jupyter lab # this will create a JupyterLab instance from which you can run all the notebooks.
+```
 
 
 # CMS Machine Learning Hands-on Advanced Tutorial Session (HATS)

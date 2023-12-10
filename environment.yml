@@ -1,10 +1,12 @@
-name: cofi-2023
+name: cofi-2023-ext
 channels:
     - pytorch
     - conda-forge
 dependencies:
     - python==3.10
     - pip
+    - rich
+    - onnx
     - numpy
     - matplotlib
     - uproot
@@ -13,6 +15,7 @@ dependencies:
     - keras
     - tensorflow
     - pytorch::pytorch
+    - pytorch-lightning
     - torchvision
     - torchaudio
     # - pyg

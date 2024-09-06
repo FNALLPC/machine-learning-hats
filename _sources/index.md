@@ -31,9 +31,13 @@ We will also explore more advanced models such as graph neural networks (GNNs), 
 
 ## Setup
 
-### Vanderbilt Jupyterhub (Recommended!)
+### Purdue Analysis Facility (New and recommended!)
 
-The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/vanderbilt-jupyterhub/vanderbilt.html).
+The recommended method for running the tutorials live is the Purdue AF, follow the instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/purdue/purdue.html).
+
+### Vanderbilt Jupyterhub
+
+Another option is the Vanderbilt Jupyterhub, instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/vanderbilt-jupyterhub/vanderbilt.html).
 
 ### FNAL LPC
 

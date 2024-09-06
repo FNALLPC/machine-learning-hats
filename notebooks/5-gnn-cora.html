@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Graph Neural Network (GNN) with PyTorch Geometric &#8212; Machine Learning HATS</title>
+    <title>5. Graph Neural Network (GNN) with PyTorch Geometric &#8212; Machine Learning HATS</title>
   
   
   
@@ -64,11 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4-gnn-cora';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/5-gnn-cora';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Variational Autoencoders with Keras and MNIST" href="5-vae-mnist.html" />
-    <link rel="prev" title="3. Convolutional Neural Networks for Jet-Images" href="3-conv2d.html" />
+    <link rel="next" title="6. Variational Autoencoders with Keras and MNIST" href="6-vae-mnist.html" />
+    <link rel="prev" title="4. Convolutional Neural Networks for Jet-Images" href="4-conv2d.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,17 +180,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">1. Loading Datasets</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">2. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">2.1. Dense neural network with Keras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">2.2. Dense neural network with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">2.3. Optimize a dense network with Bayesian optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-boosted-decision-tree.html">2. Boosted decision trees with xgboost</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="3-dense.html">3. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="3.1-dense-keras.html">3.1. Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2-dense-pytorch.html">3.2. Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3-dense-bayesian-optimization.html">3.3. Optimize a dense network with Bayesian optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3-conv2d.html">3. Convolutional Neural Networks for Jet-Images</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Graph Neural Network (GNN) with PyTorch Geometric</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">5. Variational Autoencoders with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4-conv2d.html">4. Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Graph Neural Network (GNN) with PyTorch Geometric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-vae-mnist.html">6. Variational Autoencoders with Keras and MNIST</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">7. Generative Adversarial Networks with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-gan-mnist.html">8. Generative Adversarial Networks with Keras and MNIST</a></li>
 </ul>
 
     </div>
@@ -245,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/4-gnn-cora.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/5-gnn-cora.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/4-gnn-cora.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/5-gnn-cora.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/4-gnn-cora.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/5-gnn-cora.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +342,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/notebooks/4-gnn-cora.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/5-gnn-cora.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -435,12 +436,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">4.1. Code!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.3. Step 3: Define the GNN Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.4. Step 4: Training and Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.5. Step 5: Plotting Loss and Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.6. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">5.1. Code!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">5.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">5.3. Step 3: Define the GNN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">5.4. Step 4: Training and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">5.5. Step 5: Plotting Loss and Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">5.6. Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -453,7 +454,8 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="graph-neural-network-gnn-with-pytorch-geometric">
-<h1><span class="section-number">4. </span>Graph Neural Network (GNN) with PyTorch Geometric<a class="headerlink" href="#graph-neural-network-gnn-with-pytorch-geometric" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">5. </span>Graph Neural Network (GNN) with PyTorch Geometric<a class="headerlink" href="#graph-neural-network-gnn-with-pytorch-geometric" title="Permalink to this heading">#</a></h1>
+<p>Authors: Savannah Thais, Tony Aportela</p>
 <p>The contents of this tutorial are heavily adapted from a similar one make by <a class="reference external" href="https://github.com/savvy379">Savannah Thais</a> using tensorflow and keras.</p>
 <p>A graph <span class="math notranslate nohighlight">\(G=(N,E)\)</span>, comprising of nodes <span class="math notranslate nohighlight">\(N\)</span> and edges <span class="math notranslate nohighlight">\(E\)</span>, is a versatile mathematical structure that can represent various data such as molecules, social networks, transportation systems, etc. Nodes and edges may have associated features like geometric or non-geometric information. Graphs can be directed or undirected, and GNNs, with their ability to handle graphs of varying shapes and sizes, are well-suited for diverse applications including High Energy Physics (HEP).</p>
 <p><img alt="" src="../_images/toy_graph.png" /></p>
@@ -474,7 +476,7 @@ document.write(`
 <li><p>Result: The entire process transforms the graph, updating the node and possibly edge features to include additional useful information. The final embeddings can then be used for further analysis like classification or regression on the graph’s elements or structure.</p></li>
 </ul>
 <section id="code">
-<h2><span class="section-number">4.1. </span>Code!<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Code!<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
 <p>In this tutorial, we will implement a Graph Neural Network (GNN) using PyTorch Geometric. We’ll perform node classification on the Cora dataset, which consists of scientific publications as nodes and citation links as edges.</p>
 <p>The steps in this tutorial include:</p>
 <ol class="arabic simple">
@@ -537,7 +539,7 @@ Successfully installed graphviz-0.20.1 torchviz-0.0.2
 </div>
 </section>
 <section id="step-2-import-libraries-and-load-cora-dataset">
-<h2><span class="section-number">4.2. </span>Step 2: Import Libraries and Load Cora Dataset<a class="headerlink" href="#step-2-import-libraries-and-load-cora-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Step 2: Import Libraries and Load Cora Dataset<a class="headerlink" href="#step-2-import-libraries-and-load-cora-dataset" title="Permalink to this heading">#</a></h2>
 <p>We’ll start by importing the necessary libraries and loading the Cora dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -659,7 +661,7 @@ test_mask:
 </div>
 </section>
 <section id="step-3-define-the-gnn-model">
-<h2><span class="section-number">4.3. </span>Step 3: Define the GNN Model<a class="headerlink" href="#step-3-define-the-gnn-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Step 3: Define the GNN Model<a class="headerlink" href="#step-3-define-the-gnn-model" title="Permalink to this heading">#</a></h2>
 <p>Next, we’ll define the GNN model, consisting of two GCN convolution layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -682,7 +684,7 @@ test_mask:
 </div>
 </section>
 <section id="step-4-training-and-evaluation">
-<h2><span class="section-number">4.4. </span>Step 4: Training and Evaluation<a class="headerlink" href="#step-4-training-and-evaluation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>Step 4: Training and Evaluation<a class="headerlink" href="#step-4-training-and-evaluation" title="Permalink to this heading">#</a></h2>
 <p>Now, we’ll train the GNN model and evaluate its performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -774,7 +776,7 @@ Test Accuracy: 0.806
 </div>
 </section>
 <section id="step-5-plotting-loss-and-accuracy">
-<h2><span class="section-number">4.5. </span>Step 5: Plotting Loss and Accuracy<a class="headerlink" href="#step-5-plotting-loss-and-accuracy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.5. </span>Step 5: Plotting Loss and Accuracy<a class="headerlink" href="#step-5-plotting-loss-and-accuracy" title="Permalink to this heading">#</a></h2>
 <p>Finally, we’ll visualize the training loss and test accuracy using Matplotlib.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -801,7 +803,7 @@ Test Accuracy: 0.806
 </div>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">4.6. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.6. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>In this tutorial, we implemented a GNN model to classify scientific publications in the Cora dataset. We trained the model and visualized the training progress. Experiment with different hyperparameters and architectures to see how the performance changes!</p>
 </section>
 </section>
@@ -837,20 +839,20 @@ Test Accuracy: 0.806
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="3-conv2d.html"
+       href="4-conv2d.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Convolutional Neural Networks for Jet-Images</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Convolutional Neural Networks for Jet-Images</p>
       </div>
     </a>
     <a class="right-next"
-       href="5-vae-mnist.html"
+       href="6-vae-mnist.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Variational Autoencoders with Keras and MNIST</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Variational Autoencoders with Keras and MNIST</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -869,12 +871,12 @@ Test Accuracy: 0.806
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">4.1. Code!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">4.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">4.3. Step 3: Define the GNN Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">4.4. Step 4: Training and Evaluation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">4.5. Step 5: Plotting Loss and Accuracy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.6. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">5.1. Code!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-import-libraries-and-load-cora-dataset">5.2. Step 2: Import Libraries and Load Cora Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-the-gnn-model">5.3. Step 3: Define the GNN Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-training-and-evaluation">5.4. Step 4: Training and Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-plotting-loss-and-accuracy">5.5. Step 5: Plotting Loss and Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">5.6. Conclusion</a></li>
 </ul>
   </nav></div>
 

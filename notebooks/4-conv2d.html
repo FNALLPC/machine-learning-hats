@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Convolutional Neural Networks for Jet-Images &#8212; Machine Learning HATS</title>
+    <title>4. Convolutional Neural Networks for Jet-Images &#8212; Machine Learning HATS</title>
   
   
   
@@ -64,11 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3-conv2d';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4-conv2d';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Graph Neural Network (GNN) with PyTorch Geometric" href="4-gnn-cora.html" />
-    <link rel="prev" title="2.3. Optimize a dense network with Bayesian optimization" href="2.3-dense-bayesian-optimization.html" />
+    <link rel="next" title="5. Graph Neural Network (GNN) with PyTorch Geometric" href="5-gnn-cora.html" />
+    <link rel="prev" title="3.3. Optimize a dense network with Bayesian optimization" href="3.3-dense-bayesian-optimization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,17 +180,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1-datasets-uproot.html">1. Loading Datasets</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="2-dense.html">2. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="2.1-dense-keras.html">2.1. Dense neural network with Keras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.2-dense-pytorch.html">2.2. Dense neural network with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2.3-dense-bayesian-optimization.html">2.3. Optimize a dense network with Bayesian optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-boosted-decision-tree.html">2. Boosted decision trees with xgboost</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="3-dense.html">3. Dense networks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="3.1-dense-keras.html">3.1. Dense neural network with Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2-dense-pytorch.html">3.2. Dense neural network with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3-dense-bayesian-optimization.html">3.3. Optimize a dense network with Bayesian optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Convolutional Neural Networks for Jet-Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4-gnn-cora.html">4. Graph Neural Network (GNN) with PyTorch Geometric</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5-vae-mnist.html">5. Variational Autoencoders with Keras and MNIST</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Convolutional Neural Networks for Jet-Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5-gnn-cora.html">5. Graph Neural Network (GNN) with PyTorch Geometric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6-vae-mnist.html">6. Variational Autoencoders with Keras and MNIST</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="6-gan-mnist.html">7. Generative Adversarial Networks with Keras and MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7-gan-mnist.html">8. Generative Adversarial Networks with Keras and MNIST</a></li>
 </ul>
 
     </div>
@@ -245,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/3-conv2d.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/FNALLPC/machine-learning-hats/master?urlpath=tree/machine-learning-hats/notebooks/4-conv2d.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/3-conv2d.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/FNALLPC/machine-learning-hats/blob/master/machine-learning-hats/notebooks/4-conv2d.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/3-conv2d.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FNALLPC/machine-learning-hats/issues/new?title=Issue%20on%20page%20%2Fnotebooks/4-conv2d.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +342,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/notebooks/3-conv2d.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/4-conv2d.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -435,17 +436,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">3.1.1. Convolution Operation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">3.1.2. Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">4.1.1. Convolution Operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">4.1.2. Pooling</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.2. Load numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.3. Plotting jet-images</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.4. Define our convolutional model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.5. Dividing the data into testing and training dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.6. Run training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.7. Plot performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">4.2. Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">4.3. Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">4.4. Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">4.5. Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">4.6. Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">4.7. Plot performance</a></li>
 </ul>
             </nav>
         </div>
@@ -458,10 +459,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="convolutional-neural-networks-for-jet-images">
-<h1><span class="section-number">3. </span>Convolutional Neural Networks for Jet-Images<a class="headerlink" href="#convolutional-neural-networks-for-jet-images" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Convolutional Neural Networks for Jet-Images<a class="headerlink" href="#convolutional-neural-networks-for-jet-images" title="Permalink to this heading">#</a></h1>
 <p>Authors: Javier Duarte, Raghav Kansal</p>
 <section id="introduction">
-<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p><em>Introduction adapted from <a class="reference external" href="https://github.com/AdrianAlan/codas-hep-intro-ml-2023/blob/main/part3/2023-CoDaS-HEP-Exercises-3.ipynb">CoDaS-HEP 2023</a></em></p>
 <p>In this part you will learn how to build and train a Convolutional Neural Network (CNN). For this exercise, we will use the dataset containing <em>jet images</em> and corresponding labels.</p>
 <p>Traditional approaches to jet tagging rely on features, such as jet substructure, designed by experts that detect characteristic energy deposit patterns. In recent years, many studies applied computer vision for event reconstruction at particle colliders. This was obtained by projecting the lower level detector measurements of the emanating particles onto a cylindrical detector and then unwrapping the inner surface of the calorimeter on a rectangle. Such information was further interpreted as an image with calorimeter cells as pixels, where pixel intensity maps the energy deposit of the cell, i.e. <strong>jet images</strong>. The different appearance of these jets can be used as a handle to discriminate between them, i.e. <strong>jet tagging</strong>.</p>
@@ -470,14 +471,14 @@ Instead of transforming the data, we modify the architecture of the network to w
 <p><img alt="densecnns" src="../_images/dense_cnns.png" /></p>
 <p>As the name suggestions, the main operation inside a CNN is the convolution layer.</p>
 <section id="convolution-operation">
-<h3><span class="section-number">3.1.1. </span>Convolution Operation<a class="headerlink" href="#convolution-operation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.1.1. </span>Convolution Operation<a class="headerlink" href="#convolution-operation" title="Permalink to this heading">#</a></h3>
 <p>Two-dimensional convolutional layer for image height <span class="math notranslate nohighlight">\(H\)</span>, width <span class="math notranslate nohighlight">\(W\)</span>, number of input channels <span class="math notranslate nohighlight">\(C\)</span>, number of output kernels (filters) <span class="math notranslate nohighlight">\(N\)</span>, and kernel height <span class="math notranslate nohighlight">\(J\)</span> and width <span class="math notranslate nohighlight">\(K\)</span> is given by:</p>
-<p>\begin{align}
-\label{convLayer}
-\boldsymbol{Y}[v,u,n] &amp;= \boldsymbol{\beta}[n] + \sum_{c=1}^{C} \sum_{j=1}^{J} \sum_{k=1}^{K} \boldsymbol{X}[v+j,u+k,c], \boldsymbol{W}[j,k,c,n],,
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{Y}[v,u,n] = \boldsymbol{\beta}[n] + \sum_{c=1}^{C} \sum_{j=1}^{J} \sum_{k=1}^{K} \boldsymbol{X}[v+j,u+k,c]\, \boldsymbol{W}[j,k,c,n]\,,
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(Y\)</span> is the output tensor of size <span class="math notranslate nohighlight">\(V \times U \times N\)</span>, <span class="math notranslate nohighlight">\(W\)</span> is the weight tensor of size <span class="math notranslate nohighlight">\(J \times K \times C \times N\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> is the bias vector of length <span class="math notranslate nohighlight">\(N\)</span> .</p>
-<p>The example below has <span class="math notranslate nohighlight">\(C=1\)</span> input channel and <span class="math notranslate nohighlight">\(N=1\)</span> (<span class="math notranslate nohighlight">\(J\times K=3\times 3\)</span>) kernel <a class="reference external" href="https://towardsdatascience.com/types-of-convolution-kernels-simplified-f040cb307c37">credit</a>:</p>
+<p>The example below has <span class="math notranslate nohighlight">\(C=1\)</span> input channel and <span class="math notranslate nohighlight">\(N=1\)</span> (<span class="math notranslate nohighlight">\(J\times K=3\times 3\)</span>) kernel (<a class="reference external" href="https://towardsdatascience.com/types-of-convolution-kernels-simplified-f040cb307c37">credit</a>):</p>
 <p><img alt="convolution" src="https://miro.medium.com/v2/resize:fit:780/1*Eai425FYQQSNOaahTXqtgg.gif" /></p>
 <p>Some terminology:</p>
 <ul class="simple">
@@ -487,13 +488,13 @@ Instead of transforming the data, we modify the architecture of the network to w
 </ul>
 </section>
 <section id="pooling">
-<h3><span class="section-number">3.1.2. </span>Pooling<a class="headerlink" href="#pooling" title="Permalink to this heading">#</a></h3>
-<p>We also add pooling layers to reduce the image size between layers. For example, max pooling: (also from <span class="xref myst">here</span></p>
+<h3><span class="section-number">4.1.2. </span>Pooling<a class="headerlink" href="#pooling" title="Permalink to this heading">#</a></h3>
+<p>We also add pooling layers to reduce the image size between layers. For example, max pooling (also from <span class="xref myst">here</span>):</p>
 <p><img alt="maxpool" src="https://cs231n.github.io/assets/cnn/maxpool.jpeg" /></p>
 </section>
 </section>
 <section id="load-numpy-arrays">
-<h2><span class="section-number">3.2. </span>Load numpy arrays<a class="headerlink" href="#load-numpy-arrays" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.2. </span>Load numpy arrays<a class="headerlink" href="#load-numpy-arrays" title="Permalink to this heading">#</a></h2>
 <p>Now let’s implement a CNN using Keras. Here, we load the numpy arrays containing the 4D tensors of “jet-images” (see <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">arxiv:1511.05190</a>).</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -559,7 +560,7 @@ Saving to: ‘data/jet_images.h5’
 </div>
 </section>
 <section id="plotting-jet-images">
-<h2><span class="section-number">3.3. </span>Plotting jet-images<a class="headerlink" href="#plotting-jet-images" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Plotting jet-images<a class="headerlink" href="#plotting-jet-images" title="Permalink to this heading">#</a></h2>
 <p>Let’s plot some jet-images (individual jets and averaged over all jets)</p>
 <p><strong>Question 1:</strong>  Try to plot the average W and QCD jet-images.</p>
 <div class="cell docutils container">
@@ -620,7 +621,7 @@ Saving to: ‘data/jet_images.h5’
 </div>
 </section>
 <section id="define-our-convolutional-model">
-<h2><span class="section-number">3.4. </span>Define our convolutional model<a class="headerlink" href="#define-our-convolutional-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.4. </span>Define our convolutional model<a class="headerlink" href="#define-our-convolutional-model" title="Permalink to this heading">#</a></h2>
 <p><strong>Question 2:</strong> Here we have a relatively simple <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> model using regularization, batch normalization, max pooling, and a fully connected layer before the ouput. Implement the network defined in <a class="reference external" href="https://arxiv.org/pdf/1511.05190.pdf">https://arxiv.org/pdf/1511.05190.pdf</a>. Compare the performance and number of parameters when using fully connected layers instead of convolutional layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -692,7 +693,7 @@ _________________________________________________________________
 </div>
 </section>
 <section id="dividing-the-data-into-testing-and-training-dataset">
-<h2><span class="section-number">3.5. </span>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Dividing the data into testing and training dataset<a class="headerlink" href="#dividing-the-data-into-testing-and-training-dataset" title="Permalink to this heading">#</a></h2>
 <p>We will split the data into two parts (one for training+validation and one for testing).
 <strong>Note:</strong>  We will not apply “image normalization” preprocessing: <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html">http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.normalize.html</a>.
 <strong>Question 3:</strong> Why not?</p>
@@ -748,7 +749,7 @@ number of QCD jets for testing: 668
 </div>
 </section>
 <section id="run-training">
-<h2><span class="section-number">3.6. </span>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6. </span>Run training<a class="headerlink" href="#run-training" title="Permalink to this heading">#</a></h2>
 <p>Here, we run the training.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
@@ -884,7 +885,7 @@ Epoch 56/100
 </div>
 </section>
 <section id="plot-performance">
-<h2><span class="section-number">3.7. </span>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.7. </span>Plot performance<a class="headerlink" href="#plot-performance" title="Permalink to this heading">#</a></h2>
 <p>Here, we plot the history of the training and the performance in a ROC curve</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -968,20 +969,20 @@ Epoch 56/100
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="2.3-dense-bayesian-optimization.html"
+       href="3.3-dense-bayesian-optimization.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.3. </span>Optimize a dense network with Bayesian optimization</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Optimize a dense network with Bayesian optimization</p>
       </div>
     </a>
     <a class="right-next"
-       href="4-gnn-cora.html"
+       href="5-gnn-cora.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Graph Neural Network (GNN) with PyTorch Geometric</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Graph Neural Network (GNN) with PyTorch Geometric</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1000,17 +1001,17 @@ Epoch 56/100
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">3.1.1. Convolution Operation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">3.1.2. Pooling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-operation">4.1.1. Convolution Operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling">4.1.2. Pooling</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">3.2. Load numpy arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">3.3. Plotting jet-images</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">3.4. Define our convolutional model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">3.5. Dividing the data into testing and training dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">3.6. Run training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">3.7. Plot performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-numpy-arrays">4.2. Load numpy arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-jet-images">4.3. Plotting jet-images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-our-convolutional-model">4.4. Define our convolutional model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dividing-the-data-into-testing-and-training-dataset">4.5. Dividing the data into testing and training dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-training">4.6. Run training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-performance">4.7. Plot performance</a></li>
 </ul>
   </nav></div>
 

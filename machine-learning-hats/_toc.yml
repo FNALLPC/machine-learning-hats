@@ -6,6 +6,7 @@ root: index
 parts:
   - caption: Setup
     chapters:
+    - file: setup/purdue/purdue
     - file: setup/vanderbilt-jupyterhub/vanderbilt
     - file: setup/lpc
     - file: setup-libraries

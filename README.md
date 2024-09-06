@@ -25,15 +25,19 @@ ______________________________________________________________________
 ## Introduction
 
 This is a set of tutorials for the CMS Machine Learning Hands-on Advanced Tutorial Session (HATS). 
-They are intended to show you how to build machine learning models in python, using `Keras`, `TensorFlow`, and `PyTorch`, and use them in your `ROOT`-based analyses. 
-We will build event-level classifiers for differentiating VBF Higgs and standard model background 4 muon events and jet-level classifiers for differentiating boosted W boson jets from QCD jets using dense and convolutional neural networks.
+They are intended to show you how to build machine learning models in python, using `xgboost`, `Keras`, `TensorFlow`, and `PyTorch`, and use them in your `ROOT`-based analyses. 
+ We will build event-level classifiers for differentiating VBF Higgs and standard model background 4 muon events and jet-level classifiers for differentiating boosted W boson jets from QCD jets using BDTs, and dense and convolutional neural networks.
 We will also explore more advanced models such as graph neural networks (GNNs), variational autoencoders (VAEs), and generative adversarial networks (GANs) on simple datasets.
 
 ## Setup
 
-### Vanderbilt Jupyterhub (Recommended!)
+### Purdue Analysis Facility (New and recommended!)
 
-The recommended method for running the tutorials live is the Vanderbilt Jupyterhub, follow the instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/vanderbilt-jupyterhub/vanderbilt.html).
+The recommended method for running the tutorials live is the Purdue AF, follow the instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/purdue/purdue.html).
+
+### Vanderbilt Jupyterhub
+
+Another option is the Vanderbilt Jupyterhub, instructions [here](https://fnallpc.github.io/machine-learning-hats/setup/vanderbilt-jupyterhub/vanderbilt.html).
 
 ### FNAL LPC
 

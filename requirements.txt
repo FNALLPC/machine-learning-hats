@@ -11,3 +11,4 @@ torch
 ipykernel
 tqdm
 jupyter
+xgboost

@@ -6,6 +6,7 @@ root: index
 parts:
   - caption: Setup
     chapters:
+    - file: setup/purdue/purdue
     - file: setup/vanderbilt-jupyterhub/vanderbilt
     - file: setup/lpc
     - file: setup-libraries
@@ -14,12 +15,13 @@ parts:
     maxdepth: 2
     chapters:
     - file: notebooks/1-datasets-uproot
-    - file: notebooks/2-dense
+    - file: notebooks/2-boosted-decision-tree
+    - file: notebooks/3-dense
       sections:
-        - file: notebooks/2.1-dense-keras
-        - file: notebooks/2.2-dense-pytorch
-        - file: notebooks/2.3-dense-bayesian-optimization
-    - file: notebooks/3-conv2d
-    - file: notebooks/4-gnn-cora
-    - file: notebooks/5-vae-mnist
-    - file: notebooks/6-gan-mnist
+        - file: notebooks/3.1-dense-keras
+        - file: notebooks/3.2-dense-pytorch
+        - file: notebooks/3.3-dense-bayesian-optimization
+    - file: notebooks/4-conv2d
+    - file: notebooks/5-gnn-cora
+    - file: notebooks/6-vae-mnist
+    - file: notebooks/7-gan-mnist

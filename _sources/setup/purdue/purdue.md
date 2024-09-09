@@ -6,7 +6,7 @@ See the [Getting Started](https://analysis-facility.physics.purdue.edu/en/latest
 
 Point your browser to https://cms.geddes.rcac.purdue.edu/hub and log in with your CERN or FNAL account.
 
-Create an instance with the default resources.
+Create an instance with the default resources. **Do not select GPUs for the HATS.**
 
 
 ## 2. Clone this repository

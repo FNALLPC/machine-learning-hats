@@ -82,9 +82,9 @@ To use this, you will have to install any extra libraries needed for the tutoria
 
 ## Links
 
-The indico page is: [https://indico.cern.ch/event/1311559/](https://indico.cern.ch/event/1311559/)
+The indico page is: https://indico.cern.ch/event/1444116/
 
-The Mattermost for live support is: [https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2023](https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2023)
+The Mattermost for live support is: https://mattermost.web.cern.ch/cms-exp/channels/hatslpc-2024
 
 The datasets we will use are located here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3901869.svg)](https://doi.org/10.5281/zenodo.3901869)
 
